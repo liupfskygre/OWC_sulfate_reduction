@@ -176,7 +176,7 @@ awk -F '\t' -v  '$3>$a &&$8>$b && $14>$b' TIGR04555.HMM_domtblout.txt|wc -l
 ```
 domtblout.txt
 #1, length, $3 > 75% percent of HMM len
-#2, cuoff, tigrfam, use noise cutoff $8> && $14> 
+#2, cuoff, tigrfam, use full noise cutoff $8> && domain $14> 
 #3, For Pfam, the gathering threshold
 #4, kofam, ???? KofamScan or hmmsearch ?
 awk -F '\t' '$3>300 &&$8>330 && $14>330'
@@ -191,6 +191,26 @@ do
 grep -v '^#' $file >"${file%.*}"_e.txt
 sed -i -e 's/ \+/\t/g'  "${file%.*}"_e.txt
 done
+
+awk -F '\t' '$8>181.8  && $14>181.8  && $3>288 ' TIGR00339.HMM_domtblout_e.txt>sat.met3_TIGR00339_domtblout_filter.txt #322.95	181.8	383	288
+awk -F '\t' '$8>326  && $14>326  && $3>462' TIGR02061.HMM_domtblout_e.txt >aprA_TIGR02061_domtblout_filter.txt #aprA	TIGR02061	641.75	326	616	462
+awk -F '\t' '$8>55.15  && $14>55.15  && $3>99 ' .HMM_domtblout_e.txt #aprB	TIGR02060	135.65	55.15	132	99
+awk -F '\t' '$8>222.85  && $14>222.85  && $3>302 ' .HMM_domtblout_e.txt #dsrA	TIGR02064	392.85	222.85	402	302
+awk -F '\t' '$8> 205.25 && $14>205.25  && $3>256' .HMM_domtblout_e.txt #dsrB	TIGR02066	341.5	205.25	341	256
+awk -F '\t' '$8>223.6  && $14>223.6  && $3>251' .HMM_domtblout_e.txt #asrA	TIGR02910	323.15	223.6	334	251
+awk -F '\t' '$8>226.95  && $14>226.95 && $3> 196' .HMM_domtblout_e.txt #asrB	TIGR02911	288.6	226.95	261	196
+awk -F '\t' '$8>194.3  && $14>194.3  && $3>236' .HMM_domtblout_e.txt #asrC	TIGR02912	324.1	194.3	314	236
+awk -F '\t' '$8> 16.7 && $14>16.7  && $3>22 ' .HMM_domtblout_e.txt #phsA	TIGR01409	16.7	16.7	29	22??
+awk -F '\t' '$8>  && $14>  && $3> ' .HMM_domtblout_e.txt #fccB	TIGR01409 	16.7	16.7	29	22?
+awk -F '\t' '$8>100  && $14>60  && $3> 159' .HMM_domtblout_e.txt #soxA	TIGR04484	110	100/60.00	212	159
+awk -F '\t' '$8> 60 && $14> 45 && $3>59' .HMM_domtblout_e.txt #soxX	TIGR04485	61	60.00/45.00	78	59
+awk -F '\t' '$8> 550 && $14> 550 && $3>417' .HMM_domtblout_e.txt #soxB	TIGR04486	550	550	556	417
+awk -F '\t' '$8>330  && $14> 330 && $3>306' .HMM_domtblout_e.txt #soxC	TIGR04555	420	330	408	306
+awk -F '\t' '$8>120  && $14>120  && $3>112' .HMM_domtblout_e.txt #soxY	TIGR04488	125	120	149	112
+awk -F '\t' '$8>69  && $14>69  && $3> 74' TIGR04490.HMM_domtblout_e.txt #soxZ	TIGR04490 	76	69	98	74
+awk -F '\t' '$8>  && $14>  && $3> ' .HMM_domtblout_e.txt #sreA	TIGR01409	16.7	16.7	29	22???
+
+awk -F '\t' '$8>325  && $14>325  && $3>330 ' TIGR04315.HMM_domtblout_e.txt >otr_TIGR04315_domtblout_filter.txt #otr	TIGR04315	375	325	440	330
 
 
 
