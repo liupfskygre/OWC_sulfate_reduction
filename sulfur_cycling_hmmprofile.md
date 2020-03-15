@@ -162,7 +162,7 @@ done
 
 #JGI-DOE procedure, (Marcel Huntemann, 2015)
 ###For TIGRfam, the noise cutoff (−−cug_nc) is used, with hits below the trusted cutoff and at/above the noise cutoff flagged as “marginal”. For Pfam, the gathering threshold (−−cut_ga) is used inside the pfam_scan.pl script.
-###KO terms are assigned to genes using a subset of this list, whereby the threshold is defined by an E-value cutoff of 1e–5, KO assignments are selected from the top 5 hits, with 30 % or better alignment sequence identity, and alignment percentage of at least 70 % over the length of the query gene and KEGG subject gene.
+## kofam, could only use KofamScan tools ??? We developed a database of pHMMs based on the KO and GENES databases. The adaptive score thresholds are pre-computed for individual KO families, and can be used to assign KOs (K numbers) to sequences using KofamScan and KofamKOALA. Sequence matches with scores above the thresholds are considered more reliable than other matches and thus highlighted with ‘*’ marks in the output of these tools.
 
 #example TIGR04555.HMM
 awk -F '\t' '$3>300 &&$8>420 && $14>420' TIGR04555.HMM_domtblout.txt|wc -l
@@ -178,7 +178,7 @@ domtblout.txt
 #1, length, $3 > 75% percent of HMM len
 #2, cuoff, tigrfam, use noise cutoff $8> && $14> 
 #3, For Pfam, the gathering threshold
-#4, kofam, ???
+#4, kofam, ???? KofamScan or hmmsearch ?
 awk -F '\t' '$3>300 &&$8>330 && $14>330'
 ```
 
