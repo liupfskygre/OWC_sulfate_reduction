@@ -23,6 +23,9 @@ done
 # K00386.hmm: No such file or directory
 #one duplicate (phsA==prsA), 39 items
 
+cat *.hmm>sulfur_cycling_kofam.hmm
+
+
 /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/Marker_gene_hmmprofile/sulfur_cycling_KOfam/profiles
 ```
 
@@ -42,20 +45,37 @@ cp: /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/database_model_profiles_arc
 
 /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/database_model_profiles_archive/gtdbtk_marker/tigrfam
 
+cat *.HMM >sulfur_cycling_tigrfam.hmm
+
 ```
 
 #download pfam files
 ```
 /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/Marker_gene_hmmprofile/sulfur_cycling_pfam
+
+cat *.hmm>sulfur_cycling_pfam.hmm
 ```
 
+#download specific eggnog 
+```
+cat *.hmm>sulfur_cycling_eggnog.hmm
 
+
+```
+
+#cat all profiles togerther for a search
+```
+cat ./sulfur_cycling_pfam/sulfur_cycling_pfam.hmm ./sulfur_cycling_specific_eggNOG/sulfur_cycling_eggnog.hmm ./sulfur_cycling_tigrfam/sulfur_cycling_tigrfam.hmm ./sulfur_cycling_KOfam/sulfur_cycling_kofam.hmm >sulfur_cycling_hmmprofile.hmm
+
+```
 
 
 #searching db create
 ```
 /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/dereplicated_genomes
 
+#based on the prodigal prediction file 
+#
 [liupf@zenith prodigal_files]$ cat *.faa >~/combined_owc_3211_prodigal.faa
 [liupf@zenith prodigal_files]$ pwd
 /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/prodigal_files
@@ -66,6 +86,19 @@ grep -c '>' combined_owc_3211_prodigal.faa. #use this as the database to search 
 9394752
 
 ```
+
+#do hmm search 
+```
+cd ~
+mkdir sulfur_cycling_owc_hmmsearh
+
+/home/liupf/sulfur_cycling_owc_hmmsearh
+
+screen -S hmmsearch
+hmmsearch --cpu 20 --tblout sulfur_cycling_tblout.txt --domtblout sulfur_cycling_domtblout.txt sulfur_cycling_hmmprofile.hmm combined_owc_3211_prodigal.faa
+
+```
+
 
 #Adrienne created coverage file and relabel#
 ```
@@ -88,6 +121,8 @@ grep -c '>' combined_owc_3211_prodigal.faa. #use this as the database to search 
 1805837 #the same as the combined 
 
 
+
+##
 ##besides MBNT-15
 what are the DRAM for, just to dram all genomes we need to use later?
 
