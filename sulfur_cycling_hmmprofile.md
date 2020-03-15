@@ -99,7 +99,7 @@ screen -S hmmsearch
 hmmsearch --cpu 20 --tblout sulfur_cycling_tblout.txt --domtblout sulfur_cycling_domtblout.txt sulfur_cycling_hmmprofile.hmm combined_owc_3211_prodigal.faa
 
 ###
-grep -v '^#' sulfur_cycling_tblout.txt > sulfur_cycling_tblout_edit1.txt
+grep -v '^#' sulfur_cycling_tblout.txt > sulfur_cycling_tblout_edit1.txt. #41164
 sed -i -e 's/ \+/\t/g' sulfur_cycling_tblout_edit1.txt 
 
 grep -v '^#' sulfur_cycling_domtblout.txt>sulfur_cycling_domtblout_edit1.txt
@@ -117,15 +117,38 @@ cat sulfur_cycling_tblout_edit1E3.txt |cut -f1 -d$'\t'|sort|uniq > sulfur_cyclin
 > write.table(c, file = "sulfur_cycling_bins_contigs.tsv", sep = '\t',row.names = F)
 #3093 genomes found.
 
-
+grep -c 'PF00581' sulfur_cycling_tblout_edit1.txt
+grep -c 'PF09242' sulfur_cycling_tblout_edit1.txt
+grep -c 'PF13501' sulfur_cycling_tblout_edit1.txt
+grep -c 'PF08770' sulfur_cycling_tblout_edit1.txt
 ```
 #change to just use Tigrfam and pfam, not use KOfam and COG
 
 ```
 #
+#pfam
+cd /home/liupf/sulfur_cycling_owc_hmmsearh/sulfur_cycling_pfam
+screen -r hmmsearch
 
+for file in *.hmm
+do
+hmmsearch --cpu 20 --tblout "${file}"_tblout.txt --domtblout "${file}"_domtblout.txt $file ../combined_owc_3211_prodigal.faa &>"${file}".log
+done
 
+#tigrfam
+screen -s hmmsearch2
+for file in *.HMM
+do
+hmmsearch --cpu 20 --tblout "${file}"_tblout.txt --domtblout "${file}"_domtblout.txt $file ../combined_owc_3211_prodigal.faa &>"${file}".log
+done
 
+#kofam
+
+screen -S hmmsearch2
+for file in *.hmm
+do
+hmmsearch --cpu 20 --tblout "${file}"_tblout.txt --domtblout "${file}"_domtblout.txt $file ../combined_owc_3211_prodigal.faa &>"${file}".log
+done
 ```
 
 
