@@ -85,9 +85,10 @@ cd ~
 grep -c '>' combined_owc_3211_prodigal.faa. #use this as the database to search all 
 9394752
 
+
 ```
 
-#do hmm search 
+#do hmm search , first try
 ```
 cd ~
 mkdir sulfur_cycling_owc_hmmsearh
@@ -97,8 +98,36 @@ mkdir sulfur_cycling_owc_hmmsearh
 screen -S hmmsearch
 hmmsearch --cpu 20 --tblout sulfur_cycling_tblout.txt --domtblout sulfur_cycling_domtblout.txt sulfur_cycling_hmmprofile.hmm combined_owc_3211_prodigal.faa
 
+###
+grep -v '^#' sulfur_cycling_tblout.txt > sulfur_cycling_tblout_edit1.txt
+sed -i -e 's/ \+/\t/g' sulfur_cycling_tblout_edit1.txt 
+
+grep -v '^#' sulfur_cycling_domtblout.txt>sulfur_cycling_domtblout_edit1.txt
+[liupf@zenith sulfur_cycling_owc_hmmsearh]$ sed -i -e 's/ \+/\t/g' sulfur_cycling_domtblout_edit1.txt
+[liupf@zenith sulfur_cycling_owc_hmmsearh]$ head sulfur_cycling_domtblout_edit1.txt
+
+awk -F '\t' '$5<1e-3' sulfur_cycling_tblout_edit1.txt > sulfur_cycling_tblout_edit1E3.txt
+cat sulfur_cycling_tblout_edit1E3.txt |cut -f1 -d$'\t'|sort|uniq > sulfur_cycling_tblout_edit1E3_f1uniq.txt
+
+#
+> a <- read.delim("sulfur_cycling_tblout_edit1E3_f1uniq.txt",header=F, check.names=FALSE) 
+> View(a)
+> b<-read.delim("wetlands_db_contigs_to_bins.tsv",header=F, check.names=FALSE, sep="\t") 
+> c<- merge(a,b, by.x="V1", by.y="V1", all.x=T, all.y=F, sort=F)
+> write.table(c, file = "sulfur_cycling_bins_contigs.tsv", sep = '\t',row.names = F)
+#3093 genomes found.
+
 
 ```
+#change to just use Tigrfam and pfam, not use KOfam and COG
+
+```
+#
+
+
+
+```
+
 
 
 #Adrienne created coverage file and relabel#
