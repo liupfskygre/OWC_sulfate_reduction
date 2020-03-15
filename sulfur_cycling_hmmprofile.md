@@ -151,7 +151,50 @@ hmmsearch --cpu 20 --tblout "${file}"_tblout.txt --domtblout "${file}"_domtblout
 done
 ```
 
+#filtering
+```
+#$3, len, >75% of the hmm len
+#$7, evale <1e-5 #use bitscore as final cutoff
+#$8, whole seq cutoff 
+#$14, domain cutoff
 
+#Each model has a trusted cutoff, above which there should be no false positive hits, and a noise cutoff below which hits to the model are considered uninteresting. The range between trusted cutoff and noise cutoff represents scores that may or may not be true hits.
+
+#JGI-DOE procedure, (Marcel Huntemann, 2015)
+###For TIGRfam, the noise cutoff (−−cug_nc) is used, with hits below the trusted cutoff and at/above the noise cutoff flagged as “marginal”. For Pfam, the gathering threshold (−−cut_ga) is used inside the pfam_scan.pl script.
+###KO terms are assigned to genes using a subset of this list, whereby the threshold is defined by an E-value cutoff of 1e–5, KO assignments are selected from the top 5 hits, with 30 % or better alignment sequence identity, and alignment percentage of at least 70 % over the length of the query gene and KEGG subject gene.
+
+#example TIGR04555.HMM
+awk -F '\t' '$3>300 &&$8>420 && $14>420' TIGR04555.HMM_domtblout.txt|wc -l
+awk -F '\t' '$3>300 &&$8>330 && $14>330' TIGR04555.HMM_domtblout.txt|wc -l
+cat TIGR04555.HMM_domtblout.txt |cut -f3,7,8,13,14 -d$'\t' |head 
+
+awk -F '\t' '$3>$a &&$8>$b && $14>$b' TIGR04555.HMM_domtblout.txt|wc -l
+awk -F '\t' -v  '$3>$a &&$8>$b && $14>$b' TIGR04555.HMM_domtblout.txt|wc -l
+```
+## fitering standard ##
+```
+domtblout.txt
+#1, length, $3 > 75% percent of HMM len
+#2, cuoff, tigrfam, use noise cutoff $8> && $14> 
+#3, For Pfam, the gathering threshold
+#4, kofam, ???
+awk -F '\t' '$3>300 &&$8>330 && $14>330'
+```
+
+## filtering Tigrfam
+```
+#cd /home/liupf/sulfur_cycling_owc_hmmsearh/sulfur_cycling_tigrfam
+
+for file in *domtblout.txt
+do 
+grep -v '^#' $file >"${file%.*}"_e.txt
+sed -i -e 's/ \+/\t/g'  "${file%.*}"_e.txt
+done
+
+
+
+```
 
 #Adrienne created coverage file and relabel#
 ```
