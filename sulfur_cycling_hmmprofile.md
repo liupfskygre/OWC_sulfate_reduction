@@ -97,6 +97,7 @@ mkdir sulfur_cycling_owc_hmmsearh
 screen -S hmmsearch
 hmmsearch --cpu 20 --tblout sulfur_cycling_tblout.txt --domtblout sulfur_cycling_domtblout.txt sulfur_cycling_hmmprofile.hmm combined_owc_3211_prodigal.faa
 
+
 ```
 
 
