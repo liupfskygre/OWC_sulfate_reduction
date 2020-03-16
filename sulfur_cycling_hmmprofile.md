@@ -234,13 +234,18 @@ awk -F '\t' '$8>325  && $14>325  && $3>330 ' TIGR04315.HMM_domtblout_e.txt >otr_
 
 #Kofamscan
 ```
-#
-/home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o sulfur_cycling_kofamscan.txt -p sulfur_cyclinge_profile -k sulfur_related_kofam_list -f mapper --keep-tabular --no-report-unannotated -E 1e-5  --cpu 12 ../combined_owc_3211_prodigal.faa &>sulfur_kofamscan.txt
-
-#rich formate
-/home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o sulfur_cycling_kofamscan_rich.txt -p sulfur_cyclinge_profile -k sulfur_related_kofam_list --no-report-unannotated -E 1e-5  --cpu 24 ../combined_owc_3211_prodigal.faa &>sulfur_kofamscan_rich_log.txt
 #kofamcan dir
 /home/liupf/software_liu/kofamscan
+
+#only report with reads above threshold (score >threshold, and E-value < setted)
+
+/home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o sulfur_cycling_kofamscan.txt -p sulfur_cyclinge_profile -k sulfur_related_kofam_list -f mapper --keep-tabular --no-report-unannotated -E 1e-5  --cpu 12 ../combined_owc_3211_prodigal.faa &>sulfur_kofamscan.txt
+
+#rich formate, default [detail], will report all inlucding below reshold, use star(*) to get the real ones
+/home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o sulfur_cycling_kofamscan_rich.txt -p sulfur_cyclinge_profile -k sulfur_related_kofam_list --no-report-unannotated -E 1e-5  --cpu 24 ../combined_owc_3211_prodigal.faa &>sulfur_kofamscan_rich_log.txt
+grep '\*' sulfur_cycling_kofamscan_rich.txt >sulfur_cycling_kofamscan_rich_True_hits.txt #11549
+
+
 
 #
 cd /home/liupf/sulfur_cycling_owc_hmmsearh/sulfur_cycling_pfam
