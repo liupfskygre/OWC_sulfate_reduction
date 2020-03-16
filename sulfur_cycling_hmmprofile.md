@@ -342,19 +342,44 @@ sed -i -e 's/\.fa//1' dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt
 
 grep -w -f dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt ../gtdb_and_checkm_for_dram.txt >dsrAB_aprAB_bins_gtdbtk_dram.txt
 
-wc -l dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt
+wc -l dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt #607
 
 
 ##tigrfam based
-TIGR02061
-TIGR02060
-TIGR02064
-TIGR02066
-aprB	PF12139 APS-reductase_C
-dsrD	pf08679
+for file in  TIGR02061 TIGR02060 TIGR02064 TIGR02066
+do 
+cp  ../sulfur_cycling_tigrfam/*_"${file}"_domtblout_filter.txt ./
+done
+
+#aprB	PF12139 APS-reductase_C
+#dsrD	pf08679
+cp ../sulfur_cycling_pfam/dsrD_pf08679_domtblout_filter.txt ./
+cp ../sulfur_cycling_pfam/aprB_PF12139_domtblout_filter.txt ./ 
+cat *TIGR* dsrD_pf08679_domtblout_filter.txt aprB_PF12139_domtblout_filter.txt  >Tigr_pfam_sulfate_seqs.txt
+
+cat Tigr_pfam_sulfate_seqs.txt|cut -f1 -d$'\t' >Tigr_pfam_sulfate_seqs_f1.txt
+sed -i -e 's/_[0-9]*$//1' Tigr_pfam_sulfate_seqs_f1.txt
+cat Tigr_pfam_sulfate_seqs_f1.txt |sort|uniq >Tigr_pfam_sulfate_seqs_f1_uniq.txt #786
+
+grep -w -f Tigr_pfam_sulfate_seqs_f1_uniq.txt ../wetlands_db_contigs_to_bins.tsv > dsrABD_aprAB_seqs_bin_list.txt
+
+cat dsrABD_aprAB_seqs_bin_list.txt|cut -f2 -d$'\t' |sort|uniq > dsrABD_aprAB_seqs_bin_list_uniq.txt
+#
+sed -i -e 's/\.relabeled//1' dsrABD_aprAB_seqs_bin_list_uniq.txt
+#
+sed -i -e 's/\.fa//1' dsrABD_aprAB_seqs_bin_list_uniq.txt
+#
+grep -w -f dsrABD_aprAB_seqs_bin_list_uniq.txt ../gtdb_and_checkm_for_dram.txt >dsrABD_aprAB_bins_gtdbtk_dram.txt
+
+wc -l dsrABD_aprAB_bins_gtdbtk_dram.txt #560 genomes 
+
+cat dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt dsrABD_aprAB_seqs_bin_list_uniq.txt |sort |uniq >kofamscan_tigr_pfam_bin_list_uniq.txt #619 genomes
+
+#
+grep -w -f kofamscan_tigr_pfam_bin_list_uniq.txt ../gtdb_and_checkm_for_dram.txt >sulfate_reducing_bins_gtdbtk_dram.txt
 
 
-
+.HMM_domtblout_e.txt
 ```
 
 
