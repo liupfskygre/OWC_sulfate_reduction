@@ -232,6 +232,21 @@ awk -F '\t' '$8>325  && $14>325  && $3>330 ' TIGR04315.HMM_domtblout_e.txt >otr_
 
 ```
 
+#Kofamscan
+```
+/home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o sulfur_cycling_kofamscan.txt -p sulfur_cycling_ko.txt -f mapper --keep-tabular --[no-]report-unannotated -E 1e-5  --cpu 12 <.faa>
+#kofamcan dir
+/home/liupf/software_liu/kofamscan
+
+#
+cd /home/liupf/sulfur_cycling_owc_hmmsearh/sulfur_cycling_pfam
+/home/liupf/sulfur_cycling_owc_hmmsearh/sulfur_cycling_KOfam_kofamcan
+grep -f sulfur_related_kofam.list /home/liupf/software_liu/kofamscan/ko_list >sulfur_related_kofam_list
+
+
+
+```
+
 #Adrienne created coverage file and relabel#
 ```
 /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/read_mapping_vs_relabeled_derepped_genomes
