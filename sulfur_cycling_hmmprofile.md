@@ -320,6 +320,27 @@ grep -f sulfur_related_kofam.list /home/liupf/software_liu/kofamscan/ko_list >su
 
 ```
 
+# data summary
+
+## sulfate reduction pathway
+```
+#/home/liupf/sulfur_cycling_owc_hmmsearh/sulfate_reduction_hits
+cp ../sulfur_cycling_KOfam_kofamcan/sulfur_cycling_kofamscan.txt ./
+grep -w -f dsrAB_aprAB_KO.list sulfur_cycling_kofamscan.txt >dsrAB_aprAB_KO_kofamscan.txt
+
+cat dsrAB_aprAB_KO_kofamscan.txt |cut -f1 -d$'\t' > dsrAB_aprAB_KO_kofamscan_seqs.txt
+sed -i -e 's/_[0-9]*$//1' dsrAB_aprAB_KO_kofamscan_seqs.txt
+cat dsrAB_aprAB_KO_kofamscan_seqs.txt|sort|uniq> dsrAB_aprAB_KO_kofamscan_seqs_uniq.txt
+grep -w -f dsrAB_aprAB_KO_kofamscan_seqs_uniq.txt ../wetlands_db_contigs_to_bins.tsv > dsrAB_aprAB_KO_kofamscan_seqs_bin_list.txt
+
+cat dsrAB_aprAB_KO_kofamscan_seqs_bin_list.txt|cut -f2 -d$'\t' |sort|uniq > dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt
+#
+sed -i -e 's/\.relabeled//1' dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt
+sed -i -e 's/\.fa//1' dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt
+
+```
+
+
 #Adrienne created coverage file and relabel#
 ```
 /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/read_mapping_vs_relabeled_derepped_genomes
