@@ -324,7 +324,9 @@ grep -f sulfur_related_kofam.list /home/liupf/software_liu/kofamscan/ko_list >su
 
 ## sulfate reduction pathway
 ```
-#/home/liupf/sulfur_cycling_owc_hmmsearh/sulfate_reduction_hits
+cd /home/liupf/sulfur_cycling_owc_hmmsearh/sulfate_reduction_hits
+
+##kofamscan based
 cp ../sulfur_cycling_KOfam_kofamcan/sulfur_cycling_kofamscan.txt ./
 grep -w -f dsrAB_aprAB_KO.list sulfur_cycling_kofamscan.txt >dsrAB_aprAB_KO_kofamscan.txt
 
@@ -337,6 +339,21 @@ cat dsrAB_aprAB_KO_kofamscan_seqs_bin_list.txt|cut -f2 -d$'\t' |sort|uniq > dsrA
 #
 sed -i -e 's/\.relabeled//1' dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt
 sed -i -e 's/\.fa//1' dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt
+
+grep -w -f dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt ../gtdb_and_checkm_for_dram.txt >dsrAB_aprAB_bins_gtdbtk_dram.txt
+
+wc -l dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt
+
+
+##tigrfam based
+TIGR02061
+TIGR02060
+TIGR02064
+TIGR02066
+aprB	PF12139 APS-reductase_C
+dsrD	pf08679
+
+
 
 ```
 
