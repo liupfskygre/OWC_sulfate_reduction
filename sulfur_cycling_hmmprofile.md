@@ -135,6 +135,12 @@ do
 hmmsearch --cpu 20 --tblout "${file}"_tblout.txt --domtblout "${file}"_domtblout.txt $file ../combined_owc_3211_prodigal.faa &>"${file}".log
 done
 
+for file in DoxA.hmm
+do
+hmmsearch --cpu 20 --tblout "${file}"_tblout.txt --domtblout "${file}"_domtblout.txt $file ../combined_owc_3211_prodigal.faa &>"${file}".log
+done
+
+
 #tigrfam
 screen -s hmmsearch2
 for file in *.HMM
@@ -228,11 +234,60 @@ awk -F '\t' '$8>  && $14>  && $3> ' .HMM_domtblout_e.txt #sreA	TIGR01409	16.7	16
 
 awk -F '\t' '$8>325  && $14>325  && $3>330 ' TIGR04315.HMM_domtblout_e.txt >otr_TIGR04315_domtblout_filter.txt #otr	TIGR04315	375	325	440	330
 
-
-
 ```
 
-#Kofamscan
+## filtering pfam
+```
+
+for file in *domtblout.txt
+do 
+grep -v '^#' $file >"${file%.*}"_e.txt
+sed -i -e 's/ \+/\t/g'  "${file%.*}"_e.txt
+done
+
+#
+awk -F '\t' '$8>23.4 && $14>23.4 && $3>159 ' ATP-sulfurylase.hmm_domtblout_e.txt >Sat_PF01747_domtblout_filter.txt #sat/met3	PF01747 ATP-sulfurylase	23.4	23.3	212	159
+
+awk -F '\t' '$8>25 && $14>25 && $3>62 ' APS-reductase_C.hmm_domtblout_e.txt  >aprB_PF12139_domtblout_filter.txt #aprB	PF12139 APS-reductase_C	25	25	82	62
+
+awk -F '\t' '$8>21 && $14>6.8 && $3>119 ' NIR_SIR.hmm_domtblout_e.txt  >dsrAB_pf01077_domtblout_filter.txt  #dsrA	pf01077	21	6.8	159	119
+
+awk -F '\t' '$8>24.2 && $14>24.2 && $3>48 ' DsrD.hmm_domtblout_e.txt  >dsrD_pf08679_domtblout_filter.txt
+#dsrD	pf08679	24.2	24.2	64	48
+
+awk -F '\t' '$8>24.2 && $14>24.2 && $3>53 ' FCSD-flav_bind.hmm_domtblout_e.txt >fccB_PF09242_domtblout_filter.txt
+#fccB	PF09242	21.5	21.5	70	53
+
+awk -F '\t' '$8>28.1 && $14>28.1 && $3>84 ' SoxY.hmm_domtblout_e.txt >soxY_PF13501_domtblout_filter.txt
+#soxY	PF13501	28.1	28.1	112	84
+
+awk -F '\t' '$8>20 && $14>20 && $3>72 ' SoxZ.hmm_domtblout_e.txt >soxZ_PF08770_domtblout_filter.txt
+#soxZ	PF08770	20	20	96	72
+
+awk -F '\t' '$8>25 && $14>25 && $3>227 ' SOR.hmm_domtblout_e.txt >SOR_PF07682_domtblout_filter.txt
+#SOR	PF07682	25	25	302	227
+
+awk -F '\t' '$8>22.7 && $14>22.7 && $3>125 ' DoxD.hmm_domtblout_e.txt >DoxD_PF04173_domtblout_filter.txt
+#DoxD_PF04173 	22.7	22.7	167	125
+
+awk -F '\t' '$8>20.7 && $14>20.7 && $3>98 ' DoxA.hmm_domtblout_e.txt >DoxA_PF07680_domtblout_filter.txt
+#PF07680 DoxA	20.7	20.7	130	98
+
+awk -F '\t' '$8>22.5 && $14>22.5 && $3>64 ' DoxX.hmm_domtblout_e.txt > DoxX_PF07681_domtblout_filter.txt
+#PF07680 DoxX	22.5	22.5	85	64
+
+awk -F '\t' '$8>100 && $14>100 && $3>311 ' sulfide_quinone_oxidoreductase_sqr.hmm_domtblout_e.txt > sqr_domtblout_filter.txt
+#K.A.sqr_alignment	100	100	415	311
+
+awk -F '\t' '$8>200 && $14>200 && $3>184 ' sulfur_dioxygenase_sdo.hmm_domtblout_e.txt> sdo_domtblout_filter.txt
+#A.K.sdo	200	200	245	184
+
+awk -F '\t' '$8>300 && $14>300 && $3>569 ' thiosulfate_reductase_phsA.hmm_domtblout_e.txt> phsA_domtblout_filter.txt
+#K.A.phs	300	300	758	569
+```
+
+
+## Kofamscan
 ```
 #kofamcan dir
 /home/liupf/software_liu/kofamscan
