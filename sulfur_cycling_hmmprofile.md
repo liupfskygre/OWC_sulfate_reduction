@@ -234,7 +234,11 @@ awk -F '\t' '$8>325  && $14>325  && $3>330 ' TIGR04315.HMM_domtblout_e.txt >otr_
 
 #Kofamscan
 ```
+#
 /home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o sulfur_cycling_kofamscan.txt -p sulfur_cyclinge_profile -k sulfur_related_kofam_list -f mapper --keep-tabular --no-report-unannotated -E 1e-5  --cpu 12 ../combined_owc_3211_prodigal.faa &>sulfur_kofamscan.txt
+
+#rich formate
+/home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o sulfur_cycling_kofamscan_rich.txt -p sulfur_cyclinge_profile -k sulfur_related_kofam_list --no-report-unannotated -E 1e-5  --cpu 24 ../combined_owc_3211_prodigal.faa &>sulfur_kofamscan_rich_log.txt
 #kofamcan dir
 /home/liupf/software_liu/kofamscan
 
