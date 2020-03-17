@@ -1,4 +1,6 @@
-#a collection of sulfur cycling related marker genes hmmprofile 
+#a collection of sulfur cycling related marker genes hmmprofile
+
+
 
 #ref
 #download tigrfam on mac
@@ -15,7 +17,7 @@
 
 cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/Marker_gene_hmmprofile/sulfur_cycling_KOfam
 
-touch sulfur_related_kofam.list #41 
+touch sulfur_related_kofam.list #41
 for file in $(cat sulfur_related_kofam.list)
 do
 cp ./profiles/"${file}".hmm ./
@@ -56,7 +58,7 @@ cat *.HMM >sulfur_cycling_tigrfam.hmm
 cat *.hmm>sulfur_cycling_pfam.hmm
 ```
 
-#download specific eggnog 
+#download specific eggnog
 ```
 cat *.hmm>sulfur_cycling_eggnog.hmm
 
@@ -74,15 +76,15 @@ cat ./sulfur_cycling_pfam/sulfur_cycling_pfam.hmm ./sulfur_cycling_specific_eggN
 ```
 /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/dereplicated_genomes
 
-#based on the prodigal prediction file 
+#based on the prodigal prediction file
 #
 [liupf@zenith prodigal_files]$ cat *.faa >~/combined_owc_3211_prodigal.faa
 [liupf@zenith prodigal_files]$ pwd
 /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/prodigal_files
-[liupf@zenith prodigal_files]$ 
+[liupf@zenith prodigal_files]$
 
 cd ~
-grep -c '>' combined_owc_3211_prodigal.faa. #use this as the database to search all 
+grep -c '>' combined_owc_3211_prodigal.faa. #use this as the database to search all
 9394752
 
 
@@ -100,7 +102,7 @@ hmmsearch --cpu 20 --tblout sulfur_cycling_tblout.txt --domtblout sulfur_cycling
 
 ###
 grep -v '^#' sulfur_cycling_tblout.txt > sulfur_cycling_tblout_edit1.txt. #41164
-sed -i -e 's/ \+/\t/g' sulfur_cycling_tblout_edit1.txt 
+sed -i -e 's/ \+/\t/g' sulfur_cycling_tblout_edit1.txt
 
 grep -v '^#' sulfur_cycling_domtblout.txt>sulfur_cycling_domtblout_edit1.txt
 [liupf@zenith sulfur_cycling_owc_hmmsearh]$ sed -i -e 's/ \+/\t/g' sulfur_cycling_domtblout_edit1.txt
@@ -110,9 +112,9 @@ awk -F '\t' '$5<1e-3' sulfur_cycling_tblout_edit1.txt > sulfur_cycling_tblout_ed
 cat sulfur_cycling_tblout_edit1E3.txt |cut -f1 -d$'\t'|sort|uniq > sulfur_cycling_tblout_edit1E3_f1uniq.txt
 
 #
-> a <- read.delim("sulfur_cycling_tblout_edit1E3_f1uniq.txt",header=F, check.names=FALSE) 
+> a <- read.delim("sulfur_cycling_tblout_edit1E3_f1uniq.txt",header=F, check.names=FALSE)
 > View(a)
-> b<-read.delim("wetlands_db_contigs_to_bins.tsv",header=F, check.names=FALSE, sep="\t") 
+> b<-read.delim("wetlands_db_contigs_to_bins.tsv",header=F, check.names=FALSE, sep="\t")
 > c<- merge(a,b, by.x="V1", by.y="V1", all.x=T, all.y=F, sort=F)
 > write.table(c, file = "sulfur_cycling_bins_contigs.tsv", sep = '\t',row.names = F)
 #3093 genomes found.
@@ -161,7 +163,7 @@ done
 ```
 #$3, len, >75% of the hmm len
 #$7, evale <1e-5 #use bitscore as final cutoff
-#$8, whole seq cutoff 
+#$8, whole seq cutoff
 #$14, domain cutoff
 
 #Each model has a trusted cutoff, above which there should be no false positive hits, and a noise cutoff below which hits to the model are considered uninteresting. The range between trusted cutoff and noise cutoff represents scores that may or may not be true hits.
@@ -173,7 +175,7 @@ done
 #example TIGR04555.HMM
 awk -F '\t' '$3>300 &&$8>420 && $14>420' TIGR04555.HMM_domtblout.txt|wc -l
 awk -F '\t' '$3>300 &&$8>330 && $14>330' TIGR04555.HMM_domtblout.txt|wc -l
-cat TIGR04555.HMM_domtblout.txt |cut -f3,7,8,13,14 -d$'\t' |head 
+cat TIGR04555.HMM_domtblout.txt |cut -f3,7,8,13,14 -d$'\t' |head
 
 awk -F '\t' '$3>$a &&$8>$b && $14>$b' TIGR04555.HMM_domtblout.txt|wc -l
 awk -F '\t' -v  '$3>$a &&$8>$b && $14>$b' TIGR04555.HMM_domtblout.txt|wc -l
@@ -182,7 +184,7 @@ awk -F '\t' -v  '$3>$a &&$8>$b && $14>$b' TIGR04555.HMM_domtblout.txt|wc -l
 ```
 domtblout.txt
 #1, length, $3 > 75% percent of HMM len
-#2, cuoff, tigrfam, use full noise cutoff $8> && domain $14> 
+#2, cuoff, tigrfam, use full noise cutoff $8> && domain $14>
 #3, For Pfam, the gathering threshold
 #4, kofam, ???? KofamScan or hmmsearch ?
 awk -F '\t' '$3>300 &&$8>330 && $14>330'
@@ -193,7 +195,7 @@ awk -F '\t' '$3>300 &&$8>330 && $14>330'
 #cd /home/liupf/sulfur_cycling_owc_hmmsearh/sulfur_cycling_tigrfam
 
 for file in *domtblout.txt
-do 
+do
 grep -v '^#' $file >"${file%.*}"_e.txt
 sed -i -e 's/ \+/\t/g'  "${file%.*}"_e.txt
 done
@@ -240,7 +242,7 @@ awk -F '\t' '$8>325  && $14>325  && $3>330 ' TIGR04315.HMM_domtblout_e.txt >otr_
 ```
 
 for file in *domtblout.txt
-do 
+do
 grep -v '^#' $file >"${file%.*}"_e.txt
 sed -i -e 's/ \+/\t/g'  "${file%.*}"_e.txt
 done
@@ -296,7 +298,7 @@ awk -F '\t' '$8>300 && $14>300 && $3>569 ' thiosulfate_reductase_phsA.hmm_domtbl
 
 /home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o sulfur_cycling_kofamscan.txt -p sulfur_cyclinge_profile -k sulfur_related_kofam_list -f mapper --keep-tabular --no-report-unannotated -E 1e-5  --cpu 12 ../combined_owc_3211_prodigal.faa &>sulfur_kofamscan.txt
 
-#E5 
+#E5
 #rich formate, default [detail], will report all inlucding below reshold, use star(*) to get the real ones
 /home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o sulfur_cycling_kofamscan_rich.txt -p sulfur_cyclinge_profile -k sulfur_related_kofam_list --no-report-unannotated -E 1e-5  --cpu 24 ../combined_owc_3211_prodigal.faa &>sulfur_kofamscan_rich_log.txt
 grep '\*' sulfur_cycling_kofamscan_rich.txt >sulfur_cycling_kofamscan_rich_True_hits.txt #11549
@@ -305,7 +307,7 @@ cat sulfur_cycling_kofamscan.txt |cut -f2 -d$'\t' |sort|uniq -c
 #E3
 /home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o sulfur_cycling_kofamscan_rich_E3.txt -p sulfur_cyclinge_profile -k sulfur_related_kofam_list --no-report-unannotated -E 1e-3  --cpu 40 ../combined_owc_3211_prodigal.faa &>sulfur_kofamscan_rich_logE3.txt
 grep '\*' sulfur_cycling_kofamscan_rich_E3.txt >sulfur_cycling_kofamscan_rich_True_hits_E3.txt #11641
-# cat sulfur_cycling_kofamscan.txt |cut -f2 -d$'\t' |sort|uniq -c 
+# cat sulfur_cycling_kofamscan.txt |cut -f2 -d$'\t' |sort|uniq -c
 
 
 #creat profile and list for kofamscan
@@ -340,21 +342,27 @@ cat dsrAB_aprAB_KO_kofamscan_seqs_bin_list.txt|cut -f2 -d$'\t' |sort|uniq > dsrA
 sed -i -e 's/\.relabeled//1' dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt
 sed -i -e 's/\.fa//1' dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt
 
-grep -w -f dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt ../gtdb_and_checkm_for_dram.txt >dsrAB_aprAB_bins_gtdbtk_dram.txt
+##fix naming issue in the wetlands_db_contigs_to_bins.tsv
+sed -i -e 's/O3C3D3_metabat_w_DDIG_2-5kb/O3C3D3_metabat_w_DDIG_2.5k/g'  dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt
 
-wc -l dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt #607
+sed -i -e 's/M3C4D4_metabat_w_DDIG_2-5kb/M3C4D4_metabat_w_DDIG_2.5kb/g'  dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt
+
+sed -i -e 's/O3C3D4_metabat_w_DDIG_2-5kb/O3C3D4_metabat_w_DDIG_2.5kb/g'  dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt #607 genomes
+
+grep -w -f dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt ../gtdb_and_checkm_for_dram.txt >dsrAB_aprAB_bins_gtdbtk_dram2.txt
+#607
 
 
 ##tigrfam based
 for file in  TIGR02061 TIGR02060 TIGR02064 TIGR02066
-do 
+do
 cp  ../sulfur_cycling_tigrfam/*_"${file}"_domtblout_filter.txt ./
 done
 
 #aprB	PF12139 APS-reductase_C
 #dsrD	pf08679
 cp ../sulfur_cycling_pfam/dsrD_pf08679_domtblout_filter.txt ./
-cp ../sulfur_cycling_pfam/aprB_PF12139_domtblout_filter.txt ./ 
+cp ../sulfur_cycling_pfam/aprB_PF12139_domtblout_filter.txt ./
 cat *TIGR* dsrD_pf08679_domtblout_filter.txt aprB_PF12139_domtblout_filter.txt  >Tigr_pfam_sulfate_seqs.txt
 
 cat Tigr_pfam_sulfate_seqs.txt|cut -f1 -d$'\t' >Tigr_pfam_sulfate_seqs_f1.txt
@@ -369,17 +377,110 @@ sed -i -e 's/\.relabeled//1' dsrABD_aprAB_seqs_bin_list_uniq.txt
 #
 sed -i -e 's/\.fa//1' dsrABD_aprAB_seqs_bin_list_uniq.txt
 #
-grep -w -f dsrABD_aprAB_seqs_bin_list_uniq.txt ../gtdb_and_checkm_for_dram.txt >dsrABD_aprAB_bins_gtdbtk_dram.txt
 
-wc -l dsrABD_aprAB_bins_gtdbtk_dram.txt #560 genomes 
+##fix naming issue in the wetlands_db_contigs_to_bins.tsv
+sed -i -e 's/O3C3D3_metabat_w_DDIG_2-5kb/O3C3D3_metabat_w_DDIG_2.5k/g'  dsrABD_aprAB_seqs_bin_list_uniq.txt
 
+sed -i -e 's/M3C4D4_metabat_w_DDIG_2-5kb/M3C4D4_metabat_w_DDIG_2.5kb/g'  dsrABD_aprAB_seqs_bin_list_uniq.txt
+
+sed -i -e 's/O3C3D4_metabat_w_DDIG_2-5kb/O3C3D4_metabat_w_DDIG_2.5kb/g'  dsrABD_aprAB_seqs_bin_list_uniq.txt #576
+
+grep -w -f dsrABD_aprAB_seqs_bin_list_uniq.txt ../gtdb_and_checkm_for_dram.txt >dsrABD_aprAB_bins_gtdbtk_dram2.txt
+
+wc -l dsrABD_aprAB_bins_gtdbtk_dram2.txt #576 genomes
+
+#add two together
 cat dsrAB_aprAB_KO_kofamscan_bin_list_uniq.txt dsrABD_aprAB_seqs_bin_list_uniq.txt |sort |uniq >kofamscan_tigr_pfam_bin_list_uniq.txt #619 genomes
 
 #
-grep -w -f kofamscan_tigr_pfam_bin_list_uniq.txt ../gtdb_and_checkm_for_dram.txt >sulfate_reducing_bins_gtdbtk_dram.txt
+grep -w -f kofamscan_tigr_pfam_bin_list_uniq.txt ../gtdb_and_checkm_for_dram.txt >sulfate_reducing_bins_gtdbtk_dram2.txt #619
+
+#with 619 genomes with aprAB and/or dsrAB
+```
+
+#
+```
+mkdir sox_system_hits
+
+/home/liupf/sulfur_cycling_owc_hmmsearh
+nano sox_ko_list.txt
+
+grep -w -f sox_ko_list.txt ../sulfur_cycling_KOfam_kofamcan/sulfur_cycling_kofamscan.txt  >sox_ko_list_KOfamScan.txt
+
+cat sox_ko_list_KOfamScan.txt |cut -f1 -d$'\t' > sox_ko_list_KOfamScan_seqs.txt
+
+sed -i -e 's/_[0-9]*$//1' sox_ko_list_KOfamScan_seqs.txt
+
+cat sox_ko_list_KOfamScan_seqs.txt|sort|uniq> sox_ko_list_KOfamScan_seqs_uniq.txt
+
+grep -w -f sox_ko_list_KOfamScan_seqs_uniq.txt ../wetlands_db_contigs_to_bins.tsv > sox_ko_list_KOfamScan_seqs_bins_list.txt
+
+cat sox_ko_list_KOfamScan_seqs_bins_list.txt|cut -f2 -d$'\t' |sort|uniq > sox_ko_list_KOfamScan_seqs_bins_list_uniq.txt  
+### 492
+#
+sed -i -e 's/\.relabeled//1' sox_ko_list_KOfamScan_seqs_bins_list_uniq.txt
+sed -i -e 's/\.fa//1' sox_ko_list_KOfamScan_seqs_bins_list_uniq.txt
+
+##fix naming issue in the wetlands_db_contigs_to_bins.tsv
+sed -i -e 's/O3C3D3_metabat_w_DDIG_2-5kb/O3C3D3_metabat_w_DDIG_2.5k/g'  sox_ko_list_KOfamScan_seqs_bins_list_uniq.txt
+
+sed -i -e 's/M3C4D4_metabat_w_DDIG_2-5kb/M3C4D4_metabat_w_DDIG_2.5kb/g'  sox_ko_list_KOfamScan_seqs_bins_list_uniq.txt
+
+sed -i -e 's/O3C3D4_metabat_w_DDIG_2-5kb/O3C3D4_metabat_w_DDIG_2.5kb/g'  sox_ko_list_KOfamScan_seqs_bins_list_uniq.txt
+
+grep -w -f sox_ko_list_KOfamScan_seqs_bins_list_uniq.txt ../gtdb_and_checkm_for_dram.txt >sox_ko_bins_gtdbtk_dram2.txt
+
+##names in the  gtdb_and_checkm_for_dram.txt ！= in wetlands_db_contigs_to_bins.tsv
+#M3C4D4_metabat_w_DDIG_2.5kb #w kb ==M3C4D4_metabat_w_DDIG_2-5kb
+#O3C3D3_metabat_w_DDIG_2.5k.150 #w/o kb == O3C3D3_metabat_w_DDIG_2-5kb
+#O3C3D4_metabat_w_DDIG_2.5kb #w kb  ==O3C3D4_metabat_w_DDIG_2-5kb
+
+wc -l sox_ko_bins_gtdbtk_dram2.txt
+#492
+
+## tigrfam based
+for file in  TIGR04484 TIGR04485 TIGR04486 TIGR04555 TIGR04488 TIGR04490
+do
+cp  ../sulfur_cycling_tigrfam/*_"${file}"_domtblout_filter.txt ./
+done
+
+#
+soxY	PF13501
+soxZ	PF08770
+
+cp ../sulfur_cycling_pfam/soxZ_PF08770_domtblout_filter.txt ./
+cp ../sulfur_cycling_pfam/soxY_PF13501_domtblout_filter.txt ./
+cat *TIGR* soxZ_PF08770_domtblout_filter.txt soxY_PF13501_domtblout_filter.txt  >Tigr_pfam_soxYZ_seqs.txt
+
+cat Tigr_pfam_soxYZ_seqs.txt|cut -f1 -d$'\t' >Tigr_pfam_soxYZ_seqs_f1.txt
+sed -i -e 's/_[0-9]*$//1' Tigr_pfam_soxYZ_seqs_f1.txt
+cat Tigr_pfam_soxYZ_seqs_f1.txt |sort|uniq >Tigr_pfam_soxYZ_seqs_f1_uniq.txt
+
+grep -w -f Tigr_pfam_soxYZ_seqs_f1_uniq.txt ../wetlands_db_contigs_to_bins.tsv > Tigr_pfam_soxYZ_seqs_bins_list.txt
+
+cat Tigr_pfam_soxYZ_seqs_bins_list.txt|cut -f2 -d$'\t' |sort|uniq > Tigr_pfam_soxYZ_seqs_bins_uniq.txt
+#
+sed -i -e 's/\.relabeled//1' Tigr_pfam_soxYZ_seqs_bins_uniq.txt
+#
+sed -i -e 's/\.fa//1' Tigr_pfam_soxYZ_seqs_bins_uniq.txt
+#
+##fix naming issue in the wetlands_db_contigs_to_bins.tsv
+sed -i -e 's/O3C3D3_metabat_w_DDIG_2-5kb/O3C3D3_metabat_w_DDIG_2.5k/g'  Tigr_pfam_soxYZ_seqs_bins_uniq.txt
+
+sed -i -e 's/M3C4D4_metabat_w_DDIG_2-5kb/M3C4D4_metabat_w_DDIG_2.5kb/g'  Tigr_pfam_soxYZ_seqs_bins_uniq.txt
+
+sed -i -e 's/O3C3D4_metabat_w_DDIG_2-5kb/O3C3D4_metabat_w_DDIG_2.5kb/g'  Tigr_pfam_soxYZ_seqs_bins_uniq.txt #552
 
 
-.HMM_domtblout_e.txt
+grep -w -f Tigr_pfam_soxYZ_seqs_bins_uniq.txt ../gtdb_and_checkm_for_dram.txt >Tigr_pfam_soxYZ_gtdbtk_dram2.txt #552 genomes
+
+#
+cat Tigr_pfam_soxYZ_seqs_bins_uniq.txt sox_ko_list_KOfamScan_seqs_bins_list_uniq.txt |sort |uniq >kofamscan_tigr_pfam_bin_SOX_uniq.txt  #559
+
+#
+grep -w -f kofamscan_tigr_pfam_bin_SOX_uniq.txt ../gtdb_and_checkm_for_dram.txt >SOX_bins_gtdbtk_dram2.txt #559 genomes
+
+#w 559 genomes with SOX system
 ```
 
 
@@ -401,7 +502,8 @@ grep -w -f kofamscan_tigr_pfam_bin_list_uniq.txt ../gtdb_and_checkm_for_dram.txt
 9394752 # why this is different from the combined bins_genes
 
 [liupf@zenith relabeled_dereplicated_genomes]$ cat *.fa|grep -c '>' -
-1805837 #the same as the combined 
+1805837 #the same as the combined
+
 
 
 
@@ -413,4 +515,16 @@ what are the DRAM for, just to dram all genomes we need to use later?
 ls *.fna|wc -l
 3210
 
+```
+
+# other issues
+```
+##names in the  gtdb_and_checkm_for_dram.txt ！= in wetlands_db_contigs_to_bins.tsv
+#M3C4D4_metabat_w_DDIG_2.5kb #w kb ==M3C4D4_metabat_w_DDIG_2-5kb
+#O3C3D3_metabat_w_DDIG_2.5k.150 #w/o kb == O3C3D3_metabat_w_DDIG_2-5kb
+#O3C3D4_metabat_w_DDIG_2.5kb #w kb  ==O3C3D4_metabat_w_DDIG_2-5kb
+
+#wetlands_db_contigs_to_bins.tsv
+#/home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins
+#changed by Adrienne to 2-5kb style
 ```
