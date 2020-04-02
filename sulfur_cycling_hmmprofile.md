@@ -321,8 +321,12 @@ grep -f sulfur_related_kofam.list /home/liupf/software_liu/kofamscan/ko_list >su
 
 #April-2-2020, recheck 
 asrABC_ko_list_kofam.list
-/home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o asrABC_kofamscan_rich.txt -p sulfur_cyclinge_profile -k asrABC_ko_list_kofam.list --no-report-unannotated -E 1e-5  --cpu 24 ../combined_owc_3211_prodigal.faa 
-Error: Unknown KO: K00385
+/home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o asrABC_kofamscan_rich.txt -p asrABC.hal -k asrABC_ko_list_kofam.list --no-report-unannotated -E 1e-5  --cpu 24 ../combined_owc_3211_prodigal.faa 
+#Error: Unknown KO: K00385, maybe profile and list should be 1to1
+nano asrABC.hal
+K00385.hmm 
+K16950.hmm
+K16951.hmm
 ```
 
 # data summary
