@@ -319,7 +319,10 @@ grep -f sulfur_related_kofam.list /home/liupf/software_liu/kofamscan/ko_list >su
 ##E5 is similar to the output from tigrfam
 #use this one
 
-
+#April-2-2020, recheck 
+asrABC_ko_list_kofam.list
+/home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o asrABC_kofamscan_rich.txt -p sulfur_cyclinge_profile -k asrABC_ko_list_kofam.list --no-report-unannotated -E 1e-5  --cpu 24 ../combined_owc_3211_prodigal.faa 
+Error: Unknown KO: K00385
 ```
 
 # data summary
