@@ -579,4 +579,18 @@ cat TIGR_PFAM_hit_filtered.txt|cut -f1,4 -d$'\t' >  TIGR_PFAM_hit_filtered_hits.
 
 cat TIGR_PFAM_hit_filtered_hits.txt K00392_kofamscan_hits_e.txt sulfur_cycling_kofamscan.txt >TIGR_PFAM_Kofamscan.txt
 # 20891
+cat TIGR_PFAM_Kofamscan.txt| cut -f1 -d$'\t' |sort|uniq >TIGR_PFAM_Kofamscan_uniq_genes.txt
+#12603
+#these are genes, need contigs
+sed -e 's/_[0-9]*$//1' TIGR_PFAM_Kofamscan_uniq_genes.txt >TIGR_PFAM_Kofamscan_contigs.txt
+
+cat TIGR_PFAM_Kofamscan_contigs.txt |sort|uniq >TIGR_PFAM_Kofamscan_uniq_contigs.txt
+#9702
+
+grep -w -f TIGR_PFAM_Kofamscan_uniq_contigs.txt  wetlands_db_contigs_to_bins.tsv >sulfur_cycling_related_bins_contigs.txt
+
+awk -F '\t' '{print $0"\t"$1}' TIGR_PFAM_Kofamscan.txt>TIGR_PFAM_Kofamscan_uniq_genes_contigs.txt
+
+sed -i -e 's/_[0-9]*$//1'  TIGR_PFAM_Kofamscan_uniq_genes_contigs.txt
+
 ```
