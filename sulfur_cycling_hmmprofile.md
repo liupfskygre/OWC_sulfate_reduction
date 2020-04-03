@@ -295,7 +295,7 @@ awk -F '\t' '$8>300 && $14>300 && $3>569 ' thiosulfate_reductase_phsA.hmm_domtbl
 /home/liupf/software_liu/kofamscan
 
 #only report with reads above threshold (score >threshold, and E-value < setted)
-
+#none rich
 /home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o sulfur_cycling_kofamscan.txt -p sulfur_cyclinge_profile -k sulfur_related_kofam_list -f mapper --keep-tabular --no-report-unannotated -E 1e-5  --cpu 12 ../combined_owc_3211_prodigal.faa &>sulfur_kofamscan.txt
 
 #E5
@@ -333,6 +333,7 @@ do
 /home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o "${file}"_kofamscan_rich.txt -p ./sulfur_cyclinge_profile/"${file}".hmm -k sulfur_related_kofam_list --no-report-unannotated -E 1e-5  --cpu 24 ../combined_owc_3211_prodigal.faa &>"${file}".log
 done
 for file in $(cat re_run_kofam.txt)
+#for file in K00392
 do
 wc -l "${file}"_kofamscan_rich.txt
 grep -c "${file}" "${file}"_kofamscan_rich.txt
@@ -344,12 +345,22 @@ done
 mccA kofamscan and tigrfam
 ```
 /home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o K00392_kofamscan_rich.txt -p ./sulfur_cyclinge_profile/K00392.hmm -k sulfur_related_kofam_list --no-report-unannotated -E 1e-5  --cpu 24 ../combined_owc_3211_prodigal.faa &>K00392.log
+grep '\*' K00392_kofamscan_rich.txt >K00392_kofamscan_hits.txt
 
 screen -r hmmsearch2
 for file in TIGR02042.HMM
 do
 hmmsearch --cpu 20 --tblout "${file}"_tblout.txt --domtblout "${file}"_domtblout.txt $file ../combined_owc_3211_prodigal.faa &>"${file}".log
 done
+
+for file in TIGR02042.HMM_domtblout.txt
+do
+grep -v '^#' $file >TIGR02042.HMM_domtblout_e.txt
+sed -i -e 's/ \+/\t/g'  TIGR02042.HMM_domtblout_e.txt
+done
+
+awk -F '\t' '$8>574.70  && $14>574.70  && $3>436 ' TIGR02042.HMM_domtblout_e.txt >mccA_TIGR02042_domtblout_filter.txt #mcca
+TIGR02042 sir	731.5	"731.5/	574.70"	581	436
 ```
 
 # data summary
@@ -557,4 +568,15 @@ ls *.fna|wc -l
 #wetlands_db_contigs_to_bins.tsv
 #/home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins
 #changed by Adrienne to 2-5kb style
+```
+
+##summary of all data into table
+```
+/Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/Data_analysis_sulfur_cycling/All_search_hits
+cat *filter.txt > TIGR_PFAM_hit_filtered.txt
+
+cat TIGR_PFAM_hit_filtered.txt|cut -f1,4 -d$'\t' >  TIGR_PFAM_hit_filtered_hits.txt
+
+cat TIGR_PFAM_hit_filtered_hits.txt K00392_kofamscan_hits_e.txt sulfur_cycling_kofamscan.txt >TIGR_PFAM_Kofamscan.txt
+# 20891
 ```
