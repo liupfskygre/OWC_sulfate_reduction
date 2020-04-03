@@ -330,7 +330,7 @@ K16951
 
 for file in $(cat re_run_kofam.txt)
 do
-/home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o "${file}"_kofamscan_rich.txt -p ./sulfur_cyclinge_profile/"${file}".hmm -k sulfur_related_kofam_list --no-report-unannotated -E 1e-5  --cpu 24 ../combined_owc_3211_prodigal.faa &>"${file}".log 
+/home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o "${file}"_kofamscan_rich.txt -p ./sulfur_cyclinge_profile/"${file}".hmm -k sulfur_related_kofam_list --no-report-unannotated -E 1e-5  --cpu 24 ../combined_owc_3211_prodigal.faa &>"${file}".log
 done
 for file in $(cat re_run_kofam.txt)
 do
@@ -339,6 +339,17 @@ grep -c "${file}" "${file}"_kofamscan_rich.txt
 grep "${file}" "${file}"_kofamscan_rich.txt|grep -c '\*'
 done
 #without '\*' significant hits
+```
+
+mccA kofamscan and tigrfam
+```
+/home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o K00392_kofamscan_rich.txt -p ./sulfur_cyclinge_profile/K00392.hmm -k sulfur_related_kofam_list --no-report-unannotated -E 1e-5  --cpu 24 ../combined_owc_3211_prodigal.faa &>K00392.log
+
+screen -r hmmsearch2
+for file in TIGR02042.HMM
+do
+hmmsearch --cpu 20 --tblout "${file}"_tblout.txt --domtblout "${file}"_domtblout.txt $file ../combined_owc_3211_prodigal.faa &>"${file}".log
+done
 ```
 
 # data summary
