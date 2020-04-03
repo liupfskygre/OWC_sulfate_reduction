@@ -319,14 +319,26 @@ grep -f sulfur_related_kofam.list /home/liupf/software_liu/kofamscan/ko_list >su
 ##E5 is similar to the output from tigrfam
 #use this one
 
-#April-2-2020, recheck 
+#April-2-2020, recheck
 asrABC_ko_list_kofam.list
-/home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o asrABC_kofamscan_rich.txt -p asrABC.hal -k asrABC_ko_list_kofam.list --no-report-unannotated -E 1e-5  --cpu 24 ../combined_owc_3211_prodigal.faa 
+/home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o asrABC_kofamscan_rich.txt -p asrABC.hal -k asrABC_ko_list_kofam.list --no-report-unannotated -E 1e-5  --cpu 24 ../combined_owc_3211_prodigal.faa
 #Error: Unknown KO: K00385, maybe profile and list should be 1to1
 nano asrABC.hal
-K00385.hmm 
-K16950.hmm
-K16951.hmm
+K00385
+K16950
+K16951
+
+for file in $(cat re_run_kofam.txt)
+do
+/home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o "${file}"_kofamscan_rich.txt -p ./sulfur_cyclinge_profile/"${file}".hmm -k sulfur_related_kofam_list --no-report-unannotated -E 1e-5  --cpu 24 ../combined_owc_3211_prodigal.faa &>"${file}".log 
+done
+for file in $(cat re_run_kofam.txt)
+do
+wc -l "${file}"_kofamscan_rich.txt
+grep -c "${file}" "${file}"_kofamscan_rich.txt
+grep "${file}" "${file}"_kofamscan_rich.txt|grep -c '\*'
+done
+#without '\*' significant hits
 ```
 
 # data summary
