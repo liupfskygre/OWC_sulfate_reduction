@@ -594,17 +594,20 @@ grep -w -f TIGR_PFAM_Kofamscan_uniq_contigs.txt  wetlands_db_contigs_to_bins.tsv
 sulfur_cycling_related_bins_contigs.txt
 
 #
-sed -i -e 's/\.relabeled//1' Tigr_pfam_soxYZ_seqs_bins_uniq.txt
+cat sulfur_cycling_related_bins_contigs.txt|cut -f2 -d$'\t' |sort|uniq > sulfur_cycling_related_bins_uniq.txt
 #
-sed -i -e 's/\.fa//1' Tigr_pfam_soxYZ_seqs_bins_uniq.txt
+
+sed -i -e 's/\.relabeled//1' sulfur_cycling_related_bins_uniq.txt
+#
+sed -i -e 's/\.fa//1' sulfur_cycling_related_bins_uniq.txt
 #
 ##fix naming issue in the wetlands_db_contigs_to_bins.tsv
-sed -i -e 's/O3C3D3_metabat_w_DDIG_2-5kb/O3C3D3_metabat_w_DDIG_2.5k/g'  Tigr_pfam_soxYZ_seqs_bins_uniq.txt
+sed -i -e 's/O3C3D3_metabat_w_DDIG_2-5kb/O3C3D3_metabat_w_DDIG_2.5k/g'  sulfur_cycling_related_bins_uniq.txt
 
-sed -i -e 's/M3C4D4_metabat_w_DDIG_2-5kb/M3C4D4_metabat_w_DDIG_2.5kb/g'  Tigr_pfam_soxYZ_seqs_bins_uniq.txt
+sed -i -e 's/M3C4D4_metabat_w_DDIG_2-5kb/M3C4D4_metabat_w_DDIG_2.5kb/g'  sulfur_cycling_related_bins_uniq.txt
 
-sed -i -e 's/O3C3D4_metabat_w_DDIG_2-5kb/O3C3D4_metabat_w_DDIG_2.5kb/g'  Tigr_pfam_soxYZ_seqs_bins_uniq.txt #552
-
+sed -i -e 's/O3C3D4_metabat_w_DDIG_2-5kb/O3C3D4_metabat_w_DDIG_2.5kb/g'  sulfur_cycling_related_bins_uniq.txt
+#2533
 
 grep -w -f Tigr_pfam_soxYZ_seqs_bins_uniq.txt ../gtdb_and_checkm_for_dram.txt >Tigr_pfam_soxYZ_gtdbtk_dram2.txt #552 genomes
 
