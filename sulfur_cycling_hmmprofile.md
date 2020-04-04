@@ -588,7 +588,37 @@ cat TIGR_PFAM_Kofamscan_contigs.txt |sort|uniq >TIGR_PFAM_Kofamscan_uniq_contigs
 #9702
 
 grep -w -f TIGR_PFAM_Kofamscan_uniq_contigs.txt  wetlands_db_contigs_to_bins.tsv >sulfur_cycling_related_bins_contigs.txt
+#9702
 
+#get the bin list
+sulfur_cycling_related_bins_contigs.txt
+
+#
+sed -i -e 's/\.relabeled//1' Tigr_pfam_soxYZ_seqs_bins_uniq.txt
+#
+sed -i -e 's/\.fa//1' Tigr_pfam_soxYZ_seqs_bins_uniq.txt
+#
+##fix naming issue in the wetlands_db_contigs_to_bins.tsv
+sed -i -e 's/O3C3D3_metabat_w_DDIG_2-5kb/O3C3D3_metabat_w_DDIG_2.5k/g'  Tigr_pfam_soxYZ_seqs_bins_uniq.txt
+
+sed -i -e 's/M3C4D4_metabat_w_DDIG_2-5kb/M3C4D4_metabat_w_DDIG_2.5kb/g'  Tigr_pfam_soxYZ_seqs_bins_uniq.txt
+
+sed -i -e 's/O3C3D4_metabat_w_DDIG_2-5kb/O3C3D4_metabat_w_DDIG_2.5kb/g'  Tigr_pfam_soxYZ_seqs_bins_uniq.txt #552
+
+
+grep -w -f Tigr_pfam_soxYZ_seqs_bins_uniq.txt ../gtdb_and_checkm_for_dram.txt >Tigr_pfam_soxYZ_gtdbtk_dram2.txt #552 genomes
+
+#
+cat Tigr_pfam_soxYZ_seqs_bins_uniq.txt sox_ko_list_KOfamScan_seqs_bins_list_uniq.txt |sort |uniq >kofamscan_tigr_pfam_bin_SOX_uniq.txt  #559
+
+#
+grep -w -f kofamscan_tigr_pfam_bin_SOX_uniq.txt ../gtdb_and_checkm_for_dram.txt >SOX_bins_gtdbtk_dram2.txt #559 genomes
+
+```
+
+#
+```
+#merge bins, gtdbtk, contigs, functional genes
 awk -F '\t' '{print $0"\t"$1}' TIGR_PFAM_Kofamscan.txt>TIGR_PFAM_Kofamscan_uniq_genes_contigs.txt
 
 sed -i -e 's/_[0-9]*$//1'  TIGR_PFAM_Kofamscan_uniq_genes_contigs.txt
