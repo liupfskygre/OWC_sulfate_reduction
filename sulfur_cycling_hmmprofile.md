@@ -346,6 +346,12 @@ mccA kofamscan and tigrfam
 ```
 /home/liupf/software_liu/kofamscan/kofamscan-1.2.0/exec_annotation -o K00392_kofamscan_rich.txt -p ./sulfur_cyclinge_profile/K00392.hmm -k sulfur_related_kofam_list --no-report-unannotated -E 1e-5  --cpu 24 ../combined_owc_3211_prodigal.faa &>K00392.log
 grep '\*' K00392_kofamscan_rich.txt >K00392_kofamscan_hits.txt
+#convert to simply formate
+sed 's/ \+ /\t/g' K00392_kofamscan_hits.txt > K00392_kofamscan_hits_e.txt
+sed -i -e 's/\* //g' K00392_kofamscan_hits_e.txt
+
+cat K00392_kofamscan_hits_e.txt |cut -f1,2 -d$'\t' >K00392_kofamscan_hits_f12.txt
+#24
 
 screen -r hmmsearch2
 for file in TIGR02042.HMM
@@ -577,10 +583,11 @@ cat *filter.txt > TIGR_PFAM_hit_filtered.txt
 
 cat TIGR_PFAM_hit_filtered.txt|cut -f1,4 -d$'\t' >  TIGR_PFAM_hit_filtered_hits.txt
 
-cat TIGR_PFAM_hit_filtered_hits.txt K00392_kofamscan_hits_e.txt sulfur_cycling_kofamscan.txt >TIGR_PFAM_Kofamscan.txt
-# 20891
+cat TIGR_PFAM_hit_filtered_hits.txt K00392_kofamscan_hits_f12.txt sulfur_cycling_kofamscan.txt >TIGR_PFAM_Kofamscan.txt
+# 20892
+
 cat TIGR_PFAM_Kofamscan.txt| cut -f1 -d$'\t' |sort|uniq >TIGR_PFAM_Kofamscan_uniq_genes.txt
-#12603
+#12604
 #these are genes, need contigs
 sed -e 's/_[0-9]*$//1' TIGR_PFAM_Kofamscan_uniq_genes.txt >TIGR_PFAM_Kofamscan_contigs.txt
 
@@ -595,7 +602,7 @@ sulfur_cycling_related_bins_contigs.txt
 
 #
 cat sulfur_cycling_related_bins_contigs.txt|cut -f2 -d$'\t' |sort|uniq > sulfur_cycling_related_bins_uniq.txt
-#
+#2533
 
 sed -i -e 's/\.relabeled//1' sulfur_cycling_related_bins_uniq.txt
 #
@@ -609,14 +616,9 @@ sed -i -e 's/M3C4D4_metabat_w_DDIG_2-5kb/M3C4D4_metabat_w_DDIG_2.5kb/g'  sulfur_
 sed -i -e 's/O3C3D4_metabat_w_DDIG_2-5kb/O3C3D4_metabat_w_DDIG_2.5kb/g'  sulfur_cycling_related_bins_uniq.txt
 #2533
 
-grep -w -f Tigr_pfam_soxYZ_seqs_bins_uniq.txt ../gtdb_and_checkm_for_dram.txt >Tigr_pfam_soxYZ_gtdbtk_dram2.txt #552 genomes
-
+grep -w -f sulfur_cycling_related_bins_uniq.txt gtdb_and_checkm_for_dram.txt >sulfur_cycling_related_bins_gtdbtk_dram2.txt
+#2533
 #
-cat Tigr_pfam_soxYZ_seqs_bins_uniq.txt sox_ko_list_KOfamScan_seqs_bins_list_uniq.txt |sort |uniq >kofamscan_tigr_pfam_bin_SOX_uniq.txt  #559
-
-#
-grep -w -f kofamscan_tigr_pfam_bin_SOX_uniq.txt ../gtdb_and_checkm_for_dram.txt >SOX_bins_gtdbtk_dram2.txt #559 genomes
-
 ```
 
 #
@@ -625,5 +627,31 @@ grep -w -f kofamscan_tigr_pfam_bin_SOX_uniq.txt ../gtdb_and_checkm_for_dram.txt 
 awk -F '\t' '{print $0"\t"$1}' TIGR_PFAM_Kofamscan.txt>TIGR_PFAM_Kofamscan_uniq_genes_contigs.txt
 
 sed -i -e 's/_[0-9]*$//1'  TIGR_PFAM_Kofamscan_uniq_genes_contigs.txt
+
+#fix
+sed -e 's/\.relabeled//1' sulfur_cycling_related_bins_contigs.txt >sulfur_cycling_related_bins_contigs_fix.txt
+sed -i -e 's/\.fa$//1' sulfur_cycling_related_bins_contigs_fix.txt
+##fix naming issue to match the wetlands_db_contigs_to_bins.tsv
+sed -i -e 's/O3C3D3_metabat_w_DDIG_2-5kb/O3C3D3_metabat_w_DDIG_2.5k/g'  sulfur_cycling_related_bins_contigs_fix.txt
+sed -i -e 's/M3C4D4_metabat_w_DDIG_2-5kb/M3C4D4_metabat_w_DDIG_2.5kb/g' sulfur_cycling_related_bins_contigs_fix.txt
+sed -i -e 's/O3C3D4_metabat_w_DDIG_2-5kb/O3C3D4_metabat_w_DDIG_2.5kb/g'  sulfur_cycling_related_bins_contigs_fix.txt
+
+#merge them
+TIGR_PFAM_Kofamscan_uniq_genes_contigs.txt #gene-name-contigs
+
+sulfur_cycling_related_bins_gtdbtk_dram2.txt #bins info
+
+sulfur_cycling_related_bins_contigs_fix.txt #contigs, bins
+
+#fix contigs name TIGR_PFAM_Kofamscan_uniq_genes_contigs.txt
+sed -e 's/O3C3D3_metabat_w_DDIG_2-5kb/O3C3D3_metabat_w_DDIG_2.5k/2'  TIGR_PFAM_Kofamscan_uniq_genes_contigs.txt>TIGR_PFAM_Kofamscan_uniq_genes_contigs_fix.txt
+sed -i -e 's/M3C4D4_metabat_w_DDIG_2-5kb/M3C4D4_metabat_w_DDIG_2.5kb/2' TIGR_PFAM_Kofamscan_uniq_genes_contigs_fix.txt
+sed -i -e 's/O3C3D4_metabat_w_DDIG_2-5kb/O3C3D4_metabat_w_DDIG_2.5kb/2' TIGR_PFAM_Kofamscan_uniq_genes_contigs_fix.txt
+
+#remove rldA, K01001, 2533, genomes left 
+```
+
+```
+names of the genome, annotated proteins and bins-contigs are different
 
 ```
