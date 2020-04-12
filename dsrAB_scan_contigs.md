@@ -32,14 +32,16 @@ mv sulfur_dioxygenase_sdo.hmm sdo_KA.hmm
 mv thiosulfate_reductase_phsA.hmm phsA_KA.hmm
 ```
 
-#fix prodigal header
+#fix prodigal header, add file name to header
 ```
-grep -v '#' OWC_MetaG_contigs_fix_header_Apr2020.txt
-IFS=$'\n'
-for sample in $(cat file1.txt)
+grep -v '#' OWC_MetaG_contigs_fix_header_Apr2020.txt > OWC_MetaG_contigs_fix_header_list.txt
 
+screen -r reformat_prodigal
+#
+IFS=$'\n'
+for sample in $(cat OWC_MetaG_contigs_fix_header_list.txt)
 do
-#echo ${sample}
+echo ${sample}
 #get sample name
 name=$(echo ${sample}| cut -f1 -d$'\t' )
 
@@ -48,12 +50,17 @@ protein=$(echo ${sample}| cut -f2 -d$'\t')
 
 #get sample DNAseqs
 DNAseqs=$(echo ${sample}| cut -f3 -d$'\t')
+
+echo ${name}
+sed -i -e "s/>\(.*\)/>"${name}"_\1/g" ${protein}
+sed -i -e "s/>\(.*\)/>"${name}"_\1/g" ${DNAseqs}
+
 echo ${protein}
 head -1 ${protein}
 echo ${DNAseqs}
 head -1 ${DNAseqs}
 done
-unset IFS=$'\n'
+unset IFS
 ```
 
 
@@ -69,3 +76,39 @@ unset IFS=$'\n'
 
 
 #kofam is relative easy, will give a
+
+
+##
+```
+fix sequences name header
+
+#keep the sample name and contigs info
+#1, remove all content behind '#' in the header
+for file in *.faa
+do
+sed -e 's/^>\(k.*_[0-9]*\)#.*$/>\1/g' $file>"${file%.*}"_f.temp
+sed -i -e 's/\*$//g' "${file%.*}"_f.temp
+awk -v a="${file%%.*}" '/^>/{print ">",a,$0; next}{print}' "${file%.*}"_f.temp > "${file%.*}"_f.faa
+#or sed -e "s/>\(.*\)/>"$var"_\1/g" $file >"${file%.*}"_rename.fasta
+
+sed -i -e 's/ \+//g' "${file%.*}"_f.faa
+sed -i -e 's/>/__/2' "${file%.*}"_f.faa
+done
+#
+cat *_f.faa >OWC2018_megahit_rps3_raw_aa.fasta
+#7733
+##for fna
+
+for file in *.fna
+do
+sed -e 's/^>\(k.*_[0-9]*\)#.*$/>\1/g' $file>"${file%.*}"_f.temp2
+sed -i -e 's/\*$//g' "${file%.*}"_f.temp2
+awk -v a="${file%%.*}" '/^>/{print ">",a,$0; next}{print}' "${file%.*}"_f.temp2 > "${file%.*}"_f.fna
+sed -i -e 's/ \+//g' "${file%.*}"_f.fna
+sed -i -e 's/>/__/2' "${file%.*}"_f.fna
+done
+#
+cat *_f.fna >OWC2018_megahit_rps3_raw_nt.fasta
+#7733
+
+```
