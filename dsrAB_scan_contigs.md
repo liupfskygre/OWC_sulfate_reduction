@@ -62,7 +62,29 @@ head -1 ${DNAseqs}
 done
 unset IFS
 ```
+#checking
+```
+IFS=$'\n'
+for sample in $(cat file1.txt)
 
+do
+#echo ${sample}
+#get sample name
+name=$(echo ${sample}| cut -f1 -d$'\t' )
+
+#get sampunset IFSle prodigal.faa
+protein=$(echo ${sample}| cut -f2 -d$'\t')
+
+#get sample DNAseqs
+DNAseqs=$(echo ${sample}| cut -f3 -d$'\t')
+echo ${protein}
+head -1 ${protein}
+echo ${DNAseqs}
+head -1 ${DNAseqs}
+done 
+unset IFS
+
+```
 
 #pipeline
 ```
@@ -72,6 +94,14 @@ unset IFS
 #out, (1), protein reads, (2), nt reads meeting cutoff
 
 /home/projects/Wetlands/2018_sampling/scripts/fetch_contigs_to_mcrA_seqs.sh
+
+#call /home/projects/Wetlands/2018_sampling/hmmsearch_get_seqs_w_proteins.sh [sample_file1.txt] [hmmprofile_file2.txt] [threads]
+./hmmsearch_get_seqs_w_proteins_test.sh file1.txt file2.txt 1
+
+#/home/projects/Wetlands/sulfur_cycling_analysis/hmmsearch_hits
+
+../hmmsearch_get_seqs_w_proteins.sh ../file1.txt ../file2.txt 6 &>hmmsearch.log
+
 ```
 
 
