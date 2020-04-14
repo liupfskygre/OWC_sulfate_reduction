@@ -43,11 +43,14 @@ cd dsrABD_tree
 #file name 
 pullseq -i ../sulfur_cycling_owc_hmmsearh/combined_owc_3211_prodigal.faa -n dsrB_gene_list715.txt>dsrB_gene_aa.faa
 # 363 
+sed -e 's/ #.*$//g' dsrB_gene_aa.faa >dsrB_gene_aa_fixH.faa
+sed -i -e 's/\*$//g' dsrB_gene_aa_fixH.faa
 
 #
 pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta -n dsrB_gene_list715.txt>dsrB_gene_nt.fna
 #362
-
+sed -e 's/ #.*$//g' dsrB_gene_nt.fna >dsrB_gene_nt_fixH.fna
+#102_Metabat_MUD_2014_2015_coassembly_102_Metabat_MUD_2014_2015_coassembly.fa102_Metabat_MUD_2014_2015_coassembly_scaffold_3016_10 missing #
 ```
 
 ## dsrA 
@@ -95,3 +98,8 @@ pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta
 ```
 
 #
+
+#write email to Karthik Anantharaman (karthik@bact.wisc.edu) to have the reference of dsrAB alignments, dsrD
+
+#concatenate alignment when possible Geneious/seqkit when possible
+
