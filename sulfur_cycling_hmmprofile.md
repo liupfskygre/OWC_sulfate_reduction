@@ -96,7 +96,9 @@ grep -c '>' all_wetlands_bins_combined.genes.fasta
 9390980  
 
 #???less then protein sequences 
-#===>
+
+
+#===>whihc MAGs.fa are used to call prodigal by Adrienne???
 
 
 
