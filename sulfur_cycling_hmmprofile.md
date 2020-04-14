@@ -93,9 +93,9 @@ grep -c '>' combined_owc_3211_prodigal.faa. #use this as the database to search 
 #nt sequences 
 /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/prodigal_genes_NT
 grep -c '>' all_wetlands_bins_combined.genes.fasta
-9390980  
+#9390980  
 
-#???less then protein sequences 
+#???less then protein sequences ====> seems 102_Metabat_MUD_2014_2015_coassembly_102_Metabat_MUD_2014_2015_coassembly.fa is missing## 
 
 
 #===>whihc MAGs.fa are used to call prodigal by Adrienne???
