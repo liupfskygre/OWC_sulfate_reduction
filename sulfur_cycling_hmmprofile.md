@@ -72,13 +72,16 @@ cat ./sulfur_cycling_pfam/sulfur_cycling_pfam.hmm ./sulfur_cycling_specific_eggN
 ```
 
 
-#searching db create
+## searching db create
+
+#notes, all from Adrienne relabled files
 ```
 /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/dereplicated_genomes
 
 #based on the prodigal prediction file
 #
 [liupf@zenith prodigal_files]$ cat *.faa >~/combined_owc_3211_prodigal.faa
+
 [liupf@zenith prodigal_files]$ pwd
 /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/prodigal_files
 [liupf@zenith prodigal_files]$
@@ -86,6 +89,15 @@ cat ./sulfur_cycling_pfam/sulfur_cycling_pfam.hmm ./sulfur_cycling_specific_eggN
 cd ~
 grep -c '>' combined_owc_3211_prodigal.faa. #use this as the database to search all
 9394752
+
+#nt sequences 
+/home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/prodigal_genes_NT
+grep -c '>' all_wetlands_bins_combined.genes.fasta
+9390980  
+
+#???less then protein sequences 
+#===>
+
 
 
 ```
