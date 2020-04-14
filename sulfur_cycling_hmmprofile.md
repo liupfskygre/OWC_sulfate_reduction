@@ -100,7 +100,13 @@ grep -c '>' all_wetlands_bins_combined.genes.fasta
 
 #===>whihc MAGs.fa are used to call prodigal by Adrienne???
 
+#from dramout genes.fna
+for file in *DRAMOUT;do grep -c '>' "${file}"/genes.fna>>dram_gene.txt;done
+#9392229
 
+#from dramout genes.faa
+for file in *DRAMOUT;do grep -c '>' "${file}"/genes.fna>>dram_gene_aa.txt;done
+#9392229, the same as nt file
 
 ```
 
