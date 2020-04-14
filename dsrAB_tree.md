@@ -41,12 +41,35 @@ cp /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_
 
 cd dsrABD_tree
 #file name 
-pullseq -i ../sulfur_cycling_owc_hmmsearh/combined_owc_3211_prodigal.faa -n dsrB_gene_list715.txt>dsrB_gene_list715_nt.fna
-# 362 
+pullseq -i ../sulfur_cycling_owc_hmmsearh/combined_owc_3211_prodigal.faa -n dsrB_gene_list715.txt>dsrB_gene_aa.faa
+# 363 
+
+#
+pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta -n dsrB_gene_list715.txt>dsrB_gene_nt.fna
+#362
+
+```
+
+## dsrA 
+
+## pullseq 
+```
+cd /home/projects/Wetlands/sulfur_cycling_analysis/
+mkdir dsrABD_tree
+#seqs list
+grep -i 'dsrA' ../MAGs_Pro_Con_wide_w_profile_name.txt|cut -f8 -d$'\t' >dsrA_gene_list.txt
+cat dsrA_gene_list.txt|sort|uniq|wc -l
+#439 with header
+
+
+#file name 
+pullseq -i ../sulfur_cycling_owc_hmmsearh/combined_owc_3211_prodigal.faa -n dsrA_gene_list.txt>dsrA_gene_aa.faa
+# 439 
 
 
 #
-pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta -n dsrB_gene_list715.txt>dsrB_gene_list715_aa.faa
+pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta -n dsrA_gene_list.txt>dsrA_gene_nt.fna
+#437
 
 ```
 
