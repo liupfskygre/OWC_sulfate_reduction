@@ -37,4 +37,39 @@ sulfur_cycling_KO_HMM_gene.list
 grep -w -f sulfur_cycling_KO_HMM_gene.list all_bins_combined_annotations_3211db.tsv >sulfur_cycling_KO_HMM_gene_annotations_3211db.tsv
 ```
 
+#DRAMOUT genes and proteins
+```
+
+#DRAM.py
+/home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins
+
+# the DRAM is run on each bins, not all
+# each bins get an annotation.tsv file
+
+#get the annotation.tsv for all genomes 
+for file in *_DRAMOUT
+do 
+cat ${file}/genes.fna >> all_3211_genes_DRAM.fna
+printf "\n" >>all_3211_genes_DRAM.fna
+done
+#grep -c '>' *.fna
+#9392229
+
+
+for file in *_DRAMOUT
+do 
+cat ${file}/genes.faa >> all_3211_genes_DRAM_aa.faa
+printf "\n" >> all_3211_genes_DRAM_aa.faa
+done
+grep -c '^>' *.faa
+#9392229
+```
+#rename header
+```
+
+
+```
+
+
+
 
