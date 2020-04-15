@@ -21,4 +21,8 @@ cp /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_
 
 nano sulfur_cycling_KO_gene.list
 grep -w -f sulfur_cycling_KO_gene.list all_bins_combined_annotations_3211db.tsv >sulfur_cycling_KO_gene_annotations_3211db.tsv
+
+#
+grep -i 'TIGR04315' all_bins_combined_annotations_3211db.tsv |wc -l
+# otr 
 ```
