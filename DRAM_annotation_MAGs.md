@@ -70,6 +70,9 @@ grep -c '^>' *.faa
 
 ```
 
+# using HMMsearch and KOscan + tree to selecte MAGs for down stream analysis
+```
 
 
+```
 
