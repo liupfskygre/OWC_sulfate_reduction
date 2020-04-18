@@ -8,7 +8,7 @@ cd soxB_tree
 #seqs list
 grep -i 'soxB' ../MAGs_Pro_Con_wide_w_profile_name.txt|cut -f8 -d$'\t' >soxB_gene_list.txt
 cat soxB_gene_list.txt|sort|uniq|wc -l
-#439 
+#249 
 
 
 #file name 
