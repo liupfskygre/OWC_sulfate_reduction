@@ -20,4 +20,24 @@ pullseq -i ../sulfur_cycling_owc_hmmsearh/combined_owc_3211_prodigal.faa -n ttrA
 pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta -n ttrA_gene_list.txt>ttrA_gene_nt.fna
 #67; grep -c '>' ttrA_gene_nt.fna
 
+
+##
+
+cd /home/projects/Wetlands/sulfur_cycling_analysis/
+#seqs list
+grep -i 'ttrB' ../MAGs_Pro_Con_wide_w_profile_name.txt|cut -f8 -d$'\t' >ttrB_gene_list.txt
+cat ttrB_gene_list.txt|sort|uniq|wc -l
+#204 
+
+
+#file name 
+pullseq -i ../sulfur_cycling_owc_hmmsearh/combined_owc_3211_prodigal.faa -n ttrB_gene_list.txt>ttrB_gene_aa.faa
+#304  grep -c '>' ttrB_gene_aa.faa 
+
+
+#
+pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta -n ttrB_gene_list.txt>ttrB_gene_nt.fna
+#304; grep -c '>' ttrB_gene_nt.fna
+
 ```
+
