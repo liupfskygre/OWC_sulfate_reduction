@@ -14,11 +14,13 @@ cat sqr_gene_list.txt|sort|uniq|wc -l
 #file name 
 pullseq -i ../sulfur_cycling_owc_hmmsearh/combined_owc_3211_prodigal.faa -n sqr_gene_list.txt>sqr_gene_aa.faa
 #1518;  grep -c '>' sqr_gene_aa.faa 
-
+sed -e 's/ #.*$//g' sqr_gene_aa.faa >sqr_gene_aa_fixheader.faa 
 
 #
 pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta -n sqr_gene_list.txt>sqr_gene_nt.fna
 #1517; grep -c '>' sqr_gene_nt.fna 
+
+sed -e 's/ #.*$//g' sqr_gene_nt.fna >sqr_gene_nt_fixheader.fna
 ```
 
 ##fccA
@@ -32,11 +34,12 @@ cat fccA_gene_list.txt|sort|uniq|wc -l
 #file name 
 pullseq -i ../sulfur_cycling_owc_hmmsearh/combined_owc_3211_prodigal.faa -n fccA_gene_list.txt>fccA_gene_aa.faa
 #560;  grep -c '>' fccA_gene_aa.faa 
-
+sed -e 's/ #.*$//g' fccA_gene_aa.faa >fccA_gene_aa_fixheader.faa 
 
 #
 pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta -n fccA_gene_list.txt>fccA_gene_nt.fna
 #559; grep -c '>' fccA_gene_nt.fna 
+sed -e 's/ #.*$//g' fccA_gene_nt.fna>fccA_gene_nt_fixheader.fna
 
 ##fccB
 #seqs list
@@ -44,14 +47,15 @@ grep -i 'fccB' ../MAGs_Pro_Con_wide_w_profile_name.txt|cut -f8 -d$'\t' >fccB_gen
 cat fccB_gene_list.txt|sort|uniq|wc -l
 #453 
 
-
 #file name 
 pullseq -i ../sulfur_cycling_owc_hmmsearh/combined_owc_3211_prodigal.faa -n fccB_gene_list.txt>fccB_gene_aa.faa
 #1518;  grep -c '>' fccB_gene_aa.faa 
+sed -e 's/ #.*$//g' fccB_gene_aa.faa >fccB_gene_aa_fixheader.faa 
 
 
 #
 pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta -n fccB_gene_list.txt>fccB_gene_nt.fna
 #452; grep -c '>' fccB_gene_nt.fna 
+sed -e 's/ #.*$//g' fccB_gene_nt.fna >fccB_gene_nt_fixheader.fna
 
 ```
