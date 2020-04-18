@@ -1,7 +1,7 @@
 ## phsA tree from MAGs
 
 ```
-d /home/projects/Wetlands/sulfur_cycling_analysis/
+cd /home/projects/Wetlands/sulfur_cycling_analysis/
 mkdir phsA_tree
 cd phsA_tree
 #seqs list
