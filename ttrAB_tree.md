@@ -32,12 +32,12 @@ cat ttrB_gene_list.txt|sort|uniq|wc -l
 
 #file name 
 pullseq -i ../sulfur_cycling_owc_hmmsearh/combined_owc_3211_prodigal.faa -n ttrB_gene_list.txt>ttrB_gene_aa.faa
-#304  grep -c '>' ttrB_gene_aa.faa 
+#204  grep -c '>' ttrB_gene_aa.faa 
 
 
 #
 pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta -n ttrB_gene_list.txt>ttrB_gene_nt.fna
-#304; grep -c '>' ttrB_gene_nt.fna
+#204; grep -c '>' ttrB_gene_nt.fna
 
 ```
 
