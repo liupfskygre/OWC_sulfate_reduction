@@ -22,4 +22,6 @@ sed -e 's/ #.*$//g' sorA_gene_aa.faa >sorA_gene_aa_fixheader.faa
 pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta -n sorA_gene_list.txt>sorA_gene_nt.fna
 #635; grep -c '>' sorA_gene_nt.fna
 sed -e 's/ #.*$//g' sorA_gene_nt.fna > sorA_gene_nt_fixheader.fna
+
+## problem of the kofamscan, the output is sulfide dehydrogenase (flavocytochrome) ==sqr/fcc
 ```
