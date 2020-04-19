@@ -1,5 +1,7 @@
 ##
 
+##kofam scan is not wired for this, the results are sqr/fcc
+
 ##sorA 
 ```
 cd /home/projects/Wetlands/sulfur_cycling_analysis/
