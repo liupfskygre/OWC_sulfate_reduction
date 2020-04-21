@@ -23,3 +23,17 @@ pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta
 #325; grep -c '>' otr_gene_nt.fna
 sed -e 's/ #.*$//g' otr_gene_nt.fna > otr_gene_nt_fixheader.fna
 ```
+
+#
+```
+#reference sequences
+
+#cdd search
+seqkit replace -p '(.+)$' -r '{kv}' -k alias.txt otr_gene_aa_fixheader.faa >otr_gene_aa_fixheader_alias.faa
+
+#filtering out false positive sequences
+grep -i -E 'TIGR04315|octaheme_Shew|cl37419' otr_hitdata.txt > otr_hitdata_positive.txt 
+cat otr_hitdata_positive.txt |cut -f1 -d$'\t' |sed -e 's/\Q.*>//g'|sort|uniq>otr_hitdata_positive_id.txt
+#all positive, 326
+
+```
