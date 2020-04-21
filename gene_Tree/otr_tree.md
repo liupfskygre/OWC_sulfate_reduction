@@ -1,0 +1,25 @@
+##
+
+#otr
+```
+cd /home/projects/Wetlands/sulfur_cycling_analysis/
+mkdir otr_tree
+cd otr_tree
+
+#seqs list
+grep -w -i 'otr' ../MAGs_Pro_Con_wide_w_profile_name.txt|cut -f8 -d$'\t' >otr_gene_list.txt
+cat otr_gene_list.txt|sort|uniq|wc -l
+# 326
+
+
+#file name 
+pullseq -i ../sulfur_cycling_owc_hmmsearh/combined_owc_3211_prodigal.faa -n otr_gene_list.txt>otr_gene_aa.faa
+#326  grep -c '>' otr_gene_aa.faa 
+sed -e 's/ #.*$//g' otr_gene_aa.faa >otr_gene_aa_fixheader.faa
+
+
+#
+pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta -n otr_gene_list.txt>otr_gene_nt.fna
+#325; grep -c '>' otr_gene_nt.fna
+sed -e 's/ #.*$//g' otr_gene_nt.fna > otr_gene_nt_fixheader.fna
+```
