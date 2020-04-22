@@ -23,6 +23,21 @@ for file in $(cat bacteria.list)
 do
 ln -sf /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/"${file}".fa ./bacteria_MAGs_link/"${file}".fa
 done
+
+sbatch de_novo_wf_bac_slurm.sh
+
+#fix header
+#fix header and find evolution 
+sed -e 's/\(^>.*\) .*$/\1/g' gtdbtk.bac120.msa.fasta > gtdbtk.bac120.msa_fix.fasta 
+sed -i -e 's/\(>.*\) .*$/\1/g' gtdbtk.bac120.msa_fix.fasta 
+sed -i -e 's/2-5/2_5/g' gtdbtk.bac120.msa_fix.fasta 
+
+/home/projects/Wetlands/sulfur_cycling_analysis/phylogenomics_tree/de_novo_wf_arc
+
+#run gtdbtk
+sbatch iqtree_bac_slurm_12nt.sh
+#iqtree -s gtdbtk.bac120.msa_fix.fasta  -nt 12 -pre Bac_iqtree -alrt 1000 -bb 1000 
+
 ```
 
 ## archaeal tree
@@ -36,6 +51,27 @@ ln -sf /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sep
 done
 
 #/home/projects/Wetlands/sulfur_cycling_analysis/phylogenomics_tree/archaeal_MAGs_link
+
+#run gtdbtk
+sbatch de_novo_wf_arc_slurm.sh
+
+#fix header and find evolution 
+sed -e 's/\(^>.*\) .*$/\1/g' gtdbtk.ar122.msa.fasta> gtdbtk.ar122.msa_fix.fasta
+sed -i -e 's/\(>.*\) .*$/\1/g' gtdbtk.ar122.msa_fix.fasta
+
+sed -i -e 's/2-5/2_5/g' gtdbtk.ar122.msa_fix.fasta
+
+/home/projects/Wetlands/sulfur_cycling_analysis/phylogenomics_tree/de_novo_wf_arc
+
+#run gtdbtk
+sbatch iqtree_arc_slurm_12nt.sh
+#iqtree -s gtdbtk.ar122.msa_fix.fasta -nt 12 -pre Arc_iqtree -alrt 1000 -bb 1000 
+
+```
+
+
+```
+
 
 ```
 
@@ -72,8 +108,6 @@ gtdbtk de_novo_wf --genome_dir archaeal_MAGs_link/ --outgroup_taxon p__Nanobacte
 ##This specifies which user group/servers you are targeting.  There are these 4 partitions plus one called ‘debug’.
 ## Wilkins partitions have priority on marmot, Wrighton partitions have priority on tardigrade and zenith.
 
-
-
 ```
 
 #bacteria
@@ -104,6 +138,11 @@ gtdbtk de_novo_wf --genome_dir bacteria_MAGs_link/ -x fa  --outgroup_taxon p__Bi
 ##This specifies which user group/servers you are targeting.  There are these 4 partitions plus one called ‘debug’.
 ## Wilkins partitions have priority on marmot, Wrighton partitions have priority on tardigrade and zenith.
 
+```
+
+## find evolution model of alignment
+```
 
 
 ```
+
