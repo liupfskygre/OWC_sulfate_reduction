@@ -82,13 +82,42 @@ mkdir metaT_mapping2014_MAGs3211
 sbatch metaT_2014_to_MAGs3211.sh  #--> slurm-3584.out 
 
 2)metaT2018
-#
+
+#metaT 2018 part I
+#reads
+# /home/ORG-Data-2/metaT2018JGI_reads
+#/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI
+sbatch metaT_2018_to_MAGs3211_partI.sh
+
+#metaT 2018 part II
+
+
+#part III 
+_interleaved_trimmed.fa.gz
 
 ```
 
 
 #slurm scripts
 ```
+
+
+```
+
+
+#Adrienne pipline
+```
+/home/projects/Wetlands/All_genomes/scripts
+The run in this order:
+bbmap.
+samtools
+fix bamfiles
+filter
+htseq-count
+10:59
+I’ll put a link in there to the bbmap database and the gff file.
+11:01
+These are slurm scripts so you need to edit them but you can see what I’m doing here.  The fix_bamfiles is because there is a description line in the fasta file that doesn’t match the gff file.  It’s not a typical step.
 
 
 ```
