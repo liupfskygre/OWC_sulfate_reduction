@@ -54,11 +54,26 @@ echo $a
 1805837
 [liupf@zenith metaT_mapping]$ grep -c '>' *.fna
 1805837
+
+sed -i -e 's/\.fa//g' MAGs_3211_all_fixed.fna
+
 ```
 
 #mapping
 ```
+#ref
+/home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping 
+MAGs_3211_all_fixed.fna
 
+#mrna 
+
+1)metaT2014-2015
+
+#https://github.com/liupfskygre/OWC_metaG16_ana2019/blob/master/metaT/metaT_OWC2014_mapping_mcrA.md
+
+
+2)metaT2018
+#
 
 ```
 
