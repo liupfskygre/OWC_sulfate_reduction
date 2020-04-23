@@ -119,5 +119,8 @@ I’ll put a link in there to the bbmap database and the gff file.
 11:01
 These are slurm scripts so you need to edit them but you can see what I’m doing here.  The fix_bamfiles is because there is a description line in the fasta file that doesn’t match the gff file.  It’s not a typical step.
 
+#/home/projects/Wetlands/All_genomes/scripts
+
+/home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/metaT_mappings/groupII_reads/all_bins_combined_3211db_scaffolds.fna
 
 ```
