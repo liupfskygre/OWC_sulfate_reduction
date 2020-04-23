@@ -68,9 +68,18 @@ MAGs_3211_all_fixed.fna
 #mrna 
 
 1)metaT2014-2015
-
+#reference
 #https://github.com/liupfskygre/OWC_metaG16_ana2019/blob/master/metaT/metaT_OWC2014_mapping_mcrA.md
 
+#list of metaT2014-2015
+# /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/OWC_megahit_mcrA_coverage, 
+OWC2014_trimmed_transcript_reads_prefix_uniq.txt
+
+#sample location
+#/home/projects/Wetlands/2014-2015_sampling/MetaT/sickled_transcript_reads
+mkdir metaT_mapping2014_MAGs3211
+
+sbatch metaT_2014_to_MAGs3211.sh  #--> slurm-3584.out 
 
 2)metaT2018
 #
