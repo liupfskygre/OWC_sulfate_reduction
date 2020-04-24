@@ -3,9 +3,11 @@
 ## update notes
 ```
 #these two are old ones, need recheck
-all_wetlands_bins_combined.genes.fasta
+/home/projects/Wetlands/sulfur_cycling_analysis/sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta
 #9390980 
-combined_owc_3211_prodigal.faa
+
+
+/home/projects/Wetlands/sulfur_cycling_analysis/sulfur_cycling_owc_hmmsearh/combined_owc_3211_prodigal.faa
 # 9394752
 
 #use dramout scaffold for later used for consistency. 
