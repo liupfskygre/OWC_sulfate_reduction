@@ -8,67 +8,42 @@
 
 ## reference preparation
 #use dramout seqs
+
 **version1**
 ```
 #0 mk wkdir
 mkdir /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping
 
-
-
-#1 copy all Adrienne reanmed files 
-cp /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/*.fa /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping 
-
-#fixheader of genomes
-1), remove added header (prefix \t conitgs ==> contigs)
-for file in *.fa
-do
-sed -e 's/>.* \(.*\)/>\1/g' ${file} >"${file%.*}".fasta
+#get the dram scaffolds for all genomes 
+for file in *_DRAMOUT
+do 
+cat ${file}/scaffolds.fna >> all_3211_DRAMout_scaffolds.fna
+printf "\n" >>all_3211_DRAMout_scaffolds.fna
 done
+grep -c '>' all_3211_DRAMout_scaffolds.fna
+#1804989, this is different from what we concatenate all fills together (1805837), since dram have a 2500kb cutoff
 
-2), fix header of genomes start with numbers (keep only contigs, unify as the others)
-for file in $(cat number_started_MAGs.txt)
-do
-sed -i -e "s/${file}//1" "${file}".fasta
-done
+# this is also why genes are different between dram (2500 kb) and prodigal (no cutoff)
 #
-for file in $(cat number_started_MAGs.txt)
-do
-sed -i -e "s/\.fa${file}_//1" "${file}".fasta
-done
+#the same as: all_bins_combined_3211db_scaffolds.fna; keep this one 
 
-3)
-for file in *.fasta
-do
-a="${file%.*}"
-echo ${a}
-sed -i -e "s/>\(.*\)/>${a}_;\1/g" ${file}
-done
+#reference file1, dramout scaffolds
+/home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/all_3211_DRAMout_scaffolds.fna
 
-4) cat all refix fasta files to the final references
-cat *.fasta >MAGs_3211_all_fixed.fna
-#check num of conitgs
-let a=0
-let b=0
-for file in *.fasta
-do
-b=$(grep -c '>' "${file}")
-a=`expr "$a" + "$b"`
-done
-echo $a
+#reference file2
+/home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/metaT_mappings/groupII_reads/all_bins_combined_3211db_scaffolds.fna
 
-[liupf@zenith metaT_mapping]$ echo $a
-1805837
-[liupf@zenith metaT_mapping]$ grep -c '>' *.fna
-1805837
+#dramout Genes/CDS
+/home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM_aa.faa
+/home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM.fna
 
-sed -i -e 's/\.fa//g' MAGs_3211_all_fixed.fna
 ```
 
 #mapping
 ```
 #ref
 /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping 
-MAGs_3211_all_fixed.fna
+
 
 #mrna 
 
@@ -130,7 +105,8 @@ These are slurm scripts so you need to edit them but you can see what I’m doin
 
 
 grep -c '>' /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/metaT_mappings/groupII_reads/all_bins_combined_3211db_scaffolds.fna
-1804989==>different from 1805837; this means 
+
+#1804989==>different from 1805837 directly from conconated fa files (dram have a 2500kb cut off)
 
 ```
 
