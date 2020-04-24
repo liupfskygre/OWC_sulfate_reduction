@@ -1,3 +1,17 @@
+##
+
+## update notes
+```
+#these two are old ones, need recheck
+all_wetlands_bins_combined.genes.fasta
+#9390980 
+combined_owc_3211_prodigal.faa
+# 9394752
+
+#use dramout scaffold for later used for consistency. 
+```
+
+
 #a collection of sulfur cycling related marker genes hmmprofile
 
 
@@ -6,9 +20,6 @@
 #download tigrfam on mac
 ```
 /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/database_model_profiles_archive/gtdbtk_marker/tigrfam
-
-
-
 ```
 
 
