@@ -1,5 +1,10 @@
 ##
 
+## update notes
+```
+1) test the use dram out scafolds as referecence first, which is compatabile with gff from dram, see Adrienne's notes below
+```
+
 ##reference preparation
 
 #
@@ -105,7 +110,7 @@ _interleaved_trimmed.fa.gz
 ```
 
 
-#Adrienne pipline
+## Adrienne pipline
 ```
 /home/projects/Wetlands/All_genomes/scripts
 The run in this order:
@@ -125,7 +130,7 @@ These are slurm scripts so you need to edit them but you can see what I’m doin
 
 ```
 
-#testing new references
+## testing new references, using RSEM based on bowtie2
 #
 ```
 sbatch metaT_2014_to_MAGs3211_test.sh
