@@ -128,6 +128,10 @@ These are slurm scripts so you need to edit them but you can see what I’m doin
 
 /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/metaT_mappings/groupII_reads/all_bins_combined_3211db_scaffolds.fna
 
+
+grep -c '>' /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/metaT_mappings/groupII_reads/all_bins_combined_3211db_scaffolds.fna
+1804989==>different from 1805837; this means 
+
 ```
 
 ## testing new references, using RSEM based on bowtie2
