@@ -3,11 +3,12 @@
 ## update notes
 ```
 1) test the use dram out scafolds as referecence first, which is compatabile with gff from dram, see Adrienne's notes below
+
 ```
 
-##reference preparation
-
-#
+## reference preparation
+#use dramout seqs
+**version1**
 ```
 #0 mk wkdir
 mkdir /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping
@@ -61,7 +62,6 @@ echo $a
 1805837
 
 sed -i -e 's/\.fa//g' MAGs_3211_all_fixed.fna
-
 ```
 
 #mapping
@@ -143,4 +143,102 @@ Submitted batch job 3593
 
 
 ```
+
+
+
+## archive log
+**version1**
+```
+#0 mk wkdir
+mkdir /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping
+
+
+
+#1 copy all Adrienne reanmed files 
+cp /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/*.fa /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping 
+
+#fixheader of genomes
+1), remove added header (prefix \t conitgs ==> contigs)
+for file in *.fa
+do
+sed -e 's/>.* \(.*\)/>\1/g' ${file} >"${file%.*}".fasta
+done
+
+2), fix header of genomes start with numbers (keep only contigs, unify as the others)
+for file in $(cat number_started_MAGs.txt)
+do
+sed -i -e "s/${file}//1" "${file}".fasta
+done
+#
+for file in $(cat number_started_MAGs.txt)
+do
+sed -i -e "s/\.fa${file}_//1" "${file}".fasta
+done
+
+3)
+for file in *.fasta
+do
+a="${file%.*}"
+echo ${a}
+sed -i -e "s/>\(.*\)/>${a}_;\1/g" ${file}
+done
+
+4) cat all refix fasta files to the final references
+cat *.fasta >MAGs_3211_all_fixed.fna
+#check num of conitgs
+let a=0
+let b=0
+for file in *.fasta
+do
+b=$(grep -c '>' "${file}")
+a=`expr "$a" + "$b"`
+done
+echo $a
+
+[liupf@zenith metaT_mapping]$ echo $a
+1805837
+[liupf@zenith metaT_mapping]$ grep -c '>' *.fna
+1805837
+
+sed -i -e 's/\.fa//g' MAGs_3211_all_fixed.fna
+```
+
+#mapping
+```
+#ref
+/home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping 
+MAGs_3211_all_fixed.fna
+
+#mrna 
+
+1)metaT2014-2015
+#reference
+#https://github.com/liupfskygre/OWC_metaG16_ana2019/blob/master/metaT/metaT_OWC2014_mapping_mcrA.md
+
+#list of metaT2014-2015
+# /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/OWC_megahit_mcrA_coverage, 
+OWC2014_trimmed_transcript_reads_prefix_uniq.txt
+
+#sample location
+#/home/projects/Wetlands/2014-2015_sampling/MetaT/sickled_transcript_reads
+mkdir metaT_mapping2014_MAGs3211
+
+sbatch metaT_2014_to_MAGs3211.sh  #--> slurm-3584.out 
+
+2)metaT2018
+
+#metaT 2018 part I
+#reads
+# /home/ORG-Data-2/metaT2018JGI_reads
+#/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI
+sbatch metaT_2018_to_MAGs3211_partI.sh
+
+#metaT 2018 part II
+
+
+#part III 
+_interleaved_trimmed.fa.gz
+
+```
+
 
