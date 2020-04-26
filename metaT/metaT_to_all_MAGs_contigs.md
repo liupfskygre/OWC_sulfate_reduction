@@ -129,9 +129,9 @@ Submitted batch job 3593
 
 
 3)htseq count number of reads
-/home/projects/Wetlands/All_genomes/scripts/run_htseq-count.sh 
+/home/projects/Wetlands/All_genomes/scripts/run_htseq-count.sh htseq.list
 
-/home/anarrowe/.local/bin/htseq-count -s no -f bam -t CDS -i ID -m union -r name  Aug_M1_C1_D1_A_MAGs3211_RSEM.transcript.bam /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/all_bins_combined_genes_3211db.gff > Aug_M1_C1_D1_A_htseq_counts.out 
+#/home/anarrowe/.local/bin/htseq-count -s no -f bam -t CDS -i ID -m union -r name  Aug_M1_C1_D1_A_MAGs3211_RSEM.transcript.bam /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/all_bins_combined_genes_3211db.gff > Aug_M1_C1_D1_A_htseq_counts.out 
 ```
 
 
