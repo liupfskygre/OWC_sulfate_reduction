@@ -85,7 +85,7 @@ _interleaved_trimmed.fa.gz
 ```
 
 
-## Adrienne pipline
+## Adrienne pipline note
 ```
 /home/projects/Wetlands/All_genomes/scripts
 The run in this order:
@@ -94,8 +94,17 @@ samtools
 fix bamfiles
 filter
 htseq-count
-10:59
+
+fix_headers.py 
+run_bbmap.sh #bbmap mapping
+run_samtools.sh #convert and sort bam file
+run_fix_bamfiles.sh
+run_filter.sh #reformat.sh -Xmx100g idfilter=0.95
+run_htseq-count.sh # 
+
 I’ll put a link in there to the bbmap database and the gff file.
+## /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/all_bins_combined_genes_3211db.gff
+
 11:01
 These are slurm scripts so you need to edit them but you can see what I’m doing here.  The fix_bamfiles is because there is a description line in the fasta file that doesn’t match the gff file.  It’s not a typical step.
 
@@ -107,17 +116,22 @@ These are slurm scripts so you need to edit them but you can see what I’m doin
 grep -c '>' /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/metaT_mappings/groupII_reads/all_bins_combined_3211db_scaffolds.fna
 
 #1804989==>different from 1805837 directly from conconated fa files (dram have a 2500kb cut off)
-
 ```
 
-## testing new references, using RSEM based on bowtie2
+## testing new references and Adrienne's pipeline with gff file, using RSEM based on bowtie2
 #
 ```
+1) mapping with bowtie2
 sbatch metaT_2014_to_MAGs3211_test.sh
 Submitted batch job 3593
 
+2）filtering with MAGQ
 
 
+3)htseq count number of reads
+/home/projects/Wetlands/All_genomes/scripts/run_htseq-count.sh 
+
+/home/anarrowe/.local/bin/htseq-count -s no -f bam -t CDS -i ID -m union -r name  Aug_M1_C1_D1_A_MAGs3211_RSEM.transcript.bam /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/all_bins_combined_genes_3211db.gff > Aug_M1_C1_D1_A_htseq_counts.out 
 ```
 
 
