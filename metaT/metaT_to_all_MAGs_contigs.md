@@ -9,7 +9,7 @@
 ## reference preparation
 #use dramout seqs
 
-**version1**
+**version2  dramout scaffold as ref**
 ```
 #0 mk wkdir
 mkdir /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping
@@ -25,7 +25,7 @@ grep -c '>' all_3211_DRAMout_scaffolds.fna
 
 # this is also why genes are different between dram (2500 kb) and prodigal (no cutoff)
 #
-#the same as: all_bins_combined_3211db_scaffolds.fna; keep this one 
+#>>>>>>>>>>>>>>>>>>>>>the same as: all_bins_combined_3211db_scaffolds.fna; keep this one 
 
 #reference file1, dramout scaffolds
 /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/all_3211_DRAMout_scaffolds.fna
@@ -39,7 +39,8 @@ grep -c '>' all_3211_DRAMout_scaffolds.fna
 
 ```
 
-#mapping
+# mapping
+
 ```
 #ref
 /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping 
@@ -66,14 +67,18 @@ sbatch metaT_2014_to_MAGs3211.sh  #--> slurm-3584.out
 #metaT 2018 part I
 #reads
 # /home/ORG-Data-2/metaT2018JGI_reads
-#/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI
+# /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI
 sbatch metaT_2018_to_MAGs3211_partI.sh
 
 #metaT 2018 part II
+sbatch metaT_2018_to_MAGs3211_partII.sh
+slurm-3699.out
+#clean reads
 
 
 #part III 
-_interleaved_trimmed.fa.gz
+#_interleaved_trimmed.fa.gz; all reads download and handle by adrienne
+Submitted batch job 3702
 
 ```
 
