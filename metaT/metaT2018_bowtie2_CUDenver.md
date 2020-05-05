@@ -20,6 +20,9 @@ mv F_S46_L004_R1_001.fastq.gz Aug_M1_C1_D5_C_F_S46_L004_R1_001.fastq.gz
 mv F_S46_L004_R2_001.fastq.gz Aug_M1_C1_D5_C_F_S46_L004_R2_001.fastq.gz
 
 
+/home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping 
+
+
 cd /home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT_2018_redos_16Mar2020
 Aug_M1_C2_D5_trimmed.R1.fa.gz #fq file
 Aug_M1_C2_D5_trimmed.R2.fa.gz
