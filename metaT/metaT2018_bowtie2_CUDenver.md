@@ -2,6 +2,9 @@
 ##
 
 ```
+/home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping 
+
+
 cd /home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver
 mv D_S44_L004_R1_001.fastq.gz Aug_M1_C1_D1_C_D_S44_L004_R1_001.fastq.gz
 mv D_S44_L004_R2_001.fastq.gz Aug_M1_C1_D1_C_D_S44_L004_R2_001.fastq.gz
@@ -19,6 +22,7 @@ mv E_S45_L004_R2_001.fastq.gz Aug_M1_C1_D3_C_E_S45_L004_R2_001.fastq.gz
 mv F_S46_L004_R1_001.fastq.gz Aug_M1_C1_D5_C_F_S46_L004_R1_001.fastq.gz
 mv F_S46_L004_R2_001.fastq.gz Aug_M1_C1_D5_C_F_S46_L004_R2_001.fastq.gz
 
+Submitted batch job 3881
 
 /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping 
 
@@ -30,6 +34,7 @@ Aug_M1_C2_D5_trimmed.R2.fa.gz
 Aug_OW2_C1_D5_A_trimmed.R1.fa.gz
 Aug_OW2_C1_D5_A_trimmed.R2.fa.gz
 
+Submitted batch job 3880
 
 ```
 
