@@ -4,11 +4,17 @@
 ##file
 
 ```
-16S sequences from dram
+#/home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/
 
+16S sequences from dram
+#how to extract 16S from DRAM??
 
 
 Asv sequences from OWC wetland 2018 sequences
+
+/home/projects/Wetlands/2018_sampling/16S_analysis/combined_summer_16S/may-sept_merged_rep_seqs
+(qiime2-2019.10) [liupf@zenith combined_summer_16S]$ qiime tools export --input-path may-sept_merged_rep_seqs.qza --output-path may-sept_merged_rep_seqs
+
 ```
 
 ##
