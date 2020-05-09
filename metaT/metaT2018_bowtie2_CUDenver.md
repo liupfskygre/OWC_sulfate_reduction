@@ -22,7 +22,9 @@ mv E_S45_L004_R2_001.fastq.gz Aug_M1_C1_D3_C_E_S45_L004_R2_001.fastq.gz
 mv F_S46_L004_R1_001.fastq.gz Aug_M1_C1_D5_C_F_S46_L004_R1_001.fastq.gz
 mv F_S46_L004_R2_001.fastq.gz Aug_M1_C1_D5_C_F_S46_L004_R2_001.fastq.gz
 
-Submitted batch job 3881
+Submitted batch job 3881, timeout, rerun
+Submitted batch job 4004
+
 
 /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping 
 
