@@ -87,6 +87,8 @@ the scripts from Adrienne only print only one 16s if there is split 16S on one c
 1) using mapping, 100% identity bbmap.sh minid=1
 
 2) usearch global ==> search_exact (partial 16s seqs in MAGs will fail?)
+# -mincols	
+# -id 
 
 usearch -usearch_global otu20.fa -db gold.fa -strand plus -id 0.99 -alnout otu20.aln -notrunclabels
 
@@ -94,7 +96,11 @@ usearch -usearch_global otu20.fa -db gold.fa -strand plus -id 0.99 -alnout otu20
 
 An identity threshold must be specified using the -id option. If full-length, exact matches are required, then it is better to use search_exact than usearch_global with -id 1.0.
 
-3), use blast?? 
+3), use blastn?? 
+#Briefly, each ASV was searched using BLASTN, with an E value of 1e−10 and -num_alignments 100000. Hits greater than 99% nucleotide identity over at least 200 bp were retained for further analysis.
+#controled by??
+#length    Alignment length; 
+#pident    Percentage of identical matches
 ```
 
 #references
@@ -107,4 +113,6 @@ https://www.drive5.com/usearch/manual8.1/upp_tut_misop_mock.html
 http://drive5.com/usearch/manual/cmd_usearch_global.html
 http://drive5.com/usearch/manual/cmd_search_exact.html
 
+http://www.metagenomics.wiki/tools/blast/blastn-output-format-6
+http://drive5.com/usearch/manual/accept_options.html
 ```
