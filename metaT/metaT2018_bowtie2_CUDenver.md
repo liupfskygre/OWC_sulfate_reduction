@@ -34,7 +34,10 @@ Aug_M1_C2_D5_trimmed.R2.fa.gz
 Aug_OW2_C1_D5_A_trimmed.R1.fa.gz
 Aug_OW2_C1_D5_A_trimmed.R2.fa.gz
 
-Submitted batch job 3880
+Submitted batch job 3880; failed, time out
+Submitted batch job 4003; Aug_OW2_C1_D5_A continue
+
+
 
 ```
 
