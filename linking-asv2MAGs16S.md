@@ -29,12 +29,14 @@ Asv sequences from OWC wetland 2018 sequences
 
 ```
 
-##based on all combined file by Adrienne
+## based on all combined file by Adrienne
 ```
 /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes
 
 #First do this:
-grep 16S all_bins_combined_rrnas_3211db.tsv | cut -f 1,3,4 > just_16S_rrna_info.tsv
+grep '16S' all_bins_combined_rrnas_3211db.tsv | cut -f 1,3,4 > just_16S_rrna_info.tsv
+
+#just_16S_rrna_info.tsv, 301 lines
 
 #Then get the ids to pull the sequences:
 cut -f 1 just_16S_rrna_info.tsv > a
@@ -42,16 +44,40 @@ cut -f 1 just_16S_rrna_info.tsv > a
 pull_sequence.py -i a all_bins_combined_3211db_scaffolds.fna > just_16S_scaffolds.fna
 
 #Check that you got them all:
-wc -l a  
-grep -c ">" just_16S_scaffolds.fna
-Not the same:
-sort a | uniq | wc -l
+wc -l a   #294
+grep -c ">" just_16S_scaffolds.fna #301
+
+#Not the same:
+sort a | uniq | wc -l   #294
+
+
+#repeated 
+Aug_M2_C1_D5_30Gb_idba_metabat.80_Aug_M2_C1_D5_30Gb_idba_metabat_scaffold_630
+M3C4D3_v1_idba.127_M3C4D3_v1_idba_scaffold_3183
+Nov_Plant_rebin_metabat.2_Nov_Plant_rebin_metabat_Nov_Plant_scaffold_4383
+O3C3D3_DDIG_MN.1090_O3C3D3_DDIG_MN_k121_24246102
+O3C3D4_DDIG_MN.607_O3C3D4_DDIG_MN_k121_1721028
+O3D3D3_DDIG_megahit.356_O3D3D3_DDIG_megahit_k121_4428038
+OWC_substrative_co_megahit_Deep_metabat.1272_OWC_substrative_co_megahit_Deep_metabat_k121_46235138
+
+
 
 #yes they are, looks like we had duplicate contigs in the rrnas file - probably split rRNA
-rm a 
+
+rm a  
 
 #Trim the sequences:
 python /home/projects/Wetlands/All_genomes/scripts/trim_scaffold_by_pos2.py -f just_16S_scaffolds.fna -i just_16S_rrna_info.tsv -o just_16S_TRIMMED_genes.fna
+
+#and only the second part is kept. 
+
+```
+
+#short summary
+
+```
+both slurm_get16S_from_DRAM.sh and Adrienne's way worked, but 
+the scripts from Adrienne only print only one 16s if there is split 16S on one contigs
 
 ```
 
