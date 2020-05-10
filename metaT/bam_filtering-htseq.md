@@ -1,6 +1,18 @@
 ## run bam filtering, htseq and joint all htseq into one table
 
-##
+## bam filtering
+
+**part I metaT_mapping2018_MAGs3211**
+```
+/home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/metaT_mapping2018_MAGs3211
+
+mkdir RSEM_transcript_bam
+cd RSEM_transcript_bam
+
+sbatch metaT__filter_HTSeq_2018OWC.sh
+Submitted batch job 4010
+
+```
 
 ##gene list from gff file
 
