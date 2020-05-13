@@ -91,9 +91,13 @@ mv tmp.txt host.txt
 done 
 
 
-##adding feature length 
+##merge into OWC_2018
+
 python ../../joint_htseq_output.py ../../gene_feathure.txt host.txt > metaT_mapping2014_MAGs3211_htseq_out.txt
 
+python ../../joint_htseq_output.py ../../metaT_mapping2018_MAGs3211_htseq_out.txt host.txt > metaT_mapping2014_2018_MAGs3211_htseq_out.txt
+
+#metaT_mapping2018_MAGs3211_htseq_out.txt
 ```
 
 TPM 
