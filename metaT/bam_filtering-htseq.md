@@ -44,7 +44,7 @@ done
 
 for file in $(cat bam.list)
 do 
-python joint_htseq_output.py host.txt "${file}"_htseq.out> tmp.txt
+python ../../joint_htseq_output.py host.txt "${file}"_htseq.out> tmp.txt
 mv tmp.txt host.txt
 
 done 
