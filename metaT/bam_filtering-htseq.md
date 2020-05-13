@@ -12,6 +12,10 @@ cd RSEM_transcript_bam
 sbatch metaT__filter_HTSeq_2018OWC.sh
 Submitted batch job 4010
 
+
+#2014
+sbatch metaT__filter_HTSeq_2014OWC.sh
+
 ```
 
 ##gene list from gff file
@@ -24,18 +28,37 @@ sed -i -e 's/ID=//g' all_bins_combined_genes_3211db_ID.txt
 
 sed -i -e 's/\#\#gff-version 3/gene_ID/g' all_bins_combined_genes_3211db_ID.txt
 9480542 all_bins_combined_genes_3211db_ID.txt
+```
 
+## adding header to HTseq out and join all samples
 
+```
+## OWC_2018
+# /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/metaT_mapping2018_MAGs3211/RSEM_transcript_bam
 
-#adding header to HTseq out
-for file in Mud_11_14_A.L20.Q20_MAGs3211_RSEM.sorted.out
+for file in $(cat bam.list)
 do
-sed -i "1i gene_ID\t"${file}""  Mud_11_14_A.L20.Q20_MAGs3211_RSEM.sorted.out
+sed -i "1i gene_ID\t"${file}"" "${file}"_htseq.out #Aug_M1_C2_D3_htseq.out
 done
 
-python joint_htseq_output.py host.txt ./metaT_mapping2014_MAGs3211/Mud_11_14_A.L20.Q20_MAGs3211_RSEM.sorted.out > tmp.txt
 
+for file in $(cat bam.list)
+do 
+python joint_htseq_output.py host.txt "${file}"_htseq.out> tmp.txt
 mv tmp.txt host.txt
+
+done 
+
+
+## feature length 
+
+
+
+
+```
+
+TPM 
+```
 
 
 ```
