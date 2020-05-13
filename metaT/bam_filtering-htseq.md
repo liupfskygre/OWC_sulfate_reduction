@@ -28,6 +28,23 @@ sed -i -e 's/ID=//g' all_bins_combined_genes_3211db_ID.txt
 
 sed -i -e 's/\#\#gff-version 3/gene_ID/g' all_bins_combined_genes_3211db_ID.txt
 9480542 all_bins_combined_genes_3211db_ID.txt
+
+## feature length 
+#get an adding feature length of genes
+
+cat  /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/all_bins_combined_genes_3211db.gff | cut -f 4,5,9 -d$'\t'|grep -v '#' >gene_feathure_cor.txt  
+cat gene_feathure_cor.txt |cut -f1 -d';' >  gene_feathure_cor_tmp.txt
+
+sed -i -e 's/ID=//g' gene_feathure_cor_tmp.txt
+
+
+sed -i '/^$/d' gene_feathure_cor_tmp.txt
+
+sed -i "1i start\tend\tgene_ID" gene_feathure_cor_tmp.txt 
+
+awk -F '\t' '{print $3"\t"$1"\t"$2}' gene_feathure_cor_tmp.txt  > gene_feathure_cor.txt  
+
+awk 'BEGIN { OFS = "\t" } NR == 1 { $4 = "Length" } NR >= 2 { $4 = $3 - $2 + 1 } 1' gene_feathure_cor.txt   > gene_feathure.txt
 ```
 
 ## adding header to HTseq out and join all samples
@@ -50,9 +67,11 @@ mv tmp.txt host.txt
 done 
 
 
-## feature length 
+##adding feature length 
+python ../../joint_htseq_output.py ../../gene_feathure.txt host.txt > metaT_mapping2018_MAGs3211_htseq_out.txt
 
-
+awk -F '\t' '{print NF; exit}' metaT_mapping2018_MAGs3211_htseq_out.txt
+##116 
 
 
 ```
