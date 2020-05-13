@@ -74,6 +74,26 @@ awk -F '\t' '{print NF; exit}' metaT_mapping2018_MAGs3211_htseq_out.txt
 ##116 
 
 
+## OWC_2014
+# /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/metaT_mapping2014_MAGs3211/RSEM_transcript_bam
+
+for file in $(cat bam.list)
+do
+sed -i "1i gene_ID\t"${file}"" "${file}"_htseq.out #Aug_M1_C2_D3_htseq.out
+done
+
+
+for file in $(cat bam.list)
+do 
+python ../../joint_htseq_output.py host.txt "${file}"_htseq.out> tmp.txt
+mv tmp.txt host.txt
+
+done 
+
+
+##adding feature length 
+python ../../joint_htseq_output.py ../../gene_feathure.txt host.txt > metaT_mapping2014_MAGs3211_htseq_out.txt
+
 ```
 
 TPM 
