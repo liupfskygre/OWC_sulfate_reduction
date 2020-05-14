@@ -16,6 +16,8 @@ grep '16S' all_bins_combined_rrnas_3211db.tsv | cut -f 1,3,4 > just_16S_rrna_inf
 cut -f 1 just_16S_rrna_info.tsv > a
 #I used a different script, but you should be able to use pullseq to do this:
 pull_sequence.py -i a all_bins_combined_3211db_scaffolds.fna > just_16S_scaffolds.fna
+#pullseq -n a -i all_bins_combined_3211db_scaffolds.fna>just_16S_scaffolds.fna
+
 
 #Check that you got them all:
 wc -l a   #294
@@ -50,11 +52,16 @@ grep "${line}" just_16S_rrna_info.tsv |head -1 >> split_16s_missed_info.txt
 done
 
 pullseq -n split_16s_list.txt -i just_16S_scaffolds.fna > just_16S_scaffolds_add.fna
-
+sed -i -e "s/\t.*$//" just_16S_scaffolds_add.fna
 
 python /home/projects/Wetlands/All_genomes/scripts/trim_scaffold_by_pos2.py -f just_16S_scaffolds_add.fna -i split_16s_missed_info.txt -o just_16S_TRIMMED_genes_recovery.fna
 
-cat just_16S_scaffolds_add.fna just_16S_TRIMMED_genes.fna > DB3211_16S_301seq.fna
+cat just_16S_TRIMMED_genes_recovery.fna just_16S_TRIMMED_genes.fna > DB3211_16S_301seq.fna
+
+grep -c '>' DB3211_16S_301seq.fna
+#301
+
+cp DB3211_16S_301seq.fna /home/projects/Wetlands/sulfur_cycling_analysis/rRNA16S_DB3211_ASV
 ```
 
 #short summary
@@ -107,22 +114,63 @@ cd /home/projects/Wetlands/sulfur_cycling_analysis/rRNA16S_DB3211_ASV
 
 #usearch global
 usearch -usearch_global ASV_OWC2018May_Sep.fna -db DB3211_16S_301seq.fna -strand both -id 0.99 -alnout otu_try.aln -notrunclabels -query_cov 0.99 -userout otu_try_userout.txt -maxaccepts 100000 -userfields query+target+id+alnlen+mism+opens+qlo+qhi+tlo+thi+evalue+bits
+sed -i "1i query\ttarget\tid\talnlen\tmism\topens\tqlo\tqhi\ttlo\tthi\tevalue\tbits" otu_try_userout.txt 
 
 -mincols 200  #0.4%
--query_cov 0.99 #0.4% , #433 sequences
+-query_cov 0.99 #0.4% , #432 sequences
 
 
 
 usearch -usearch_global ASV_OWC2018May_Sep.fna -db DB3211_16S_301seq.fna -strand both -id 0.999 -alnout otu_try_999.aln -notrunclabels -query_cov 0.999 -userout otu_try_userout_999.txt -maxaccepts 100000 -userfields query+target+id+alnlen+mism+opens+qlo+qhi+tlo+thi+evalue+bits
+sed -i "1i query\ttarget\tid\talnlen\tmism\topens\tqlo\tqhi\ttlo\tthi\tevalue\tbits" otu_try_userout_999.txt
 
 #89 seques
 
 #>100bp alignment , id=0.999
 usearch -usearch_global ASV_OWC2018May_Sep.fna -db DB3211_16S_301seq.fna -strand both -id 0.999 -alnout otu_try_999_s100.aln -notrunclabels -mincols 100 -userout otu_try_userout_999_s100.txt -maxaccepts 100000 -userfields query+target+id+alnlen+mism+opens+qlo+qhi+tlo+thi+evalue+bits
 
+sed -i "1i query\ttarget\tid\talnlen\tmism\topens\tqlo\tqhi\ttlo\tthi\tevalue\tbits" otu_try_userout_999_s100.txt
 #also 89
 
 ```
+
+##MAGs with ASV link
+```
+cd /home/projects/Wetlands/sulfur_cycling_analysis/rRNA16S_DB3211_ASV
+
+awk -F '\t' '{print NF; exit}' /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/all_bins_combined_annotations_3211db.tsv 
+#28
+
+cat /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/all_bins_combined_annotations_3211db.tsv | cut -f1,2,3,26,27,28 -d$'\t'> all_bins_combined_annotations_3211db_simple.tsv
+
+awk -F '\t' '{print $0"\t"$1}' all_bins_combined_annotations_3211db_simple.tsv >tmp.tsv
+rev tmp.tsv | sed -e 's/[1-9]\+_//' |rev  > all_bins_combined_annotations_3211db_simple.tsv 
+
+#0.99 and -mincols 200; 433 sequences
+cat otu_try_userout.txt|cut -f2 -d$'\t' >Contigs_w_linking_ASV.txt
+sed -i -e 's/:.*$//g' Contigs_w_linking_ASV.txt
+cat Contigs_w_linking_ASV.txt |sort|uniq >Contigs_w_linking_ASV_uniq.txt
+#432 ASV linking to 109 Contigs (or MAGs)
+
+grep -w -f Contigs_w_linking_ASV_uniq.txt all_bins_combined_annotations_3211db_simple.tsv > MAGs_w_linking_ASV.txt
+
+cat MAGs_w_linking_ASV.txt |cut -f2,3,4,5,6,7 -d$'\t' |sort|uniq >MAGs_w_linking_ASV_uniq.txt
+
+
+##89, coverage 0.999, id=0.999
+
+cat otu_try_userout_999.txt|cut -f2 -d$'\t' >Contigs_w_linking_ASV.txt
+sed -i -e 's/:.*$//g' Contigs_w_linking_ASV.txt
+cat Contigs_w_linking_ASV.txt |sort|uniq >Contigs_w_linking_ASV_uniq.txt
+#89
+
+grep -w -f Contigs_w_linking_ASV_uniq.txt all_bins_combined_annotations_3211db_simple.tsv > MAGs_w_linking_ASV.txt
+
+cat MAGs_w_linking_ASV.txt |cut -f2,3,4,5,6,7 -d$'\t' |sort|uniq >MAGs_w_linking_ASV_uniq_999.txt
+
+#88
+```
+
 
 
 ## references 
