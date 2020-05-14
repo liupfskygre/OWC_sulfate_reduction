@@ -102,6 +102,12 @@ python ../../joint_htseq_output.py ../../metaT_mapping2018_MAGs3211_htseq_out.tx
 
 TPM 
 ```
+#remove t_RNA lines
+
+#omit NA in R
+
+#
+
 
 
 ```
