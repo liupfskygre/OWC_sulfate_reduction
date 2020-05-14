@@ -116,8 +116,7 @@ cd /home/projects/Wetlands/sulfur_cycling_analysis/rRNA16S_DB3211_ASV
 usearch -usearch_global ASV_OWC2018May_Sep.fna -db DB3211_16S_301seq.fna -strand both -id 0.99 -alnout otu_try.aln -notrunclabels -query_cov 0.99 -userout otu_try_userout.txt -maxaccepts 100000 -userfields query+target+id+alnlen+mism+opens+qlo+qhi+tlo+thi+evalue+bits
 sed -i "1i query\ttarget\tid\talnlen\tmism\topens\tqlo\tqhi\ttlo\tthi\tevalue\tbits" otu_try_userout.txt 
 
--mincols 200  #0.4%
--query_cov 0.99 #0.4% , #432 sequences
+-mincols 200  #0.4%, the same as -query_cov 0.99 #0.4% , #432 sequences
 
 
 
@@ -150,6 +149,7 @@ rev tmp.tsv | sed -e 's/[1-9]\+_//' |rev  > all_bins_combined_annotations_3211db
 cat otu_try_userout.txt|cut -f2 -d$'\t' >Contigs_w_linking_ASV.txt
 sed -i -e 's/:.*$//g' Contigs_w_linking_ASV.txt
 cat Contigs_w_linking_ASV.txt |sort|uniq >Contigs_w_linking_ASV_uniq.txt
+
 #432 ASV linking to 109 Contigs (or MAGs)
 
 grep -w -f Contigs_w_linking_ASV_uniq.txt all_bins_combined_annotations_3211db_simple.tsv > MAGs_w_linking_ASV.txt
