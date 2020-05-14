@@ -103,9 +103,32 @@ python ../../joint_htseq_output.py ../../metaT_mapping2018_MAGs3211_htseq_out.tx
 TPM 
 ```
 #remove t_RNA lines
+grep -v 'RNA_'  metaT_mapping2014_2018_MAGs3211_htseq_out.txt > metaT_mapping2014_2018_MAGs3211_htseq_out_fix.txt
 
-#omit NA in R
 
+#omit NA in R, no NA
+
+metaT_mapping2014_2018_MAGs3211_htseq_out_fix.txt
+
+counts <- read.delim("metaT_mapping2014_2018_MAGs3211_htseq_out_fix.txt",header=T, check.names = FALSE)
+
+row.names(counts) <-counts[,1]
+counts<- counts[,-1]
+
+#counts <- counts %>% column_to_rownames("gene_ID")
+
+cts <-as.matrix(counts[,4:130])
+
+ftl<- counts$Length
+
+TPM <- counts_to_tpm(cts,ftl)
+
+
+write.table(TPM, "OWC2014-2018_DB3211_genes_TPM_2.txt",sep ='\t', col.names = NA, quote= F)
+or 
+write.table(data.frame("Gene_ID"=rownames(TPM),TPM),"OWC2014-2018_DB3211_genes_TPM.txt", row.names=FALSE,sep = '\t', quote= F)
+
+#
 #
 
 
