@@ -45,9 +45,16 @@ cd /home/projects/Wetlands/sulfur_cycling_analysis/
 mkdir dsrABD_tree
 #seqs list
 cd dsrABD_tree
-grep -i 'dsrB' ../MAGs_Pro_Con_wide_w_profile_name.txt|cut -f8 -d$'\t' >hmm_header.txt
+grep -i 'dsrB' ../MAGs_Pro_Con_wide_w_profile_name.txt|cut -f8 -d$'\t' >tmp.txt
+
+sed -i -e 's/$/\$/1' tmp.txt
+grep -E -f tmp.txt ../all_bins_combined_annotations_3211db_ID.txt > hmm_header.txt 
+
 cat hmm_header.txt|sort|uniq|wc -l
 #363 
+
+
+
 
 #get faa seqs
 for line in $(cat hmm_header.txt)
