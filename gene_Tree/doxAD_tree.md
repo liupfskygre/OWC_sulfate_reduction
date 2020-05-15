@@ -24,5 +24,5 @@ pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta
 ```
 
 ../pfam_KO_to_seqs_OWC3211.sh doxD PF04173 K16937 na_na 125
-
+#835
 ```
