@@ -125,10 +125,15 @@ for file in *DRAMOUT;do grep -c '>' "${file}"/genes.fna>>dram_gene_aa.txt;done
 
 #do hmm search , first try
 ```
-cd ~
-mkdir sulfur_cycling_owc_hmmsearh
+#all data move to here
+cd /home/projects/Wetlands/sulfur_cycling_analysis
 
-/home/liupf/sulfur_cycling_owc_hmmsearh
+/home/projects/Wetlands/sulfur_cycling_analysis/sulfur_cycling_owc_hmmsearh
+
+#cd ~
+#mkdir sulfur_cycling_owc_hmmsearh
+
+#/home/liupf/sulfur_cycling_owc_hmmsearh
 
 screen -S hmmsearch
 hmmsearch --cpu 20 --tblout sulfur_cycling_tblout.txt --domtblout sulfur_cycling_domtblout.txt sulfur_cycling_hmmprofile.hmm combined_owc_3211_prodigal.faa
