@@ -18,11 +18,11 @@ e.g.
 
 
 here: 
-/home/projects/Wetlands/sulfur_cycling_analysis/sulfur_cycling_owc_hmmsearh 
+/home/projects/Wetlands/sulfur_cycling_analysis
 
 =====>wetlands_db_contigs_to_bins.tsv
 
-
+#sed -e 's/.fa.relabeled/_/1'  wetlands_db_contigs_to_bins.tsv > wetlands_db_contigs_to_bins_fix.tsv
 
 
 2)based on this we have prodigal predicition, get gene names like this 
