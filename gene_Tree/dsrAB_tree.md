@@ -18,7 +18,8 @@
 
 ##all gene list from DRAMOUT
 ```
-
+# https://github.com/liupfskygre/OWC_sulfate_reduction/blob/master/DRAM_annotation_MAGs.md
+/home/projects/Wetlands/sulfur_cycling_analysis/DRAM_OUT/sulfur_cycling_KO_HMM_gene_annotations_3211db.tsv
 
 ```
 
@@ -38,42 +39,48 @@ for line in $(cat hmm_header.txt);do  pullseq -i /home/projects/Wetlands/sulfur_
 
 ## dsrB 
 
-## pullseq, HMM hits
+## pullseq,
 
 ```
 cd /home/projects/Wetlands/sulfur_cycling_analysis/
 mkdir dsrABD_tree
 #seqs list
 cd dsrABD_tree
+
+# HMM hits
 grep -i 'dsrB' ../MAGs_Pro_Con_wide_w_profile_name.txt|cut -f8 -d$'\t' >tmp.txt
 
 sed -i -e 's/$/\$/1' tmp.txt
 grep -E -f tmp.txt ../all_bins_combined_annotations_3211db_ID.txt > hmm_header.txt 
 
-cat hmm_header.txt|sort|uniq|wc -l
-#363 
+## DRAMout hits
+grep -E -i 'dsrB|TIGR02064|K11181' /home/projects/Wetlands/sulfur_cycling_analysis/DRAM_OUT/sulfur_cycling_KO_HMM_gene_annotations_3211db.tsv|cut -f1 -d$'\t' |sort|uniq >DRAM_header.txt 
+
+cat hmm_header.txt DRAM_header.txt > hmm_DRAM_header.txt
+cat hmm_DRAM_header.txt |sort|uniq > hmm_DRAM_header_uniq.txt
 
 #get faa seqs
-pullseq -i /home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM_aa.faa -n hmm_header.txt > dsrB_hmm.faa
+pullseq -i /home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM_aa.faa -n hmm_DRAM_header_uniq.txt > dsrB_hmm_DRAM.faa
 
 #get fna seqs
-pullseq -i /home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM.fna -n hmm_header.txt > dsrB_hmm.fna
+pullseq -i /home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM.fna -n hmm_DRAM_header_uniq.txt > dsrB_hmm_DRAM.fna
 
-sed -e 's/ #.*$//g' dsrB_hmm.faa >dsrB_hmm_fixH.faa
-sed -i -e 's/\*$//g' dsrB_hmm_fixH.faa
-rm dsrB_hmm.faa
+sed -e 's/ .*$//g' dsrB_hmm_DRAM.faa >dsrB_fixH.faa
+sed -i -e 's/\*$//g' dsrB_fixH.faa
+rm dsrB_hmm_DRAM.faa
 #
-sed -e 's/ #.*$//g' dsrB_hmm.fna >dsrB_hmm_fixH.fna
-sed -i -e 's/\*$//g' dsrB_hmm_fixH.fna
-rm dsrB_hmm.fna
+sed -e 's/ .*$//g' dsrB_hmm_DRAM.fna >dsrB_fixH.fna
+sed -i -e 's/\*$//g' dsrB_fixH.fna
+rm dsrB_hmm_DRAM.fna
+
+rm hmm_DRAM_header.txt
+rm DRAM_header.txt
+rm hmm_header.txt
+
+pullseq -i dsrB_fixH.faa -m 256 > dsrB_4_tree.faa
 ```
 
-## DRAMout hits
-```
-/home/projects/Wetlands/sulfur_cycling_analysis/DRAM_OUT
 
-
-```
 
 ## dsrA 
 
@@ -99,7 +106,18 @@ pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta
 sed -e 's/ #.*$//g' dsrA_gene_nt.fna >dsrA_gene_nt_fixheader.fna
 
 ```
+## dsrB scripts
+```
+#dsrB scripts
+../pfam_KO_to_seqs_OWC3211.sh dsrB na_na TIGR02064 K11181 256
 
+#dsrA scripts
+../pfam_KO_to_seqs_OWC3211.sh dsrA na_na TIGR02061 K11180 302
+
+#dsrD
+../pfam_KO_to_seqs_OWC3211.sh dsrD PF08697 na_na na_na 48
+
+```
 
 ## dsrD 
 
@@ -123,6 +141,7 @@ pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta
 
 sed -e 's/ #.*$//g' dsrD_gene_aa.faa >dsrD_gene_aa_fixheader.faa
 sed -e 's/ #.*$//g' dsrD_gene_nt.fna >dsrD_gene_nt_fixheader.fna
+
 ```
 
 ## reference sequences preparation
