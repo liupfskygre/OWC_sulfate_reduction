@@ -53,31 +53,25 @@ grep -E -f tmp.txt ../all_bins_combined_annotations_3211db_ID.txt > hmm_header.t
 cat hmm_header.txt|sort|uniq|wc -l
 #363 
 
-
-
-
 #get faa seqs
-for line in $(cat hmm_header.txt)
-do  
-pullseq -i /home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM_aa.faa -g ${line} >> dsrB_hmm.faa
-done
+pullseq -i /home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM_aa.faa -n hmm_header.txt > dsrB_hmm.faa
 
 #get fna seqs
-for line in $(cat hmm_header.txt)
-do  pullseq -i /home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM.fna -g ${line} >> dsrB_hmm.fna
-done
+pullseq -i /home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM.fna -n hmm_header.txt > dsrB_hmm.fna
 
 sed -e 's/ #.*$//g' dsrB_hmm.faa >dsrB_hmm_fixH.faa
 sed -i -e 's/\*$//g' dsrB_hmm_fixH.faa
-
+rm dsrB_hmm.faa
 #
 sed -e 's/ #.*$//g' dsrB_hmm.fna >dsrB_hmm_fixH.fna
 sed -i -e 's/\*$//g' dsrB_hmm_fixH.fna
-
+rm dsrB_hmm.fna
 ```
 
 ## DRAMout hits
 ```
+/home/projects/Wetlands/sulfur_cycling_analysis/DRAM_OUT
+
 
 ```
 
