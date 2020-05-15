@@ -16,41 +16,62 @@
 
 ```
 
+##all gene list from DRAMOUT
+```
+
+
+```
+
+## sequences db
+```
+/home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM.fna
+
+
+/home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM_aa.faa
+
+for line in $(cat hmm_header.txt);do  pullseq -i /home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM_aa.faa
+ -g ${line} >> xxx.faa; done
+
+
+for line in $(cat hmm_header.txt);do  pullseq -i /home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM.fna -g ${line} >> xxx.fna; done
+```
 
 ## dsrB 
 
-## pullseq 
+## pullseq, HMM hits
+
 ```
 cd /home/projects/Wetlands/sulfur_cycling_analysis/
 mkdir dsrABD_tree
 #seqs list
-grep -i 'dsrB' MAGs_Pro_Con_wide_w_profile_name.txt|cut -f8 -d$'\t' >dsrB_gene_list715.txt
-mv dsrB_gene_list715.txt dsrABD_tree
-cat dsrB_gene_list715.txt|sort|uniq|wc -l
+cd dsrABD_tree
+grep -i 'dsrB' ../MAGs_Pro_Con_wide_w_profile_name.txt|cut -f8 -d$'\t' >hmm_header.txt
+cat hmm_header.txt|sort|uniq|wc -l
 #363 
 
+#get faa seqs
+for line in $(cat hmm_header.txt)
+do  
+pullseq -i /home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM_aa.faa -g ${line} >> dsrB_hmm.faa
+done
 
+#get fna seqs
+for line in $(cat hmm_header.txt)
+do  pullseq -i /home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM.fna -g ${line} >> dsrB_hmm.fna
+done
 
-#all 3211 MAGs gene aa seqs: prodigal.faa
-cd 
-/home/projects/Wetlands/sulfur_cycling_analysis/sulfur_cycling_owc_hmmsearh/combined_owc_3211_prodigal.faa
-
-
-#fna list? confusing about the file from Adrienne: all_wetlands_bins_combined.genes.fasta
-cp /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/prodigal_genes_NT/all_wetlands_bins_combined.genes.fasta ./
-
-cd dsrABD_tree
-#file name 
-pullseq -i ../sulfur_cycling_owc_hmmsearh/combined_owc_3211_prodigal.faa -n dsrB_gene_list715.txt>dsrB_gene_aa.faa
-# 363 
-sed -e 's/ #.*$//g' dsrB_gene_aa.faa >dsrB_gene_aa_fixH.faa
-sed -i -e 's/\*$//g' dsrB_gene_aa_fixH.faa
+sed -e 's/ #.*$//g' dsrB_hmm.faa >dsrB_hmm_fixH.faa
+sed -i -e 's/\*$//g' dsrB_hmm_fixH.faa
 
 #
-pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta -n dsrB_gene_list715.txt>dsrB_gene_nt.fna
-#362
-sed -e 's/ #.*$//g' dsrB_gene_nt.fna >dsrB_gene_nt_fixH.fna
-#102_Metabat_MUD_2014_2015_coassembly_102_Metabat_MUD_2014_2015_coassembly.fa102_Metabat_MUD_2014_2015_coassembly_scaffold_3016_10 missing #
+sed -e 's/ #.*$//g' dsrB_hmm.fna >dsrB_hmm_fixH.fna
+sed -i -e 's/\*$//g' dsrB_hmm_fixH.fna
+
+```
+
+## DRAMout hits
+```
+
 ```
 
 ## dsrA 
