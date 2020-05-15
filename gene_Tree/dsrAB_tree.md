@@ -10,7 +10,7 @@
 
 ```
 
-#all gene list
+#all gene list from HMM search
 ```
 /home/projects/Wetlands/sulfur_cycling_analysis/MAGs_Pro_Con_wide_w_profile_name.txt
 
