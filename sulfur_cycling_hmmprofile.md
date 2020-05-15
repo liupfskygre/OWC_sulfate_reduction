@@ -1,6 +1,57 @@
 ##
 
+
+## summary of all data into table
+```
+/Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/Data_analysis_sulfur_cycling/All_search_hits
+
+cat *filter.txt > TIGR_PFAM_hit_filtered.txt
+
+cat TIGR_PFAM_hit_filtered.txt|cut -f1,4 -d$'\t' >  TIGR_PFAM_hit_filtered_hits.txt
+
+cat TIGR_PFAM_hit_filtered_hits.txt K00392_kofamscan_hits_f12.txt sulfur_cycling_kofamscan.txt >TIGR_PFAM_Kofamscan.txt
+# 20892
+
+cat TIGR_PFAM_Kofamscan.txt| cut -f1 -d$'\t' |sort|uniq > TIGR_PFAM_Kofamscan_uniq_genes.txt
+#12604
+#these are genes, need contigs
+sed -e 's/_[0-9]*$//1' TIGR_PFAM_Kofamscan_uniq_genes.txt >TIGR_PFAM_Kofamscan_contigs.txt
+
+cat TIGR_PFAM_Kofamscan_contigs.txt |sort|uniq >TIGR_PFAM_Kofamscan_uniq_contigs.txt
+#9702
+
+grep -w -f TIGR_PFAM_Kofamscan_uniq_contigs.txt  wetlands_db_contigs_to_bins.tsv >sulfur_cycling_related_bins_contigs.txt
+#9702
+
+#get the bin list
+sulfur_cycling_related_bins_contigs.txt
+
+#
+cat sulfur_cycling_related_bins_contigs.txt|cut -f2 -d$'\t' |sort|uniq > sulfur_cycling_related_bins_uniq.txt
+#2533
+
+sed -i -e 's/\.relabeled//1' sulfur_cycling_related_bins_uniq.txt
+#
+sed -i -e 's/\.fa//1' sulfur_cycling_related_bins_uniq.txt
+#
+##fix naming issue in the wetlands_db_contigs_to_bins.tsv
+sed -i -e 's/O3C3D3_metabat_w_DDIG_2-5kb/O3C3D3_metabat_w_DDIG_2.5k/g'  sulfur_cycling_related_bins_uniq.txt
+
+sed -i -e 's/M3C4D4_metabat_w_DDIG_2-5kb/M3C4D4_metabat_w_DDIG_2.5kb/g'  sulfur_cycling_related_bins_uniq.txt
+
+sed -i -e 's/O3C3D4_metabat_w_DDIG_2-5kb/O3C3D4_metabat_w_DDIG_2.5kb/g'  sulfur_cycling_related_bins_uniq.txt
+#2533
+
+grep -w -f sulfur_cycling_related_bins_uniq.txt gtdb_and_checkm_for_dram.txt >sulfur_cycling_related_bins_gtdbtk_dram2.txt
+#2533
+#
+```
+
+
+
+
 ## update notes
+
 ```
 #these two are old ones, need recheck
 /home/projects/Wetlands/sulfur_cycling_analysis/sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta
@@ -612,51 +663,6 @@ ls *.fna|wc -l
 #wetlands_db_contigs_to_bins.tsv
 #/home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins
 #changed by Adrienne to 2-5kb style
-```
-
-##summary of all data into table
-```
-/Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/Data_analysis_sulfur_cycling/All_search_hits
-cat *filter.txt > TIGR_PFAM_hit_filtered.txt
-
-cat TIGR_PFAM_hit_filtered.txt|cut -f1,4 -d$'\t' >  TIGR_PFAM_hit_filtered_hits.txt
-
-cat TIGR_PFAM_hit_filtered_hits.txt K00392_kofamscan_hits_f12.txt sulfur_cycling_kofamscan.txt >TIGR_PFAM_Kofamscan.txt
-# 20892
-
-cat TIGR_PFAM_Kofamscan.txt| cut -f1 -d$'\t' |sort|uniq >TIGR_PFAM_Kofamscan_uniq_genes.txt
-#12604
-#these are genes, need contigs
-sed -e 's/_[0-9]*$//1' TIGR_PFAM_Kofamscan_uniq_genes.txt >TIGR_PFAM_Kofamscan_contigs.txt
-
-cat TIGR_PFAM_Kofamscan_contigs.txt |sort|uniq >TIGR_PFAM_Kofamscan_uniq_contigs.txt
-#9702
-
-grep -w -f TIGR_PFAM_Kofamscan_uniq_contigs.txt  wetlands_db_contigs_to_bins.tsv >sulfur_cycling_related_bins_contigs.txt
-#9702
-
-#get the bin list
-sulfur_cycling_related_bins_contigs.txt
-
-#
-cat sulfur_cycling_related_bins_contigs.txt|cut -f2 -d$'\t' |sort|uniq > sulfur_cycling_related_bins_uniq.txt
-#2533
-
-sed -i -e 's/\.relabeled//1' sulfur_cycling_related_bins_uniq.txt
-#
-sed -i -e 's/\.fa//1' sulfur_cycling_related_bins_uniq.txt
-#
-##fix naming issue in the wetlands_db_contigs_to_bins.tsv
-sed -i -e 's/O3C3D3_metabat_w_DDIG_2-5kb/O3C3D3_metabat_w_DDIG_2.5k/g'  sulfur_cycling_related_bins_uniq.txt
-
-sed -i -e 's/M3C4D4_metabat_w_DDIG_2-5kb/M3C4D4_metabat_w_DDIG_2.5kb/g'  sulfur_cycling_related_bins_uniq.txt
-
-sed -i -e 's/O3C3D4_metabat_w_DDIG_2-5kb/O3C3D4_metabat_w_DDIG_2.5kb/g'  sulfur_cycling_related_bins_uniq.txt
-#2533
-
-grep -w -f sulfur_cycling_related_bins_uniq.txt gtdb_and_checkm_for_dram.txt >sulfur_cycling_related_bins_gtdbtk_dram2.txt
-#2533
-#
 ```
 
 #
