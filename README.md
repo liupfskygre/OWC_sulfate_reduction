@@ -7,6 +7,9 @@ this is a side story on sulfate reduction in OWC wetland based on 16S, biogeoche
 ## what did Adrienne do for MAGs renaming ##
 ```
 1) add partial name of MAGs (w/o) MAGs id and .fa to the seq header, +\t scaffold ID
+#here 
+
+/home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins
 e.g.
 ===> OWC_subtractive_megahit_Surface_metabat_k121_44274654  k121_44274654
 
@@ -17,7 +20,7 @@ e.g.
 here: 
 /home/projects/Wetlands/sulfur_cycling_analysis/sulfur_cycling_owc_hmmsearh 
 
-wetlands_db_contigs_to_bins.tsv
+=====>wetlands_db_contigs_to_bins.tsv
 
 
 
@@ -27,13 +30,15 @@ wetlands_db_contigs_to_bins.tsv
 ===> OWC_subtractive_megahit_Surface_metabat_k121_44274654_13
 
 all combined genes and protein files are here
+/home/projects/Wetlands/sulfur_cycling_analysis/sulfur_cycling_owc_hmmsearh 
 
+===>combined_owc_3211_prodigal.faa
+===>all_wetlands_bins_combined.genes.fasta
 
 [liupf@zenith prodigal_files]$ pwd
 /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/prodigal_files
+
 [liupf@zenith prodigal_files]$
-
-
 /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/prodigal_genes_NT
 
 
@@ -45,6 +50,11 @@ all combined genes and protein files are here
 combined 3211 DRAMOUT genes and protein files are here
 
 
+#from dramout genes.fna
+#9392229
+=========> all_3211_genes_DRAM.fna
 
-
+#from dramout genes.faa
+#9392229, the same as nt file
+=======> all_3211_genes_DRAM_aa.faa
 ```
