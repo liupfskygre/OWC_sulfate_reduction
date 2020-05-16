@@ -37,7 +37,55 @@ for line in $(cat hmm_header.txt);do  pullseq -i /home/projects/Wetlands/sulfur_
 for line in $(cat hmm_header.txt);do  pullseq -i /home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM.fna -g ${line} >> xxx.fna; done
 ```
 
-## dsrB 
+## dsrABD scripts
+```
+#dsrB scripts
+../pfam_KO_to_seqs_OWC3211.sh dsrB na_na TIGR02064 K11181 256
+
+#dsrA scripts
+../pfam_KO_to_seqs_OWC3211.sh dsrA na_na TIGR02061 K11180 302
+
+#dsrD
+../pfam_KO_to_seqs_OWC3211.sh dsrD PF08697 na_na na_na 48
+
+```
+
+# reference for dsrAB
+```
+# 1292 Full_length_seq_dsrAB_header.txt, nearly full length seqs from Pelican 2016 and Muller 2015, EMI and ISME J
+
+Full_length_seq_dsrAB_ref.faa
+sed -e 's/ \+.*$/_Reference/g' Full_length_seq_dsrAB_ref.faa > Full_length_seq_dsrAB_ref_fixH.faa
+
+
+
+
+```
+
+
+## alignment 
+```
+#dsrA
+mafft --auto --add dsrA_4_tree.faa --thread 6 Full_length_seq_dsrAB_ref_fixH.faa >dsrA_4_tree_alignment.faa
+
+#--maxiterate 0 --thread -1 --keeplength --reorder 
+
+#dsrB 
+mafft --auto --add dsrB_4_tree.faa --thread 6 Full_length_seq_dsrAB_ref_fixH.faa >dsrB_4_tree_alignment.faa
+
+#mafft --maxiterate 0 --add dsrB_4_tree.faa --thread 6 --keeplength Full_length_seq_dsrAB_ref_fixH.faa >dsrB_4_tree_alignment.faa
+
+```
+
+
+
+
+
+
+
+
+
+# old log #
 
 ## pullseq,
 
@@ -106,18 +154,7 @@ pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta
 sed -e 's/ #.*$//g' dsrA_gene_nt.fna >dsrA_gene_nt_fixheader.fna
 
 ```
-## dsrB scripts
-```
-#dsrB scripts
-../pfam_KO_to_seqs_OWC3211.sh dsrB na_na TIGR02064 K11181 256
 
-#dsrA scripts
-../pfam_KO_to_seqs_OWC3211.sh dsrA na_na TIGR02061 K11180 302
-
-#dsrD
-../pfam_KO_to_seqs_OWC3211.sh dsrD PF08697 na_na na_na 48
-
-```
 
 ## dsrD 
 
