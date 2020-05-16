@@ -1,6 +1,13 @@
 ##soeABC
 
 ```
+
+../pfam_KO_to_seqs_OWC3211.sh soeA na_na K21307 na_na 580
+##D3RNN8, 967 aa, 60% of the typical length==580
+# 214
+```
+
+```
 cd /home/projects/Wetlands/sulfur_cycling_analysis/
 mkdir soeA_tree
 cd soeA_tree
