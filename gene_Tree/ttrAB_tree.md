@@ -1,5 +1,15 @@
 ##ttrA
 
+##
+```
+../pfam_KO_to_seqs_OWC3211.sh ttrA na_na K08357 na_na 612
+
+#
+
+
+```
+
+
 ```
 cd /home/projects/Wetlands/sulfur_cycling_analysis/
 mkdir ttrA_tree
