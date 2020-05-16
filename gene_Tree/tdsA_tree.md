@@ -1,4 +1,11 @@
 ##
+```
+../pfam_KO_to_seqs_OWC3211.sh tdsA na_na K19713 na_na 145
+#218
+
+```
+
+
 
 ##
 
