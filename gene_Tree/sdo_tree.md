@@ -3,6 +3,14 @@
 ## sdo tree from MAGs
 
 ```
+#sdo
+../pfam_KO_to_seqs_OWC3211.sh sdo K17725 na_na na_na 184
+
+#415
+```
+
+
+```
 cd /home/projects/Wetlands/sulfur_cycling_analysis/
 mkdir sdo_tree
 cd sdo_tree
