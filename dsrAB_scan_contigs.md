@@ -1,5 +1,16 @@
 #use dsrAB hmmprofile to search contigs profile
 
+
+## update note
+```
+#16-May-2020
+the metafile containing TIGRFAM was wrong, part of TIGRFAM != gene names during the generation of the file
+
+needs to redo if needed
+```
+
+
+
 #all data analysis
 cd /home/projects/Wetlands/sulfur_cycling_analysis
 
@@ -102,6 +113,8 @@ unset IFS
 
 ../hmmsearch_get_seqs_w_proteins.sh ../file1.txt ../file2.txt 6 &>hmmsearch.log
 
+
+##notes, need to redo since file1 TIGRfam!= gene names
 ```
 
 
