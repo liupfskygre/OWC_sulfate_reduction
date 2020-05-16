@@ -1,4 +1,28 @@
-##soxB seqs from MAGs
+## 
+
+## update
+```
+#soxA
+../pfam_KO_to_seqs_OWC3211.sh soxA na_na K17222 TIGR04484 159
+#361
+
+#soxB
+../pfam_KO_to_seqs_OWC3211.sh soxB na_na K17224 TIGR04486 417
+#
+#soxC
+../pfam_KO_to_seqs_OWC3211.sh soxC na_na K17225 TIGR04555 306
+182
+
+#soxY
+../pfam_KO_to_seqs_OWC3211.sh soxY PF13501 K17226 TIGR04488 112
+506
+
+```
+
+
+
+
+## soxB seqs from MAGs
 
 ##
 ```
