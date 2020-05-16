@@ -1,5 +1,14 @@
 ## phsA tree from MAGs
 
+
+## update
+```
+#phsA
+../pfam_KO_to_seqs_OWC3211.sh phsA K08352 na_na na_na 569
+#756
+```
+
+
 ```
 cd /home/projects/Wetlands/sulfur_cycling_analysis/
 mkdir phsA_tree
