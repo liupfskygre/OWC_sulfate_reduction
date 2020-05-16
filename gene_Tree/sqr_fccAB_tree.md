@@ -1,5 +1,18 @@
 ##
 
+```
+#sqr
+../pfam_KO_to_seqs_OWC3211.sh sqr na_na K17218 na_na 311
+#1450
+
+
+#fccB
+../pfam_KO_to_seqs_OWC3211.sh fccB na_na K17229 na_na 258
+#use 60% of typical fccB Q06530, 430*0.6 ==258
+??? mixed with Pyridine nucleotide-disulfide oxidoreductase???
+389
+```
+
 ##sqr seqs from MAGs
 ```
 cd /home/projects/Wetlands/sulfur_cycling_analysis/
