@@ -1,9 +1,12 @@
 ##
 
 ```
-#otr
-../pfam_KO_to_seqs_OWC3211.sh otr TIGR04315 na_na na_na 
+cd /home/projects/Wetlands/sulfur_cycling_analysis/
 
+#otr, otr	TIGR04315	375	325	440	330	
+
+../pfam_KO_to_seqs_OWC3211.sh otr TIGR04315 na_na na_na 330
+#326
 ```
 
 
