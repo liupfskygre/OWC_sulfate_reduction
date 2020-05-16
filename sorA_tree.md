@@ -1,6 +1,12 @@
 ##
 
-##kofam scan is not wired for this, the results are sqr/fcc
+## kofam scan is wired, not for sorA, but get results for the results are sqr/fcc based on the 
+## problem of the kofamscan, the output is sulfide dehydrogenase (flavocytochrome) ==sqr/fcc
+
+
+#dram annotation showing only 1 hits. 
+
+#not used
 
 ##sorA 
 ```
