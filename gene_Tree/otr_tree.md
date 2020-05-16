@@ -1,4 +1,4 @@
-##
+## update hmm + DRAMOUT
 
 ```
 cd /home/projects/Wetlands/sulfur_cycling_analysis/
