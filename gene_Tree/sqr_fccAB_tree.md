@@ -13,6 +13,42 @@
 389
 ```
 
+##tree of fccB
+```
+
+fccB_4_tree.faa
+
+#ref from uniref
+fccB_uniref100_q06530_id50.fasta
+sed -e 's/ /replace/1' fccB_uniref100_q06530_id50.fasta >fccB_uniref.fasta
+sed -i -e 's/replace.*$/_Ref/g' fccB_uniref.fasta
+
+
+#from annotree KO search
+#fccB_annotree_hits 
+
+
+cat fccB_annotree_hits.csv|grep -v 'bitscore' |cut -f3,4,8 -d',' > sel.csv
+
+awk -F ',' '{print ">" $1 "link" $2 "_Ref" "\n" $3}' sel.csv > fccB_annotree_hits.fasta
+
+#reference
+cat fccB_annotree_hits.fasta fccB_uniref.fasta fccB_4_tree.faa >fccB_4_tree_w_ref.fasta
+
+mafft --auto fccB_4_tree_w_ref.fasta > fccB_4_tree_w_ref_align.fasta
+
+muscle -in fccB_4_tree_w_ref_align.fasta -out fccB_4_tree_w_ref_align_refine.fasta
+
+trimal -keepheader -automated1 -in fccB_4_tree_w_ref_align_refine.fasta -out fccB_4_tree_w_ref_align_refine_trim.fasta
+
+fasttree -gamma -lg -boot 1000 <fccB_4_tree_w_ref_align_refine_trim.fasta> fccB_4_raw.fasttree
+
+run_treeshrink.py  -t fccB_4_raw.fasttree -m per-gene -o fccB_treeshrink_pergene -a fccB_4_tree_w_ref_align_refine_trim.fasta
+```
+
+
+
+
 ##sqr seqs from MAGs
 ```
 cd /home/projects/Wetlands/sulfur_cycling_analysis/
