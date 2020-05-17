@@ -7,6 +7,34 @@
 # 214
 ```
 
+##
+```
+#soeA_annotree_hits 
+
+cd /home/projects/Wetlands/sulfur_cycling_analysis/soeA_tree
+
+cat soeA_bac_annotree_hits.csv|grep -v 'bitscore' |cut -f3,4,8 -d',' > sel.csv
+
+awk -F ',' '{print ">" $1 "link" $2 "_Ref" "\n" $3}' sel.csv > soeA_annotree_hits.fasta
+
+#reference
+cat soeA_annotree_hits.fasta soeA_4_tree.faa >soeA_4_tree_w_ref.fasta
+
+mafft --auto soeA_4_tree_w_ref.fasta > soeA_4_tree_w_ref_align.fasta
+
+muscle -in soeA_4_tree_w_ref_align.fasta -out soeA_4_tree_w_ref_align_refine.fasta
+
+trimal -keepheader -automated1 -in soeA_4_tree_w_ref_align_refine.fasta -out soeA_4_tree_w_ref_align_refine_trim.fasta
+
+fasttree -gamma -lg -boot 1000 <soeA_4_tree_w_ref_align_refine_trim.fasta> soeA_4_raw.fasttree
+
+run_treeshrink.py  -t soeA_4_raw.fasttree -m per-gene -o soeA_treeshrink_pergene -a soeA_4_tree_w_ref_align_refine_trim.fasta
+
+
+
+```
+
+
 ```
 cd /home/projects/Wetlands/sulfur_cycling_analysis/
 mkdir soeA_tree
