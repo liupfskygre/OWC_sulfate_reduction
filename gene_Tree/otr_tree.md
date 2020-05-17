@@ -10,6 +10,32 @@ cd /home/projects/Wetlands/sulfur_cycling_analysis/
 ```
 
 
+## otr tree
+```
+cd /home/projects/Wetlands/sulfur_cycling_analysis/otr_tree
+
+cat otr_bac_annotree_hits.csv|grep -v 'bitscore' |cut -f3,4,5 -d',' > sel.csv
+
+awk -F ',' '{print ">" $1 "link" $2 "_Ref" "\n" $3}' sel.csv > otr_annotree_hits.fasta
+
+cd-hit -i otr_annotree_hits.fasta -o otr_annotree_hits_09.fasta
+
+pullseq -i otr_annotree_hits_09.fasta -m 330 > otr_annotree_hits_09_length.fasta
+
+#reference
+cat otr_annotree_hits_09_length.fasta otr_4_tree.faa >otr_4_tree_w_ref.fasta
+
+mafft --auto otr_4_tree_w_ref.fasta > otr_4_tree_w_ref_align.fasta
+
+muscle -in otr_4_tree_w_ref_align.fasta -out otr_4_tree_w_ref_align_refine.fasta
+
+trimal -keepheader -automated1 -in otr_4_tree_w_ref_align_refine.fasta -out otr_4_tree_w_ref_align_refine_trim.fasta
+
+fasttree -gamma -lg -boot 1000 <otr_4_tree_w_ref_align_refine_trim.fasta> otr_4_raw.fasttree
+
+run_treeshrink.py  -t otr_4_raw.fasttree -m per-gene -o otr_treeshrink_pergene -a otr_4_tree_w_ref_align_refine_trim.fasta
+```
+
 #otr
 ```
 cd /home/projects/Wetlands/sulfur_cycling_analysis/
