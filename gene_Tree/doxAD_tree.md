@@ -25,4 +25,18 @@ pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta
 
 ../pfam_KO_to_seqs_OWC3211.sh doxD PF04173 K16937 na_na 125
 #835
+
+```
+
+
+##doxD, tree
+```
+/home/projects/Wetlands/sulfur_cycling_analysis/doxD_tree
+
+sed -i -e 's/>\(.*\)/>\1_Ref/g' raw_alg.fasta
+
+cat doxD_4_tree.faa raw_alg.fasta > doxD_4_tree_w_ref.fasta
+
+muscle -in doxD_4_tree_w_ref.fasta -out doxD_4_tree_w_ref_muscle.fasta
+
 ```
