@@ -38,8 +38,14 @@ cat aprA_annotree_hits.fasta aprA_4_tree.faa >aprA_4_tree_w_ref.fasta
 
 /Users/pengfeiliu/software/mafft-mac/mafft.bat --auto aprA_4_tree_w_ref.fasta > aprA_4_tree_w_ref_align.fasta
 
+aprA_4_tree_w_ref_align_refine.fasta
+
 #trimAl v1.4.rev22 build[2015-05-21]
-/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in dsrD_aa_cat_align.faa -out dsrD_aa_cat_trim.faa
+/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in aprA_4_tree_w_ref_align_refine.fasta -out aprA_4_tree_w_ref_align_refine_trim.fasta
+
+fasttree -gamma -lg -boot 1000 <aprA_4_tree_w_ref_align_refine_trim.fasta> aprA_4_raw.fasttree
+
+run_treeshrink.py  -t aprA_4_raw.fasttree -m per-gene -o aprA_treeshrink_pergene -a aprA_4_tree_w_ref_align_refine_trim.fasta
 
 
 
@@ -47,7 +53,7 @@ cat aprA_annotree_hits.fasta aprA_4_tree.faa >aprA_4_tree_w_ref.fasta
 
 # reference and tree ===> aprB 
 ```
-/home/projects/Wetlands/sulfur_cycling_analysis
+cd /home/projects/Wetlands/sulfur_cycling_analysis
 
 cat aprB_arc_annotree_hits.csv aprB_bac_annotree_hits.csv > aprB_annotree_hits.csv
 
@@ -62,9 +68,10 @@ mafft --auto aprB_4_tree_w_ref.fasta > aprB_4_tree_w_ref_align.fasta
 
 muscle -in aprB_4_tree_w_ref_align.fasta -out aprB_4_tree_w_ref_align_refine.fasta
 
-#trimAl v1.4.rev22 build[2015-05-21]
-/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in dsrD_aa_cat_align.faa -out dsrD_aa_cat_trim.faa
+trimal -keepheader -automated1 -in aprB_4_tree_w_ref_align_refine.fasta -out aprB_4_tree_w_ref_align_refine_trim.fasta
 
+fasttree -gamma -lg -boot 1000 <aprB_4_tree_w_ref_align_refine_trim.fasta> aprB_4_raw.fasttree
 
+run_treeshrink.py  -t aprB_4_raw.fasttree -m per-gene -o aprB_treeshrink_pergene -a aprB_4_tree_w_ref_align_refine_trim.fasta
 
 ```
