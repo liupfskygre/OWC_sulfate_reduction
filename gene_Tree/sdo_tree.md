@@ -8,6 +8,34 @@
 
 #415
 ```
+#with caution
+
+```
+#sdo_annotree_hits 
+
+cd /home/projects/Wetlands/sulfur_cycling_analysis/sdo_tree
+
+cat sdo_bac_annotree_hits.csv|grep -v 'bitscore' |cut -f3,4,8 -d',' > sel.csv
+
+awk -F ',' '{print ">" $1 "link" $2 "_Ref" "\n" $3}' sel.csv > sdo_annotree_hits.fasta
+
+#reference
+cat sdo_annotree_hits.fasta sdo_4_tree.faa >sdo_4_tree_w_ref.fasta
+
+mafft --auto sdo_4_tree_w_ref.fasta > sdo_4_tree_w_ref_align.fasta
+
+muscle -in sdo_4_tree_w_ref_align.fasta -out sdo_4_tree_w_ref_align_refine.fasta
+
+trimal -keepheader -automated1 -in sdo_4_tree_w_ref_align_refine.fasta -out sdo_4_tree_w_ref_align_refine_trim.fasta
+
+fasttree -gamma -lg -boot 1000 <sdo_4_tree_w_ref_align_refine_trim.fasta> sdo_4_raw.fasttree
+
+run_treeshrink.py  -t sdo_4_raw.fasttree -m per-gene -o sdo_treeshrink_pergene -a sdo_4_tree_w_ref_align_refine_trim.fasta
+
+
+
+```
+
 
 
 ```
