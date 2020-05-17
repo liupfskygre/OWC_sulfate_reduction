@@ -39,4 +39,20 @@ cat doxD_4_tree.faa raw_alg.fasta > doxD_4_tree_w_ref.fasta
 
 muscle -in doxD_4_tree_w_ref.fasta -out doxD_4_tree_w_ref_muscle.fasta
 
+trimal -automated1 -keepheader -in doxD_4_tree_w_ref_muscle.fasta -out doxD_4_tree_w_ref_muscle_trim.fasta
+
+fasttree -gamma -lg -boot 1000 <doxD_4_tree_w_ref_muscle_trim.fasta> doxD_4_tree_w_ref_muscle_trim.fasttree
+
+run_treeshrink.py  -t doxD_4_tree_w_ref_muscle_trim.fasttree -m per-gene -o doxD_treeshrink_pergene -a doxD_4_tree_w_ref_muscle_trim.fasta
+
+#try mafft
+mafft --maxiterate 1000 --globalpair --thread 6 doxD_4_tree_w_ref.fasta  > doxD_4_tree_w_mafft.fasta
+
+trimal -automated1 -keepheader -in doxD_4_tree_w_mafft.fasta -out doxD_4_tree_w_ref_mafft_trim.fasta
+
+fasttree -gamma -lg -boot 1000 <doxD_4_tree_w_ref_mafft_trim.fasta> doxD_4_tree_w_ref_mafft_trim.fasttree
+
+run_treeshrink.py  -t doxD_4_tree_w_ref_mafft_trim.fasttree -m per-gene -o doxD_treeshrink_pergene_mafft -a doxD_4_tree_w_ref_mafft_trim.fasta
+
+
 ```
