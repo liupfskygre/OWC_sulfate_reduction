@@ -6,8 +6,36 @@
 #phsA
 ../pfam_KO_to_seqs_OWC3211.sh phsA K08352 na_na na_na 569
 #756
+
 ```
 
+## tree
+```
+#from annotree KO search
+#phsA_annotree_hits 
+
+cd /home/projects/Wetlands/sulfur_cycling_analysis/phsA_tree
+
+cat phsA_bac_annotree_hits.csv|grep -v 'bitscore' |cut -f3,4,8 -d',' > sel.csv
+
+awk -F ',' '{print ">" $1 "link" $2 "_Ref" "\n" $3}' sel.csv > phsA_annotree_hits.fasta
+
+#reference
+cat phsA_annotree_hits.fasta phsA_4_tree.faa >phsA_4_tree_w_ref.fasta
+
+mafft --auto phsA_4_tree_w_ref.fasta > phsA_4_tree_w_ref_align.fasta
+
+muscle -in phsA_4_tree_w_ref_align.fasta -out phsA_4_tree_w_ref_align_refine.fasta
+
+trimal -keepheader -automated1 -in phsA_4_tree_w_ref_align_refine.fasta -out phsA_4_tree_w_ref_align_refine_trim.fasta
+
+fasttree -gamma -lg -boot 1000 <phsA_4_tree_w_ref_align_refine_trim.fasta> phsA_4_raw.fasttree
+
+run_treeshrink.py  -t phsA_4_raw.fasttree -m per-gene -o phsA_treeshrink_pergene -a phsA_4_tree_w_ref_align_refine_trim.fasta
+
+```
+
+## 
 
 ```
 cd /home/projects/Wetlands/sulfur_cycling_analysis/
