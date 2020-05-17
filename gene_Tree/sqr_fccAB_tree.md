@@ -47,7 +47,35 @@ run_treeshrink.py  -t fccB_4_raw.fasttree -m per-gene -o fccB_treeshrink_pergene
 ```
 
 
+##tree of sqr
+```
+cd /home/projects/Wetlands/sulfur_cycling_analysis/sqr_tree
 
+cat sqr_bac_annotree_hits.csv|grep -v 'bitscore' |cut -f3,4,8 -d',' > sel.csv
+
+awk -F ',' '{print ">" $1 "link" $2 "_Ref" "\n" $3}' sel.csv > sqr_annotree_hits.fasta
+cd-hit -i sqr_annotree_hits.fasta -o sqr_annotree_hits_09.fasta
+
+pullseq -i sqr_annotree_hits_09.fasta -m 311 > sqr_annotree_hits_09_length.fasta
+
+#reference
+cat sqr_annotree_hits_09_length.fasta sqr_4_tree.faa >sqr_4_tree_w_ref.fasta
+
+mafft --auto sqr_4_tree_w_ref.fasta > sqr_4_tree_w_ref_align.fasta
+
+muscle -in sqr_4_tree_w_ref_align.fasta -out sqr_4_tree_w_ref_align_refine.fasta
+
+trimal -keepheader -automated1 -in sqr_4_tree_w_ref_align_refine.fasta -out sqr_4_tree_w_ref_align_refine_trim.fasta
+
+fasttree -gamma -lg -boot 1000 <sqr_4_tree_w_ref_align_refine_trim.fasta> sqr_4_raw.fasttree
+
+run_treeshrink.py  -t sqr_4_raw.fasttree -m per-gene -o sqr_treeshrink_pergene -a sqr_4_tree_w_ref_align_refine_trim.fasta
+
+
+
+
+
+```
 
 ##sqr seqs from MAGs
 ```
