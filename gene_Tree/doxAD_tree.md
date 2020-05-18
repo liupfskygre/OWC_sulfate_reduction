@@ -28,6 +28,27 @@ pullseq -i ../sulfur_cycling_owc_hmmsearh/all_wetlands_bins_combined.genes.fasta
 
 ```
 
+#conserved residue domain search
+```
+#use cdd search batch mode
+rename header
+seqkit replace -p '(.+)$' -r '{kv}' -k doxD_match_header.txt doxD_4_tree.faa >  doxD_4_tree_cdd.faa
+
+Upload to CDD search
+
+#residue is not clear yet. 
+cat doxD_4_tree.faa UPI0002624EAE_w_CDD_pf04173.fasta> doxD_4_tree_UPI0002624EAE_w_CDD_pf04173.faa
+
+
+/Users/pengfeiliu/software/mafft-mac/mafftdir/bin/mafft  doxD_4_tree_UPI0002624EAE_w_CDD_pf04173.faa > doxD_4_tree_UPI0002624EAE_w_CDD_pf04173_mafft.fasta
+
+lcl|consensus
+#6R-28L-37G-75E-79G-85G-90R-108-116E-141D-148K
+
+#used
+75E-108W-141D
+```
+
 
 ##doxD, tree
 ```
