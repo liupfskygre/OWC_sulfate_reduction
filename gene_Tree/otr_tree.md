@@ -36,6 +36,16 @@ fasttree -gamma -lg -boot 1000 <otr_4_tree_w_ref_align_refine_trim.fasta> otr_4_
 run_treeshrink.py  -t otr_4_raw.fasttree -m per-gene -o otr_treeshrink_pergene -a otr_4_tree_w_ref_align_refine_trim.fasta
 ```
 
+## ort check conserved residue
+```
+cat otr_4_tree.faa otr_uniref-uniprot_04315_0.5.fasta uniprot_Q8E9W89_otr.fasta Q8E9W8.fasta> otr_4_tree_w_uniref.fasta
+
+/Users/pengfeiliu/software/mafft-mac/mafftdir/bin/mafft --anysymbol otr_4_tree_w_uniref.fasta >otr_4_tree_w_uniref_mafft.fasta
+
+
+```
+
+
 #otr
 ```
 cd /home/projects/Wetlands/sulfur_cycling_analysis/
