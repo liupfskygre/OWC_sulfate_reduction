@@ -35,6 +35,15 @@ run_treeshrink.py  -t phsA_4_raw.fasttree -m per-gene -o phsA_treeshrink_pergene
 
 ```
 
+#conserved residue checking
+```
+cat phsA_4_tree.faa uniprot_cluster_P37600.fasta > phsA_4_tree_uniprot_cluster_P37600.fasta
+
+/Users/pengfeiliu/software/mafft-mac/mafftdir/bin/mafft phsA_4_tree_uniprot_cluster_P37600.fasta >phsA_4_tree_uniprot_cluster_P37600_mafft.fasta
+
+#~700 sequences left
+```
+
 ## 
 
 ```
