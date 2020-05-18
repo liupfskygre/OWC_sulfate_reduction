@@ -46,6 +46,12 @@ fasttree -gamma -lg -boot 1000 <fccB_4_tree_w_ref_align_refine_trim.fasta> fccB_
 run_treeshrink.py  -t fccB_4_raw.fasttree -m per-gene -o fccB_treeshrink_pergene -a fccB_4_tree_w_ref_align_refine_trim.fasta
 ```
 
+#fccB residue checking, based on the uniref ref
+```
+cat fccB_4_tree.faa fccB_Q06530_Ref.fasta q06530_fccB_Ref.fasta > fccB_4_tree_w_uni_Ref.faa
+/Users/pengfeiliu/software/mafft-mac/mafftdir/bin/mafft fccB_4_tree_w_uni_Ref.faa > fccB_4_tree_w_uni_Ref_align.faa
+```
+
 
 ##tree of sqr
 ```
@@ -70,12 +76,18 @@ trimal -keepheader -automated1 -in sqr_4_tree_w_ref_align_refine.fasta -out sqr_
 fasttree -gamma -lg -boot 1000 <sqr_4_tree_w_ref_align_refine_trim.fasta> sqr_4_raw.fasttree
 
 run_treeshrink.py  -t sqr_4_raw.fasttree -m per-gene -o sqr_treeshrink_pergene -a sqr_4_tree_w_ref_align_refine_trim.fasta
-
-
-
-
-
 ```
+
+## sqr: recheck  the tree of based on eggnog reference, residue checking
+```
+sqr_4_tree_07SA8_ref_mafft_align.faa
+muscle -in sqr_4_tree_07SA8_ref_mafft_align.faa -out sqr_4_tree_07SA8_ref_mafft_align_refine.faa
+
+3C,
+after removing sequences without 3 conserved redidues, 382 left
+```
+
+
 
 ##sqr seqs from MAGs
 ```
