@@ -18,6 +18,20 @@
 506
 
 ```
+## get final gene list
+```
+grep '>' soxA_4_tree.faa |sed 's/>//g' - > soxA_4_tree_gene.txt 
+
+grep '>' soxB_4_tree.faa |sed 's/>//g' - > soxB_4_tree_gene.txt 
+
+grep '>' soxC_4_tree.faa |sed 's/>//g' - > soxC_4_tree_gene.txt 
+
+grep '>' soxY_4_tree.faa |sed 's/>//g' - > soxY_4_tree_gene.txt 
+
+
+
+```
+
 
 ## soxA tree
 ```
