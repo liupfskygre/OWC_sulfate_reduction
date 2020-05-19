@@ -42,6 +42,11 @@ cat phsA_4_tree.faa uniprot_cluster_P37600.fasta > phsA_4_tree_uniprot_cluster_P
 /Users/pengfeiliu/software/mafft-mac/mafftdir/bin/mafft phsA_4_tree_uniprot_cluster_P37600.fasta >phsA_4_tree_uniprot_cluster_P37600_mafft.fasta
 
 #~700 sequences left
+
+phsA_4_tree_final.fasta
+
+grep '>' phsA_4_tree_final.fasta |sed 's/>//g' - >phsA_4_tree_gene.txt 
+
 ```
 
 ## 
