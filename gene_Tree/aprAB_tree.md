@@ -75,3 +75,12 @@ fasttree -gamma -lg -boot 1000 <aprB_4_tree_w_ref_align_refine_trim.fasta> aprB_
 run_treeshrink.py  -t aprB_4_raw.fasttree -m per-gene -o aprB_treeshrink_pergene -a aprB_4_tree_w_ref_align_refine_trim.fasta
 
 ```
+
+## gene list, final 
+```
+cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/Data_analysis_sulfur_cycling/gene_tree/aprAB
+grep '>' aprA_4_tree.faa |sed 's/>//g' - > aprA_4_tree_gene.txt #188
+
+grep '>' aprB_4_tree.faa |sed 's/>//g' - > aprB_4_tree_gene.txt #228
+
+```
