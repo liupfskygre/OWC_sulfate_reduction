@@ -39,6 +39,9 @@ run_treeshrink.py  -t tsdA_4_raw.fasttree -m per-gene -o tsdA_treeshrink_pergene
 cat tsdA_D3RVD4.fasta tsdA_raw_alg.fasta tdsA_4_tree.faa> tdsA_4_tree_uniref.fasta
 /Users/pengfeiliu/software/mafft-mac/mafftdir/bin/mafft tdsA_4_tree_uniref.fasta > tdsA_4_tree_uniref_mafft.fasta
 #161 left
+
+grep '>' tdsA_4_tree_final.fasta |sed 's/>//g' - > tsdA_4_tree_gene.txt 
+
 ```
 
 ##
