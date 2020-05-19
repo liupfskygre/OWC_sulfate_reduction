@@ -29,10 +29,17 @@ trimal -keepheader -automated1 -in soeA_4_tree_w_ref_align_refine.fasta -out soe
 fasttree -gamma -lg -boot 1000 <soeA_4_tree_w_ref_align_refine_trim.fasta> soeA_4_raw.fasttree
 
 run_treeshrink.py  -t soeA_4_raw.fasttree -m per-gene -o soeA_treeshrink_pergene -a soeA_4_tree_w_ref_align_refine_trim.fasta
+```
 
+##
+```
+grep '>' soeA_4_tree.faa |sed 's/>//g' - > soeA_4_tree_gene.txt 
+214 
 
 
 ```
+
+
 
 
 ```
