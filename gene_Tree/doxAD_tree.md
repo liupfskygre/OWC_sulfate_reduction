@@ -36,6 +36,9 @@ seqkit replace -p '(.+)$' -r '{kv}' -k doxD_match_header.txt doxD_4_tree.faa >  
 
 Upload to CDD search
 
+#
+
+
 #residue is not clear yet. 
 cat doxD_4_tree.faa UPI0002624EAE_w_CDD_pf04173.fasta> doxD_4_tree_UPI0002624EAE_w_CDD_pf04173.faa
 
