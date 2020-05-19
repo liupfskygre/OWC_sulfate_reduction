@@ -60,6 +60,11 @@ grep -w -f sulfur_cycling_KO_gene.list MAGs1761_w_sulfur_Gene_annotation.txt > S
 
 ```
 
+## metaT first view
+``
+grep -w -f all_22_marker_gene_final.list  ../metaT_mapping/OWC2014-2018_DB3211_genes_TPM.txt > OWC2014-2018_DB3211_sulfur_markers_TPM.txt
+```
+
 
 ## checking with previous list
 ```
