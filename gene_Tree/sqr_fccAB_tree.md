@@ -50,6 +50,13 @@ run_treeshrink.py  -t fccB_4_raw.fasttree -m per-gene -o fccB_treeshrink_pergene
 ```
 cat fccB_4_tree.faa fccB_Q06530_Ref.fasta q06530_fccB_Ref.fasta > fccB_4_tree_w_uni_Ref.faa
 /Users/pengfeiliu/software/mafft-mac/mafftdir/bin/mafft fccB_4_tree_w_uni_Ref.faa > fccB_4_tree_w_uni_Ref_align.faa
+
+
+
+fccB_4_tree_w_uni_Ref_align_removed.faa
+
+grep '>' fccB_4_tree_final.fasta |sed 's/>//g' - > fccB_4_tree_gene.txt 
+
 ```
 
 
@@ -85,6 +92,12 @@ muscle -in sqr_4_tree_07SA8_ref_mafft_align.faa -out sqr_4_tree_07SA8_ref_mafft_
 
 3C,
 after removing sequences without 3 conserved redidues, 382 left
+
+sqr_4_tree_07SA8_ref_mafft_align_remove.faa
+sqr_4_tree_final.fasta
+
+grep '>' sqr_4_tree_final.fasta |sed 's/>//g' - > sqr_4_tree_gene.txt 
+
 ```
 
 
