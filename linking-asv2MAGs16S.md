@@ -1,6 +1,12 @@
 ## asv from owc 2018 linking to MAGs3211 genomes
 
 
+#update, link asv to sulfur cycling microorganisms
+```
+#id=0.99 
+MAGs_w_linking_ASV.txt #0.99
+
+```
 
 
 ## based on all combined file by Adrienne
