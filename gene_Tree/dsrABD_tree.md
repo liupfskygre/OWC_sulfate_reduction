@@ -78,7 +78,19 @@ mafft --auto --add dsrB_4_tree.faa --thread 6 Full_length_seq_dsrAB_ref_fixH.faa
 ```
 
 
+#final gene list
+```
+grep '>' dsrA_4_tree.faa |sed 's/>//g' - > dsrA_4_tree_gene.txt 
 
+grep '>' dsrB_4_tree.faa |sed 's/>//g' - > dsrB_4_tree_gene.txt 
+
+grep '>' dsrD_4_tree.faa |sed 's/>//g' - > dsrD_4_tree_gene.txt 
+
+     385 dsrA_4_tree_gene.txt
+     353 dsrB_4_tree_gene.txt
+      91 dsrD_4_tree_gene.txt
+      
+```
 
 
 
