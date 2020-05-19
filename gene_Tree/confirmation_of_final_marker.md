@@ -23,20 +23,19 @@ cat all_22_marker_gene_final.list |sort|uniq|wc -l
 
 ##bin list
 ```
+/home/projects/Wetlands/sulfur_cycling_analysis/marker_gene_confirmation_final
+
 grep -w -f all_22_marker_gene_final.list  /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/all_bins_combined_annotations_3211db.tsv > all_22_marker_gene_final_dram_annotation.tsv
 
 grep -w -f doxX_D_4_tree_final.txt  /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/all_bins_combined_annotations_3211db.tsv > all_22_marker_gene_final_dram_annotation2.tsv
 
-cat all_22_marker_gene_final_dram_annotation.tsv all_22_marker_gene_final_dram_annotation2.tsv > all_22_marker_gene_final_DRAM_annotation.tsv
+cat all_22_marker_gene_final_dram_annotation.tsv all_22_marker_gene_final_dram_annotation2.tsv > all_22_marker_gene_final_DRAM_annotation.tsv 
+#==> DRAM annotation of functional genes 
+
 
 cat all_22_marker_gene_final_DRAM_annotation.tsv |cut -f2 -d$'\t' |sort|uniq > all_22_marker_gene_final_MAGs.tsv
 # 1761 all_22_marker_gene_final_MAGs.tsv, 1761 MAGs
 
-
-
-grep -w -f all_22_marker_gene_final_MAGs.tsv /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/all_bins_combined_annotations_3211db.tsv > MAGs_w_sulfur_Gene_annotation.txt
-
-/home/projects/Wetlands/sulfur_cycling_analysis/marker_gene_confirmation_final
 
 
 for file in $(cat all_22_marker_gene_final_MAGs.tsv)
@@ -47,11 +46,19 @@ cat /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19
 printf "\n" >>MAGs1761_w_sulfur_Gene_annotation.txt
 done
 
-
+#==> DRAM annotation of 1762 MAGs with sulfur cycling genes 
 
 ``` 
 
+#functional key genes screen is very conservative, 
+# KEGG list of all possible genes for sulfur cycling contains more, make a list 
+#mark those from consistent with homologue search, also check gene clusters if possible
 
+```
+
+grep -w -f sulfur_cycling_KO_gene.list MAGs1761_w_sulfur_Gene_annotation.txt > Sulfur_Gene_annotation_DRAM_KO.txt
+
+```
 
 
 ## checking with previous list
