@@ -5,6 +5,16 @@
 ../pfam_KO_to_seqs_OWC3211.sh ttrA na_na K08357 na_na 612
 
 ```
+##
+```
+grep '>' ttrA_4_tree_w_ref_align_refine_removed.fasta> removed.txt
+grep -v 'Ref' removed.txt |sed 's/>//g' - > ttrA_4_tree_gene.txt 
+
+# 49
+
+```
+
+
 
 ## ttrA tree
 ```
