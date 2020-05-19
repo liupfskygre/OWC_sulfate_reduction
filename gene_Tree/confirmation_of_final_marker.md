@@ -36,6 +36,16 @@ cat all_22_marker_gene_final_DRAM_annotation.tsv |cut -f2 -d$'\t' |sort|uniq > a
 
 grep -w -f all_22_marker_gene_final_MAGs.tsv /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/all_bins_combined_annotations_3211db.tsv > MAGs_w_sulfur_Gene_annotation.txt
 
+/home/projects/Wetlands/sulfur_cycling_analysis/marker_gene_confirmation_final
+
+
+for file in $(cat all_22_marker_gene_final_MAGs.tsv)
+do
+echo /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/"${file}"_DRAMOUT
+
+cat /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/"${file}"_DRAMOUT/annotations.tsv >> MAGs1761_w_sulfur_Gene_annotation.txt
+printf "\n" >>MAGs1761_w_sulfur_Gene_annotation.txt
+done
 
 
 
