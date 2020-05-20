@@ -11,7 +11,16 @@ wc -l all_22_marker_gene_final.list
 cat all_22_marker_gene_final.list |sort|uniq|wc -l
     5167 #there is one dsrAB gene fusion, others are great
 
+#with gene names
 
+#upload to zenith
+sed -i -e 's/\.txt//g' all_22_marker_gene_final_w_genename.list
+
+
+#merge annotation with gene names
+#/home/projects/Wetlands/sulfur_cycling_analysis/marker_gene_confirmation_final
+ 
+python ../metaT_mapping/joint_htseq_output.py all_22_marker_gene_final_w_genename.list all_22_marker_gene_final_DRAM_annotation.tsv   >all_22_marker_gene_final_DRAM_annotation_w_genename.tsv 
 ```
 
 ## 
@@ -21,7 +30,7 @@ cat all_22_marker_gene_final.list |sort|uniq|wc -l
 
 ```
 
-##bin list
+## bin list and marker genes with annotation
 ```
 /home/projects/Wetlands/sulfur_cycling_analysis/marker_gene_confirmation_final
 
@@ -51,19 +60,20 @@ done
 ``` 
 
 #functional key genes screen is very conservative, 
-# KEGG list of all possible genes for sulfur cycling contains more, make a list 
+#KEGG list of all possible genes for sulfur cycling contains more, make a list 
 #mark those from consistent with homologue search, also check gene clusters if possible
 
 ```
-
 grep -w -f sulfur_cycling_KO_gene.list MAGs1761_w_sulfur_Gene_annotation.txt > Sulfur_Gene_annotation_DRAM_KO.txt
-
 ```
 
 ## metaT first view
-``
+```
 grep -w -f all_22_marker_gene_final.list  ../metaT_mapping/OWC2014-2018_DB3211_genes_TPM.txt > OWC2014-2018_DB3211_sulfur_markers_TPM.txt
 ```
+
+
+
 
 
 ## checking with previous list
