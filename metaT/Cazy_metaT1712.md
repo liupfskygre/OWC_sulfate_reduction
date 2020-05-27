@@ -42,7 +42,14 @@ DRAM.py distill -i zixbacteria_annotation_Fix.tsv -o zixbacteria
 
 get cazy_hits from 1712 MAGs
 ```
+#gtdb_and_checkm_1712MAGs_bac.list
 
+grep -w -f gtdb_and_checkm_1712MAGs_bac.list all_bins_combined_annotations_3211db.tsv > combined_annotations_1712MAGs_bac.tsv
+
+awk -F'\t' '$36!=""' combined_annotations_1712MAGs_bac.tsv > tmp.tsv
+head -1 all_bins_combined_annotations_3211db.tsv > header
+
+cat header tmp.tsv > combined_annotations_1712MAGs_bac_cazy.tsv 
 
 
 ```
