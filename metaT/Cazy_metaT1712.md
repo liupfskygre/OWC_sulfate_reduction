@@ -41,11 +41,18 @@ cat header combined_annotations_1712MAGs_bac_fix.tsv >combined_annotations_1712M
 ```
 
 
-#get metabolism_summary
+#get metabolism_summary, to get cazy hits curation file
 ```
 source /opt/Miniconda2/miniconda2/bin/activate DRAM
 
 DRAM.py distill -i combined_annotations_1712MAGs_bac.tsv -o 1712MAGs_bac
+```
+
+## cazy-hits category curation file
+```
+DRAM_CAZY_subsystem.txt
+
+
 ```
 
 # merge gene--cazy category--tpm together
@@ -67,3 +74,5 @@ sed -i -e 's/ /\t/1' combined_annotations_1712MAGs_bac_CAZY_simple.tsv
 #cohesin and SLH, with $3==None, fix none cazy gene-id 
 awk -F'\t' '$3!="None"' combined_annotations_1712MAGs_bac_CAZY_simple.tsv >combined_annotations_1712MAGs_bac_CAZY_SF.tsv
 ```
+
+
