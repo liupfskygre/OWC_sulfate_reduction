@@ -21,4 +21,8 @@ grep -w -f H2ase_KO.txt ../CAZY_metaT/combined_annotations_1712MAGs_bac.tsv|cut 
 grep -w -f 1712MAGs_bac_H2_cycling_gene.txt /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/OWC2014-2018_DB3211_genes_TPM.txt > OWC2014-2018_Bac1712_H2_cycle_TPM.txt
 
 
+#add this three into vhoACT
+K14068
+K14069
+K14070
 ```
