@@ -25,12 +25,32 @@ cat header OWC2014-2018_Bac1712_N_cycle_TPM.txt > OWC2014-2018_Bac1712_N_cycle_T
 
 ```
 
+#1761 genomes from w sulfur cycling genes
+```
+fix annotation
+../marker_gene_confirmation_final/MAGs1761_w_sulfur_Gene_annotation.txt
+head -1 MAGs1761_w_sulfur_Gene_annotation.txt > header.txt
+grep -v 'fasta' MAGs1761_w_sulfur_Gene_annotation.txt  > tpm.txt 
+
+#5786088 MAGs1761_w_sulfur_Gene_annotation.txt
+
+
+cat header.txt tpm.txt > MAGs1761_w_sulfur_Gene_annotation_fix.txt
+# 5784328 MAGs1761_w_sulfur_Gene_annotation_fix.txt ##1760. 
+
+sed -i -e 's/\tfasta/Gene_ID\tfasta/1' MAGs1761_w_sulfur_Gene_annotation_fix.txt
+rm tpm.txt
+```
+
 #summary TPM based on tax and functional categories
 ```
 #add tax info to TPM values
-R
 
-TPM <- read.delim("OWC2014-2018_Bac1712_N_cycle_TPM_h.txt",header=T, check.names = FALSE)
+
+python /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/joint_htseq_output.py OWC2014-2018_Bac1712_N_cycle_TPM_h.txt ../marker_gene_confirmation_final/MAGs1761_w_sulfur_Gene_annotation_fix.txt >OWC2014-2018_Bac1712_N_cycle_TPM_w_annotation.txt
+
+awk -F '\t' '{print NF; exit}' OWC2014-2018_Bac1712_N_cycle_TPM_w_annotation.txt
+
 
 
 ```
