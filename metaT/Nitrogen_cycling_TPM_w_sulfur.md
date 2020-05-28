@@ -27,5 +27,10 @@ cat header OWC2014-2018_Bac1712_N_cycle_TPM.txt > OWC2014-2018_Bac1712_N_cycle_T
 
 #summary TPM based on tax and functional categories
 ```
+#add tax info to TPM values
+R
+
+TPM <- read.delim("OWC2014-2018_Bac1712_N_cycle_TPM_h.txt",header=T, check.names = FALSE)
+
 
 ```
