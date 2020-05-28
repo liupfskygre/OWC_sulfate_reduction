@@ -11,4 +11,7 @@ grep -w -f /home/projects/Wetlands/sulfur_cycling_analysis/marker_gene_confirmat
 
 # add gene info and tax info to the end of file
 
+log fail to stored!!!!
+
+==>Bacteria_Sulfure_genes_TPM.txt 
 ```
