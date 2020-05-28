@@ -64,6 +64,6 @@ cat combined_annotations_1712MAGs_bac_cazy.tsv| cut -f1,2,22 -d$'\t' > combined_
 
 sed -i -e 's/ /\t/1' combined_annotations_1712MAGs_bac_CAZY_simple.tsv
 
-#cohesin and SLH, with $3==None 
+#cohesin and SLH, with $3==None, fix none cazy gene-id 
 awk -F'\t' '$3!="None"' combined_annotations_1712MAGs_bac_CAZY_simple.tsv >combined_annotations_1712MAGs_bac_CAZY_SF.tsv
 ```
