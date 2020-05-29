@@ -67,7 +67,7 @@ sed -i -e '1 i\Gene_ID\tfasta\tcazy_hits\tcazy_description\tbin_taxonomy' combin
 
 #cohesin and SLH, with $3==None, fix none cazy gene-id 
 awk -F '\t' '$3!="None"' combined_annotations_1712MAGs_bac_CAZY_simple.tsv >combined_annotations_1712MAGs_bac_CAZY_SF.tsv
-``
+```
 
 # merge gene--cazy category--tpm together
 ```
@@ -85,6 +85,17 @@ python /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/joint_htseq
 
 ```
 
+#add cazy subsystem to cazy tpm with annotaiton
+```
+TPM_Gene <- read.delim("OWC2014-2018_Bac1712_CAZY_cycle_TPM_w_annotation.txt",header=T, check.names = FALSE)
+Subsystem <- read.delim("DRAM_CAZY_subsystem.txt",header=T, check.names = FALSE) 
+
+TPM_w_sub <- merge(TPM_Gene,Subsystem,by.x="cazy_hits",by.y="gene_id", all.x=T, all.y=F, sort=F )
+
+write.table(TPM_w_sub, "OWC2014-2018_Bac1712_CAZY_cycle_TPM_w_ann_w_sub.txt",sep ='\t', quote=F, row.names=F)
+
+awk -F '\t' '{print NF; exit}' OWC2014-2018_Bac1712_CAZY_cycle_TPM_w_ann_w_sub.txt
+```
 `
 
 
