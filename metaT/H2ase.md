@@ -22,7 +22,22 @@ grep -w -f 1712MAGs_bac_H2_cycling_gene.txt /home/projects/Wetlands/sulfur_cycli
 
 
 #add this three into vhoACT
-K14068
-K14069
-K14070
+K14068, K14069, K14070 # all zero
+
+
+##fix header
+head -1 /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/OWC2014-2018_DB3211_genes_TPM.txt> header
+
+cat header OWC2014-2018_Bac1712_H2_cycle_TPM.txt > OWC2014-2018_Bac1712_H2_cycle_TPM_h.txt
+
+
+##add tax info to TPM values
+
+
+python /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/joint_htseq_output.py OWC2014-2018_Bac1712_H2_cycle_TPM_h.txt ../marker_gene_confirmation_final/MAGs1761_w_sulfur_Gene_annotation_fix.txt > OWC2014-2018_Bac1712_H2ase_cycle_TPM_w_annotation.txt
+
+awk -F '\t' '{print NF; exit}' OWC2014-2018_Bac1712_H2ase_cycle_TPM_w_annotation.txt
+
+cat  OWC2014-2018_Bac1712_H2ase_cycle_TPM_w_annotation.txt|cut -f1-128,129,153 -d$'\t'>OWC2014-2018_Bac1712_H2ase_cycle_TPM_w_tax.txt
+
 ```
