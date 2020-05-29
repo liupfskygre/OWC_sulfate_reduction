@@ -79,7 +79,9 @@ cat combined_annotations_1712MAGs_bac_cazy.tsv | grep -v 'fasta' |cut -f1 -d$'\t
 
 
 #
-#sed -i -e '1 i\Gene_ID' combined_annotations_1712MAGs_bac_cazy.list 
+#
+
+sed -i -e '1 i\Gene_ID' combined_annotations_1712MAGs_bac_cazy.list 
 
 python /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/joint_htseq_output.py combined_annotations_1712MAGs_bac_CAZY_SF.tsv /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/OWC2014-2018_DB3211_genes_TPM.txt > OWC2014-2018_Bac1712_CAZY_cycle_TPM_w_annotation.txt
 
@@ -96,6 +98,36 @@ write.table(TPM_w_sub, "OWC2014-2018_Bac1712_CAZY_cycle_TPM_w_ann_w_sub.txt",sep
 
 awk -F '\t' '{print NF; exit}' OWC2014-2018_Bac1712_CAZY_cycle_TPM_w_ann_w_sub.txt
 ```
-`
 
+#add Polyphenolics Cleavage 
+```
+Polyphenolics.KO.list
+K05810
+K05809
+K00422
+
+grep -w -f Polyphenolics.KO.list combined_annotations_1712MAGs_bac.tsv >Polyphenolics_KO_gene_annotation.txt
+
+cat header Polyphenolics_KO_gene_annotation.txt >Polyphenolics_KO_gene_anno_fix.txt
+
+sed -i -e 's/\tfasta/Gene_ID\tfasta/1' Polyphenolics_KO_gene_anno_fix.txt
+#1264
+
+
+python /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/joint_htseq_output.py Polyphenolics_KO_gene_anno_fix.txt /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/OWC2014-2018_DB3211_genes_TPM.txt > Polyphenolics_TPM_w_annotation.txt
+```
+
+
+# add DRAM-liquor subsystem to TPM,
+
+1) flat the DRAM_cazy heatmap category, based on NAR May-2020 resubmissiom
+```
+pengfeiliu /Users/pengfeiliu/A_Wrighton_lab/AMG_projects/AMG_progress $ sed -i -e 's/, /\n\t\t/g' CaZy_gene_link_flat_May2020NAR.txt
+
+#covered 219 genes
+CaZy_gene_link_flat_May2020NAR.txt
+
+
+
+```
 
