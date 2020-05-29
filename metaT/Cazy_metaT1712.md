@@ -117,6 +117,20 @@ sed -i -e 's/\tfasta/Gene_ID\tfasta/1' Polyphenolics_KO_gene_anno_fix.txt
 python /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/joint_htseq_output.py Polyphenolics_KO_gene_anno_fix.txt /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/OWC2014-2018_DB3211_genes_TPM.txt > Polyphenolics_TPM_w_annotation.txt
 ```
 
+##rbind KO and cazy_hits kept hits w TPM valuse
+```
+#column kept: K0/Cazy_hits, TPM 1-127, GeneID, fasta, Tax
+
+cat OWC2014-2018_Bac1712_CAZY_cycle_TPM_w_ann_w_sub.txt|  cut -f1-3,5,6-132-d$'\t' > OWC2014-2018_Bac1712_CAZY_cycle_TPM_unify.txt
+
+Polyphenolics_TPM_w_annotation.txt
+awk -F '\t' '{print $8"\t"$0}' Polyphenolics_TPM_w_annotation.txt |cut -f1-3,27,30-156 -d$'\t' > Polyphenolics_TPM_w_annotation_unify.txt
+sed -i -e '1d' Polyphenolics_TPM_w_annotation_unify.txt
+
+cat OWC2014-2018_Bac1712_CAZY_cycle_TPM_unify.txt Polyphenolics_TPM_w_annotation_unify.txt > Cazy_Polyphenolics_TPM_w_annotation_unify.txt
+```
+
+
 
 # add DRAM-liquor subsystem to TPM,
 
@@ -127,7 +141,17 @@ pengfeiliu /Users/pengfeiliu/A_Wrighton_lab/AMG_projects/AMG_progress $ sed -i -
 #covered 219 genes
 CaZy_gene_link_flat_May2020NAR.txt
 
+Cazy_Polyphenolics_TPM_w_annotation_unify.txt
 
+>>R
+TPM_Gene <- read.delim("Cazy_Polyphenolics_TPM_w_annotation_unify.txt",header=T, check.names = FALSE)
+Subsystem <- read.delim("CaZy_gene_link_flat_May2020NAR.txt",header=T, check.names = FALSE) 
+
+TPM_w_sub <- merge(Subsystem,TPM_Gene,by.x="function_ids",by.y="cazy_hits", all.x=T, all.y=F, sort=F )
+
+write.table(TPM_w_sub, "OWC2014-2018_Bac1712_CAZY_Polyphenoic.txt",sep ='\t', quote=F, row.names=F)
+
+#tested with duplicated values, function_ids will repeat, which means some of GH will assign several functions
 
 ```
 
