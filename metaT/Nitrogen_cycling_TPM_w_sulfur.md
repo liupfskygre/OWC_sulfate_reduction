@@ -51,6 +51,6 @@ python /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/joint_htseq
 
 awk -F '\t' '{print NF; exit}' OWC2014-2018_Bac1712_N_cycle_TPM_w_annotation.txt
 
-cat  OWC2014-2018_Bac1712_N_cycle_TPM_w_annotation.txt|cut -f1-128,129,153 -d$'\t'>OWC2014-2018_Bac1712_N_cycle_TPM_w_tax.txt
+cat  OWC2014-2018_Bac1712_N_cycle_TPM_w_annotation.txt|cut -f1-128,129,135,153 -d$'\t'>OWC2014-2018_Bac1712_N_cycle_TPM_w_tax.txt
 
 ```
