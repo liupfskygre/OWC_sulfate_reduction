@@ -23,7 +23,32 @@ cut -f8 -d$'\t' test1.txt|more
 cut -f8 -d$'\t'  all_3211_genes_DRAM_TIGR04266.HMM_domtblout.txt|more 
 ```
 
+## cat all sequences together
+```{r}
+for file in *.ID
+do 
+sed -i -e 's/\t"${file}"//g' ${file}
 
+#sed -i -e "s/$/\t"${file}"/g" ${file}
+
+done
+
+cat *.ID > Hydrogenase_mdh_DB3211_hitsID.txt
+all_3211_genes_DRAM_
+.hmm_seqs.ID
+.HMM_seqs.ID
+
+sed -i -e 's/all_3211_genes_DRAM_//g' Hydrogenase_mdh_DB3211_hitsID.txt
+sed -i -e 's/\.hmm_seqs.ID//g' Hydrogenase_mdh_DB3211_hitsID.txt
+sed -i -e 's/\.HMM_seqs.ID//g' Hydrogenase_mdh_DB3211_hitsID.txt
+
+sed -i '1 i\Gene_ID\tGene_type' Hydrogenase_mdh_DB3211_hitsID.txt
+
+python /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/joint_htseq_output.py Hydrogenase_mdh_DB3211_hitsID.txt /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/OWC2014-2018_DB3211_genes_TPM.txt >Hydrogenase_mdh_DB3211_TPM.txt
+
+python /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/joint_htseq_output.py Hydrogenase_mdh_DB3211_TPM.txt ../marker_gene_confirmation_final/MAGs1761_w_sulfur_Gene_annotation_fix.txt > OWC2014-2018_Bac1712_H2ase_mdh_TPM_w_annotation.txt
+
+```
 
 
 ## KO list of hydroogenase
