@@ -3,6 +3,9 @@
 
 ## update note
 ```
+#9-June-2020
+../hmmsearch_get_seqs_w_proteins.sh  #typo err, cutoof1 ==>cutoff1; cutoof2 ==>cutoff2
+
 #16-May-2020
 the metafile containing TIGRFAM was wrong, part of TIGRFAM != gene names during the generation of the file
 
