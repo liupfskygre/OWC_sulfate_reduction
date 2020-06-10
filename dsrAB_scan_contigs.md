@@ -109,7 +109,7 @@ unset IFS
 #call /home/projects/Wetlands/2018_sampling/hmmsearch_get_seqs_w_proteins.sh [sample_file1.txt] [hmmprofile_file2.txt] [threads]
 ./hmmsearch_get_seqs_w_proteins_test.sh file1.txt file2.txt 1
 
-#/home/projects/Wetlands/sulfur_cycling_analysis/hmmsearch_hits
+/home/projects/Wetlands/sulfur_cycling_analysis/hmmsearch_hits_assembly
 
 ../hmmsearch_get_seqs_w_proteins.sh ../file1.txt ../file2.txt 6 &>hmmsearch.log
 
