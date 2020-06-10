@@ -1,5 +1,31 @@
 ## expression level of H2ase in 1712 MAGs 
 
+## custome hmm search of H2ase of within 3211 MAGs db
+```
+hmm profile collection with cutoff 
+
+# db, dramout db
+
+#profile metadata text: include profile name, profile GA, TC, filtering length
+
+#for H2ase, only cutoff used from Zhou and Annathramann et al., METABOLICs 
+# file include sample name and all path to protein and nt file
+
+/home/projects/Wetlands/sulfur_cycling_analysis/H2ase_hmm_db_3211
+
+../hmmsearch_get_seqs_w_proteins.sh sample_info.txt hmm_meta_file.txt 2 &>hmmsearch.log
+#failed cutoff filtering, typo error
+
+
+#awk -v v1="${Cutoof1}" -v v2="${Cutoof2}" -v v3="${length}" -F '\t' '$8>v1 && $14>v2 && $3>v3' all_3211_genes_DRAM_TIGR04266.HMM_domtblout.txt|grep -v '^#' > test1.txt #cutoff1, cutoff2
+
+cut -f8 -d$'\t' test1.txt|more
+cut -f8 -d$'\t'  all_3211_genes_DRAM_TIGR04266.HMM_domtblout.txt|more 
+```
+
+
+
+
 ## KO list of hydroogenase
 ```
 cd /home/projects/Wetlands/sulfur_cycling_analysis
