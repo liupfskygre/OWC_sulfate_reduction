@@ -1,5 +1,29 @@
 ## asv from owc 2018 linking to MAGs3211 genomes
 
+##update, clean 16S ASV to MAGs link, sulfur cycling MAGs
+```
+#ASV classification general matched MAGs
+ASV_sulfur_cycling_bac_w_feature_ReAba_clean1.xlsx
+
+#based on the bin list, checking the activity of all genes related sulfur cycling of them
+
+cd /home/projects/Wetlands/sulfur_cycling_analysis/rRNA16S_DB3211_ASV
+nano ASV_MAGS_sulfur_cycling.list
+
+#get all type of sulfur cycling genes within these MAGs
+grep -w -f  ASV_MAGS_sulfur_cycling.list /home/projects/Wetlands/sulfur_cycling_analysis/marker_gene_confirmation_final/all_22_marker_gene_final_DRAM_annotation_w_genename.tsv > ASV_MAGS_sulfur_cycling_DRAM_annotation_w_genename.tsv 
+
+cat /home/projects/Wetlands/sulfur_cycling_analysis/marker_gene_confirmation_final/header.txt ASV_MAGS_sulfur_cycling_DRAM_annotation_w_genename.tsv  >ASV_MAGS_sulfur_cycling_DRAM_annotation_w_genename_head.tsv 
+
+sed -i -e 's/fasta/Gene_ID\tfasta/g' ASV_MAGS_sulfur_cycling_DRAM_annotation_w_genename_head.tsv 
+
+sed -i -e 's/\tGene_ID/Gene_ID/g' ASV_MAGS_sulfur_cycling_DRAM_annotation_w_genename_head.tsv 
+
+
+python /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/joint_htseq_output.py ASV_MAGS_sulfur_cycling_DRAM_annotation_w_genename_head.tsv /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/OWC2014-2018_DB3211_genes_TPM.txt > ASV_MAGS_sulfur_cycling_gene_annotation_TPM.tsv 
+```
+
+==>ASV_MAGS_sulfur_cycling_gene_annotation_TPM.tsv  #sulfur cycling genes with TPM in MAGs with a ASV link
 
 #update, link asv to sulfur cycling microorganisms
 ```
