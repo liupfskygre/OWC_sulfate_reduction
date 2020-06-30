@@ -10,6 +10,55 @@ sulfur_cycling_biogeoMarker_genes_hmmsearch.txt #16-May-2020the metafile contain
 
 needs to redo if needed
 ```
+#redo prodigal annotation of MetaG16 @2500bp
+```
+cd 
+#
+pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/Aug_M1_C1_D1_reads_and_megahit_full_assembly/Aug_M1_C1_D1_megahit_assembly/Aug_M1_C1_D1_megahit.contigs.fa >AugM1C1D1B.fa
+
+pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/Aug_M1_C1_D2_reads_and_megahit_full_assembly/Aug_M1_C1_D2_megahit_assembly/Aug_M1_C1_D2_megahit.contigs.fa >AugM1C1D2B.fa
+
+pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/Aug_M1_C1_D3_reads_and_megahit_full_assembly/Aug_M1_C1_D3_megahit_assembly/Aug_M1_C1_D3_megahit.contigs.fa > AugM1C1D3B.fa
+
+pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/Aug_M1_C1_D4_reads_and_megahit_full_assembly/Aug_M1_C1_D4_megahit_assembly/Aug_M1_C1_D4_megahit.contigs.fa >AugM1C1D4B.fa
+
+pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/Aug_M1_C1_D5_reads_and_megahit_full_assembly/Aug_M1_C1_D5_megahit_assembly/Aug_M1_C1_D5_megahit.contigs.fa >AugM1C1D5B.fa
+
+pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/Aug_M2_C1_D1_reads_and_megahit_full_assembly/Aug_M2_C1_D1_megahit_assembly/Aug_M2_C1_D1_megahit.contigs.fa >AugM2C1D1C.fa
+
+
+pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/Aug_M2_C1_D5_reads_and_megahit_full_assembly/Aug_M2_C1_D5_megahit_assembly/Aug_M2_C1_D5_megahit.contigs.fa > AugM2C1D5C.fa
+
+
+pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/Aug_N3_C1_D1_reads_and_megahit_full_assembly/Aug_N3_C1_D1_megahit_assembly/Aug_N3_C1_D1_megahit.contigs.fa > AugN3C1D1A.fa
+
+
+pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/Aug_N3_C1_D5_reads_and_megahit_full_assembly/Aug_N3_C1_D5_megahit_assembly/Aug_N3_C1_D5_megahit.contigs.fa >AugN3C1D5A.fa
+
+
+pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/Aug_OW2_C1_D1_reads_and_megahit_full_assembly/Aug_OW2_C1_D1_megahit_assembly/Aug_OW2_C1_D1_megahit.contigs.fa>AugOW2C1D1C.fa
+
+pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/Aug_OW2_C1_D5_reads_and_megahit_full_assembly/Aug_OW2_C1_D5_megahit_assembly/Aug_OW2_C1_D5_megahit.contigs.fa>AugOW2C1D5C.fa
+
+pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/Aug_T1_C1_D1_reads_and_megahit_full_assembly/Aug_T1_C1_D1_megahit_assembly/Aug_T1_C1_D1_megahit.contigs.fa>AugT1C1D1A.fa
+
+
+pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/Aug_T1_C1_D5_reads_and_megahit_full_assembly/Aug_T1_C1_D5_megahit_assembly/Aug_T1_C1_D5_megahit.contigs.fa>AugT1C1D5A.fa
+
+
+
+
+pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/May_M1_C1_D1_reads_and_megahit_full_assembly/May_M1_C1_D1_megahit_assembly/May_M1_C1_D1_megahit.contigs.fa >MayM1C1D1A.fa
+
+pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/May_M1_C1_D3_reads_and_megahit_full_assembly/May_M1_C1_D3_megahit_assembly/May_M1_C1_D3_megahit.contigs.fa> MayM1C1D3A.fa
+
+
+pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/May_M1_C1_D6_reads_and_megahit_full_assembly/May_M1_C1_D6_megahit_assembly/May_M1_C1_D6_megahit.contigs.fa >MayM1C1D6A.fa
+
+
+
+```
+
 
 ## redo all scan with marker genes, 2020-June-30
 ```
