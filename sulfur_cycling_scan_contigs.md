@@ -46,8 +46,6 @@ pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/Aug_T
 pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/Aug_T1_C1_D5_reads_and_megahit_full_assembly/Aug_T1_C1_D5_megahit_assembly/Aug_T1_C1_D5_megahit.contigs.fa>AugT1C1D5A.fa
 
 
-
-
 pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/May_M1_C1_D1_reads_and_megahit_full_assembly/May_M1_C1_D1_megahit_assembly/May_M1_C1_D1_megahit.contigs.fa >MayM1C1D1A.fa
 
 pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/May_M1_C1_D3_reads_and_megahit_full_assembly/May_M1_C1_D3_megahit_assembly/May_M1_C1_D3_megahit.contigs.fa> MayM1C1D3A.fa
@@ -55,8 +53,13 @@ pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/May_M
 
 pullseq -m 2500 -i /home/projects/Wetlands/2018_sampling/OWC_metaG_megahit/May_M1_C1_D6_reads_and_megahit_full_assembly/May_M1_C1_D6_megahit_assembly/May_M1_C1_D6_megahit.contigs.fa >MayM1C1D6A.fa
 
-
-
+##
+for file in $(cat metaG16_list.txt)
+do 
+prodigal -p meta -q -i ${file}.fa -a ${file}_prodigal.faa -d ${file}_prodigal.fna
+sed -i -e 's/ \+/#/g' ${file}_prodigal.faa
+sed -i -e 's/ \+/#/g' ${file}_prodigal.fna
+done
 ```
 
 
