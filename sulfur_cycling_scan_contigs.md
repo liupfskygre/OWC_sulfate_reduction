@@ -1,15 +1,38 @@
-#use dsrAB hmmprofile to search contigs profile
+#use marker gene hmmprofile to search contigs profile
 
 
 ## update note
 ```
-#9-June-2020
+#30-June-2020, correct script and the metafile 
 ../hmmsearch_get_seqs_w_proteins.sh  #typo err, cutoof1 ==>cutoff1; cutoof2 ==>cutoff2
 
-#16-May-2020
-the metafile containing TIGRFAM was wrong, part of TIGRFAM != gene names during the generation of the file
+sulfur_cycling_biogeoMarker_genes_hmmsearch.txt #16-May-2020the metafile containing TIGRFAM was wrong, part of TIGRFAM != gene names during the generation of the file
 
 needs to redo if needed
+```
+
+## redo all scan with marker genes, 2020-June-30
+```
+#all data analysis
+cd /home/projects/Wetlands/sulfur_cycling_analysis
+
+cd /home/projects/Wetlands/sulfur_cycling_analysis/hmmsearch_hits_assembly
+
+## OWC_MetaG_contigs_fix_header_Apr2020.txt ====> all prodigal file were removed!!!
+
+nano OWC_all_MetaG_contigs.txt
+
+
+
+#call /home/projects/Wetlands/2018_sampling/hmmsearch_get_seqs_w_proteins.sh [sample_file1.txt] [hmmprofile_file2.txt] [threads]
+screen -r 1core
+../hmmsearch_get_seqs_w_proteins.sh ../OWC_all_MetaG_contigs.txt ../sulfur_cycling_biogeoMarker_genes_hmmsearch.txt 4 
+
+
+all_3211_genes_DRAM	/home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM_aa.faa	/home/projects/Wetlands/sulfur_cycling_analysis/all_3211_genes_DRAM.fna
+
+#all prodigal files deleted???, need to re-run the prodigal step
+
 ```
 
 
@@ -124,7 +147,7 @@ unset IFS
 #kofam is relative easy, will give a
 
 
-##
+## rps3 archive log
 ```
 fix sequences name header
 
