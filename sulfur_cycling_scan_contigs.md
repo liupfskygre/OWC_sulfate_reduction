@@ -62,8 +62,28 @@ sed -i -e 's/ \+/#/g' ${file}_prodigal.fna
 done
 ```
 
+##transfer to MAC and use MATABOLIC pipline to hmmsearch biogeochemical genes
+```
+for file in $(cat /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/metaG16_prodigal.txt) 
+do 
+echo $file
+#mkdir /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/${file}_contigs
+#mv ${file} /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/${file}_contigs
 
-## redo all scan with marker genes, 2020-June-30
+#METBOLIC requeire sequences names no '#', otherwise error
+sed -i -e 's/#/ /g' /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/${file}_contigs/$file
+perl METABOLIC-G.pl -kofam-db small -in /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/${file}_contigs -o /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/${file}_contigs
+done
+
+```
+perl METABOLIC-G.pl -in /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/AugM1C1D1B_prodigal -o /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/AugM1C1D1B_prodigal -kofam-db small
+
+sed -i -e 's/#/ /g' AugM1C1D1B_prodigal.faa
+
+
+
+
+## redo all scan with marker genes, 2020-June-30；not run
 ```
 #all data analysis
 cd /home/projects/Wetlands/sulfur_cycling_analysis
