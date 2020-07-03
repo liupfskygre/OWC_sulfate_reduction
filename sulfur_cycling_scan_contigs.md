@@ -71,15 +71,29 @@ echo $file
 #mv ${file} /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/${file}_contigs
 
 #METBOLIC requeire sequences names no '#', otherwise error
+
 sed -i -e 's/#/ /g' /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/${file}_contigs/$file
 perl METABOLIC-G.pl -kofam-db small -in /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/${file}_contigs -o /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/${file}_contigs
 done
 
 ```
+```
 perl METABOLIC-G.pl -in /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/AugM1C1D1B_prodigal -o /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/AugM1C1D1B_prodigal -kofam-db small
 
 sed -i -e 's/#/ /g' AugM1C1D1B_prodigal.faa
+```
+#build raw gene database of each functional 
+```
+#1, get gene names from hmmsearch hits 
+.collection.faa
+>AugM1C1D1B_prodigal~~k121_10370813_4
 
+#for nt sequecnes, fix gene names first ==> add sample names to header and match METABOLIC style
+
+
+#pullseq and remove duplicates sequences based on nt sequences
+
+```
 
 
 
