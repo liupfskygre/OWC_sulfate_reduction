@@ -82,8 +82,33 @@ perl METABOLIC-G.pl -in /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_
 
 sed -i -e 's/#/ /g' AugM1C1D1B_prodigal.faa
 ```
+
 #build raw gene database of each functional 
 ```
+#MAC
+cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length
+
+for folder in $(cat sample_sub_dir.txt)
+do 
+cd ./${folder}/Each_HMM_Amino_Acid_Sequence/
+pwd
+for file in *.faa
+do
+cp ${file} /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/Each_HMM_Amino_Acid_Sequence/${folder}_${file}
+done
+cd ../../
+done
+
+#
+cd Each_HMM_Amino_Acid_Sequence 
+for file in $(cat ../METABOLIC_inluded_hmm_hits_list.txt)
+do 
+cat *${file} > ../"${file}".faa
+done 
+
+for file in *.faa.faa; do mv ${file} "${file%.*}"; done
+
+
 #1, get gene names from hmmsearch hits 
 .collection.faa
 >AugM1C1D1B_prodigal~~k121_10370813_4
