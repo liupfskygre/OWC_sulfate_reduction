@@ -119,7 +119,29 @@ for file in *.faa.faa; do mv ${file} "${file%.*}"; done
 #pullseq and remove duplicates sequences based on nt sequences
 
 ```
+#
+```
+#pull seqs id 
+for file in *.faa
+do 
+grep -e '>' ${file} > "${file%.*}"_id.txt
+sed -i -e 's/>//g' "${file%.*}"_id.txt 
+done
 
+
+for file in *faa
+do 
+echo "${file}" >> counts_of_hits.txt
+grep -c '>' ${file} >> counts_of_hits.txt
+done
+```
+
+#verify the hits
+```
+138 hmm in the metabolic hmm profile database
+99 returned, hits like fccB, pmoA, mmoA,  were all missing； 
+#some of them, like ammoA, cause by binning procedure?? 
+#ammoC were find in some of intermiediate files, missing due to motif filtering?  is still there
 
 
 ## redo all scan with marker genes, 2020-June-30；not run
