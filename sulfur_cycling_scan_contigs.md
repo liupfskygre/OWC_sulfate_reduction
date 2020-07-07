@@ -143,6 +143,15 @@ done
 #some of them, like ammoA, cause by binning procedure?? 
 #ammoC were find in some of intermiediate files, missing due to motif filtering?  is still there
 
+hmmsearch --tblout /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/AugM2C1D1C_prodigal.faa_contigs/intermediate_files/Hmmsearch_Outputs/pmoC.hmm.total.hmmsearch_result_liu.txt --cpu 1 /Users/pengfeiliu/software/METABOLIC-master/METABOLIC_hmm_db/pmoC.hmm /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/AugM2C1D1C_prodigal.faa_contigs/AugM2C1D1C_prodigal.faa
+
+
+hmmsearch --tblout /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/AugM2C1D1C_prodigal.faa_contigs/intermediate_files/Hmmsearch_Outputs/PF09242.hmm.total.hmmsearch_result_liu.txt --cpu 1 /Users/pengfeiliu/software/METABOLIC-master/METABOLIC_hmm_db/PF09242.hmm /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/AugM2C1D1C_prodigal.faa_contigs/AugM2C1D1C_prodigal.faa 
+
+```
+
+
+
 
 ## redo all scan with marker genes, 2020-June-30；not run
 ```
