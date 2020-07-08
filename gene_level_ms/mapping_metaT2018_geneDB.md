@@ -114,20 +114,20 @@ mrna_path="/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partIII"
 #rsem-prepare-reference ../MAGs_3211_all_fixed.fna --bowtie2 MAGs_3211_all_fixed
 #build already when mapping 2014-2015 data ==>../metaT_mapping2014_MAGs3211/MAGs_3211_all_fixed
 
-for prefix in $(cat /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/metaT2018JGI_reads_partII_list.txt)
+for prefix in $(cat /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mapping/metaT2018JGI_reads_partIII_list.txt)
 do
-zcat ${mrna_path}/${prefix}_interleaved_trimmed.fa.gz > ${mrna_path}/${prefix}_interleaved_trimmed.fq
+zcat ${mrna_path}/${prefix}_interleaved_trimmed.fq.gz > ./${prefix}_interleaved_trimmed.fq
 
- paste - - - - - - - - < ${mrna_path}/${prefix}_interleaved_trimmed.fq | tee >(cut -f 1-4 | tr '\t' '\n' > ${mrna_path}/${prefix}_R1_trimmed.fq) | cut -f 5-8 | tr '\t' '\n' > ${mrna_path}/${prefix}_R2_trimmed.fq
+ paste - - - - - - - - < ./${prefix}_interleaved_trimmed.fq | tee >(cut -f 1-4 | tr '\t' '\n' > ./${prefix}_R1_trimmed.fq) | cut -f 5-8 | tr '\t' '\n' > ./${prefix}_R2_trimmed.fq
 
 echo "${mrna_path}/${prefix}_R1_trimmed.fq"
 echo "${mrna_path}/${prefix}_R2_trimmed.fq"
 
-rsem-calculate-expression --bowtie2 -p 14 --num-threads 14 --paired-end  "${mrna_path}"/${prefix}_R1_trimmed.fq "${mrna_path}"/${prefix}_R2_trimmed.fq ./all_sulfur_cycling_genes_Raw ${prefix}_sulfur_cycling_gene
+rsem-calculate-expression --bowtie2 -p 14 --num-threads 14 --paired-end  ./${prefix}_R1_trimmed.fq ./${prefix}_R2_trimmed.fq ./all_sulfur_cycling_genes_Raw ${prefix}_sulfur_cycling_gene
 
-rm ${mrna_path}/${prefix}_R1_trimmed.fq
-rm ${mrna_path}/${prefix}_R2_trimmed.fq
-rm ${mrna_path}/${prefix}_interleaved_trimmed.fq
+rm ./${prefix}_R1_trimmed.fq
+rm ./${prefix}_R2_trimmed.fq
+rm ./${prefix}_interleaved_trimmed.fq
 done
 
 ```
