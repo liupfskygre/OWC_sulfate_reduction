@@ -27,7 +27,7 @@ cat *_5k.fa > all_metaG16_5k.fa
 
 ```
 all_Raw_genes_id.txt #fix name with total during hmmsearch
-sed -i -e 's/total/AugM2C1D5C/g'  all_Raw_genes_id.txt, 6901
+sed -i -e 's/AugM2C1D5C~~k121/AugM2C1D5C_prodigal~~k121/g'  all_Raw_genes_id.txt #, 6901
 
 #AugM1C1D1B_prodigal~~k121_10149869_2 
 
@@ -38,11 +38,11 @@ sed -e 's/\(k121.*_.*\)_[0-9].*$/\1/1' all_Raw_genes_id.txt >all_Raw_genes_id_fi
 
 #remove duplicate
 cat all_Raw_genes_id_fix.txt |sort|uniq >all_Raw_genes_id_fix_uniq.txt
-#4974
+#4969
 
 pullseq -i all_metaG16_5k.fa -n all_Raw_genes_id_fix_uniq.txt > all_Raw_genes_uniq_conitgs_5k.fasta
 #grep -c '>' all_Raw_genes_uniq_conitgs_5k.fasta
-#1714==> which means for all 4974 contigs with sulfur cycling genes, 1/3 were in contigs w lenght >5k, not bad
+#1725==> which means for all 4974 contigs with sulfur cycling genes, 1/3 were in contigs w lenght >5k, not bad
 # how about each categroy, especiall dsrA and dsrB
 
 
