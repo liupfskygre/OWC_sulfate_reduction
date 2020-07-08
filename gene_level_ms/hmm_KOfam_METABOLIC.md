@@ -79,4 +79,57 @@ perl METABOLIC-G.pl -in /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_
 
 MayM1C1D6A_prodigal.faa
 perl METABOLIC-G.pl -in /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/MayM1C1D6A_prodigal.faa_contigs -o /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/MayM1C1D6A_prodigal.faa_contigs
+```
 
+#build raw gene database of each functional 
+```
+#MAC
+cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length
+
+for folder in $(cat sample_sub_dir.txt)
+do 
+cd ./${folder}/Each_HMM_Amino_Acid_Sequence/
+pwd
+for file in *.faa
+do
+cp ${file} /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/Each_HMM_Amino_Acid_Sequence/${folder}_${file}
+done
+cd ../../
+done
+
+#
+cd Each_HMM_Amino_Acid_Sequence 
+for file in $(cat ../METABOLIC_inluded_hmm_hits_list.txt)
+do 
+cat *${file} > ../"${file}".faa
+done 
+
+for file in *.faa.faa; do mv ${file} "${file%.*}"; done
+
+
+#1, get gene names from hmmsearch hits 
+.collection.faa
+>AugM1C1D1B_prodigal~~k121_10370813_4
+
+#for nt sequecnes, fix gene names first ==> add sample names to header and match METABOLIC style
+
+
+#pullseq and remove duplicates sequences based on nt sequences
+
+```
+#
+```
+#pull seqs id 
+for file in *.faa
+do 
+grep -e '>' ${file} > "${file%.*}"_id.txt
+sed -i -e 's/>//g' "${file%.*}"_id.txt 
+done
+
+
+for file in *faa
+do 
+echo "${file}" >> counts_of_hits.txt
+grep -c '>' ${file} >> counts_of_hits.txt
+done
+```
