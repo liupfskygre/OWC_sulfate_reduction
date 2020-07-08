@@ -47,6 +47,9 @@ done
 
 ```
 memory issue,
+#AugM2C1D5C_prodigal.faa
+perl METABOLIC-G.pl -in /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/AugM2C1D5C_prodigal.faa_contigs -o /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/AugM2C1D5C_prodigal.faa_contigs
+
 
 #AugN3C1D1A_prodigal.faa
 perl METABOLIC-G.pl -in /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/AugN3C1D1A_prodigal.faa_contigs -o /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/AugN3C1D1A_prodigal.faa_contigs
