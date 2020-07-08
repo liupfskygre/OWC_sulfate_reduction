@@ -99,7 +99,7 @@ done
 
 #
 cd Each_HMM_Amino_Acid_Sequence 
-for file in $(cat ../METABOLIC_inluded_hmm_hits_list.txt)
+for file in $(cat ../METABOLIC_inluded_hmm_hits_list_2.txt)
 do 
 cat *${file} > ../"${file}".faa
 done 
