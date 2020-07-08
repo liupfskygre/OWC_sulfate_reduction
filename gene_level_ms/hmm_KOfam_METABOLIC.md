@@ -120,10 +120,11 @@ for file in *.faa.faa; do mv ${file} "${file%.*}"; done
 #
 ```
 #pull seqs id 
-for file in *.faa
+for file in K21307 K21308 K21309 K19713 K08357 K08358
 do 
-grep -e '>' ${file} > "${file%.*}"_id.txt
-sed -i -e 's/>//g' "${file%.*}"_id.txt 
+#grep -e '>' "${file}".hmm.collection.faa >  "${file}".hmm.collection_id.txt
+
+sed -i -e 's/>//g' "${file}".hmm.collection_id.txt 
 done
 
 
@@ -132,4 +133,8 @@ do
 echo "${file}" >> counts_of_hits.txt
 grep -c '>' ${file} >> counts_of_hits.txt
 done
+
+#one bug
+total~~k121_2550817_2===AugM2C1D5C_prodigal~~k121_2550817_2
+
 ```
