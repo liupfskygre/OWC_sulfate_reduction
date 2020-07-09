@@ -4,8 +4,9 @@ cd /home/ORG-Data-2/metaT2018JGI_reads
 cd /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mappping_geneDB
 
 #reference preparation
+```
 rsem-prepare-reference all_sulfur_cycling_genes_Raw.fna --bowtie2 all_sulfur_cycling_genes_Raw
-
+```
 
 #part I
 ```
