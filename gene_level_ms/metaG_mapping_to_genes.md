@@ -10,7 +10,7 @@ cp ../metaT_mappping_geneDB/all_sulfur_cycling_genes_Raw.fna ./
 #6903
 
 #build index
-bowtie2-build all_sulfur_cycling_genes_Raw.fna all_sulfur_cycling_genes_Raw
+rsem-prepare-reference all_sulfur_cycling_genes_Raw.fna --bowtie2 all_sulfur_cycling_genes_Raw
 ```
 #
 ```
@@ -20,7 +20,7 @@ nano file_path_link.txt
 nano metaG_mapping_S_genes.sh
 
 sbatch metaG_mapping_S_genes.sh
-Submitted batch job 7256
+Submitted batch job 7258
 
 ```
 ```
@@ -48,12 +48,22 @@ path=$(echo ${sample}| cut -f3 -d$'\t')
 #checkpoint
 echo ${name} ${file} ${path}
 
-zcat ${path}/${file} > ./temp_interleaved_trimmed.fq
+#convert fastq file to trimmed fa
+zcat ${path}/${file} > ./temp_interleaved.fq
 
+sickle pe -c temp_interleaved.fq -t sanger -M temp_interleaved_trimmed.fq
+fq2fa --paired --filter temp_interleaved_trimmed.fq temp_interleaved_trimmed.fa
+rm temp_interleaved.fq
+rm temp_interleaved_trimmed.fq
 
-bowtie2 --interleaved ./temp_interleaved_trimmed.fq -q --phred33 --sensitive --dpad 0 --gbar 99999999 --mp 1,1 --np 1 --score-min L,0,-0.1 -I 1 -X 1000 --no-mixed --no-discordant -p 14 -k 200 -x ./all_sulfur_cycling_genes_Raw | samtools view -bS - >${name}.bam
+reformat.sh in=temp_interleaved_trimmed.fa out1=temp_interleaved_trimmed_R1.fa out2=temp_interleaved_trimmed_R2.fa
+
+rsem-calculate-expression --bowtie2 -p 14 --num-threads 14 --paired-end temp_interleaved_trimmed_R1.fa temp_interleaved_trimmed_R2.fa --no-qualities ./all_sulfur_cycling_genes_Raw ${prefix}_S_cycling_gene
 
 done
+rm temp_interleaved_trimmed.fa
+rm temp_interleaved_trimmed_R1.fa 
+rm temp_interleaved_trimmed_R2.fa 
 echo "finish all"
 unset IFS
 ```
