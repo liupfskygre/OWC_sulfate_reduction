@@ -19,13 +19,14 @@ perl METABOLIC-G.pl -in /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_
 rerun, recovered hits, but no sequences recovered
 ```
 
-#
+#re-run METABOLIC based on the fccB new TC
 ```
 for file in $(cat sample_sub_dir.txt);
 do echo ${file}
 mv ./${file}/*.faa ./Congtis
 done
 
+#too big for my mac
 perl METABOLIC-G.pl -in /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/Congtis -o /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/Congtis
 
 for file in *.faa
@@ -33,4 +34,39 @@ do echo ${file}
 sed -i -e "s/>/>"${file%.*}"~~/g" ${file}
 done
 
+#change it b
+for file in *.faa
+do echo ${file}
+sed -i -e "s/>"${file%.*}"~~/>/g" ${file}
+done
+
+for file in $(cat sample_faa_list.txt)
+do echo ${file}
+mv ./Congtis/${file} ./${file}_contigs
+done
+
+
+for file in $(cat sample_sub_dir.txt)
+do 
+echo ${file}
+mkdir ./${file}/metabolic_run2
+mv ./${file}/Each_HMM_Amino_Acid_Sequence ./${file}/metabolic_run2
+mv ./${file}/intermediate_files ./${file}/metabolic_run2
+mv ./${file}/KEGG_identifier_result ./${file}/metabolic_run2
+mv ./${file}/METABOLIC_Figures ./${file}/metabolic_run2
+mv ./${file}/METABOLIC_Figures_Input ./${file}/metabolic_run2
+mv ./${file}/METABOLIC_result_each_spreadsheet ./${file}/metabolic_run2
+mv ./${file}/METABOLIC_result.xlsx ./${file}/metabolic_run2
+done
+```
+
+#
+```
+cd /Users/pengfeiliu/software/METABOLIC-master
+
+for file in $(cat /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/metaG16_prodigal.txt) 
+do 
+echo $file
+perl METABOLIC-G.pl -t 4 -in /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/${file}_contigs -o /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/${file}_contigs
+done
 ```
