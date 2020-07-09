@@ -51,3 +51,22 @@ with AugM1C1D1B
 
 all_Raw_genes_id.txt
 ```
+
+
+##adding sequence of fccB
+```
+# 812 PF09242.hmm.collection_id.txt
+
+sed -e 's/\(k121.*_.*\)_[0-9].*$/\1/1' PF09242.hmm.collection_id.txt >PF09242.hmm.collection_id_fix.txt 
+
+#remove duplicate contigs
+cat PF09242.hmm.collection_id_fix.txt |sort|uniq >PF09242.hmm.collection_id_fix_uniq.txt 
+
+cat PF09242.hmm.collection_id_fix_uniq.txt all_Raw_genes_id_fix_uniq.txt|sort|uniq > all_Raw_genes_id_fix_uniq_final.txt
+
+pullseq -i all_metaG16_5k.fa -n all_Raw_genes_id_fix_uniq_final.txt > all_Raw_genes_uniq_conitgs_5k.fasta
+#grep -c '>' all_Raw_genes_uniq_conitgs_5k.fasta
+#1725==> which means for all 4974 contigs with sulfur cycling genes, 1/3 were in contigs w lenght >5k, not bad
+
+
+```
