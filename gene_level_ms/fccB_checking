@@ -70,3 +70,56 @@ echo $file
 perl METABOLIC-G.pl -t 4 -in /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/${file}_contigs -o /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/${file}_contigs
 done
 ```
+
+#get all fccB sequences together
+```
+cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length
+
+for folder in $(cat sample_sub_dir.txt)
+do 
+cd ./${folder}/Each_HMM_Amino_Acid_Sequence/
+pwd
+for file in *.faa
+do
+cp ${file} /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/Each_HMM_Amino_Acid_Sequence/${folder}_${file}
+done
+cd ../../
+done
+
+#
+cd Each_HMM_Amino_Acid_Sequence 
+for file in PF09242.hmm.collection.faa
+do 
+cat *${file} > ../"${file}".faa
+done 
+
+for file in *.faa.faa; do mv ${file} "${file%.*}"; done
+
+
+grep -e '>' PF09242.hmm.collection.faa >  PF09242.hmm.collection_id.txt
+
+sed -i -e 's/>//g' PF09242.hmm.collection_id.txt 
+#830 sequences
+pullseq -i PF09242.hmm.collection.faa  -m 53 >PF09242.hmm.collection_len.faa 
+
+grep -e '>' PF09242.hmm.collection_len.faa  >  PF09242.hmm.collection_id.txt
+sed -i -e 's/>//g' PF09242.hmm.collection_id.txt #812 sequences
+```
+
+#do mapping on fccB along
+```
+#reference sequence
+
+
+#mkdir of fccB mapping
+
+
+#do mapping slurm files
+
+
+
+
+```
+
+
+
