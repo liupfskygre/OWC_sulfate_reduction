@@ -106,6 +106,9 @@ grep -e '>' PF09242.hmm.collection_len.faa  >  PF09242.hmm.collection_id.txt
 sed -i -e 's/>//g' PF09242.hmm.collection_id.txt #812 sequences
 ```
 
+
+#following are del, 2020July-9
+
 #do mapping on fccB along
 ```
 cd hmmsearch_hits_assembly
