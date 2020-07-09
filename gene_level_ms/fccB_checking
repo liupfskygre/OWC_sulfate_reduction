@@ -1,0 +1,14 @@
+## checking the metabolic annotaiton of fccB gene
+```
+/Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/fccB_checking
+
+#run metabolic on previous genes from MAGs by using
+
+# FCSD-flav_bind (PF09242) - Pfam: Family
+
+perl METABOLIC-G.pl -in /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/fccB_checking -o /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/fccB_checking
+
+#METABOLIC reject all hits of fccB
+
+
+```
