@@ -9,6 +9,28 @@
 perl METABOLIC-G.pl -in /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/fccB_checking -o /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/fccB_checking
 
 #METABOLIC reject all hits of fccB
+```
 
+
+
+```
+#change to 21.4 of tc in the hmm_table_template.txt
+
+rerun, recovered hits, but no sequences recovered
+```
+
+#
+```
+for file in $(cat sample_sub_dir.txt);
+do echo ${file}
+mv ./${file}/*.faa ./Congtis
+done
+
+perl METABOLIC-G.pl -in /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/Congtis -o /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/contigs_2500_length/Congtis
+
+for file in *.faa
+do echo ${file}
+sed -i -e "s/>/>"${file%.*}"~~/g" ${file}
+done
 
 ```
