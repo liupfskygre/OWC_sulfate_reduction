@@ -72,5 +72,31 @@ pullseq -i all_metaG16_5k.fa -n all_Raw_genes_id_fix_uniq_final.txt > all_Raw_ge
 grep -c '>' all_Raw_genes_uniq_conitgs_5k.fasta
 #2006==> which means for all 4974 contigs with sulfur cycling genes, 1/3 were in contigs w lenght >5k, not bad
 
+```
 
+#dram annotation on 
+```
+[liupf@zenith hmmsearch_hits_assembly]$ nano sulfur_genes_in_uniq_conitgs_5k.sh
+
+
+#!/bin/bash
+#SBATCH --nodes=1 #always =1 on zenith, usually will be =1 on summit
+#SBATCH --ntasks=16 #number of cores you are requesting
+#SBATCH --time=14-00:00:00 #max 14 days, HH:MM:SS if you need to include days do D-HH:MM:SS i.e.requesting 7 days is done as 7-00:00:00
+#SBATCH --mem=480gb #How much memory you are requesting.  i.e. 500gb.  For 1Tb use 1024gb.  Notice this is lower case.
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --mail-user=liupf@colostate.edu
+#SBATCH --partition=wrighton-hi,wrighton-low #The options are: wrighton-hi,wrighton-low,wilkins-hi,wilkins-low,debug
+
+
+#code block for running
+source /opt/Miniconda2/miniconda2/bin/activate DRAM
+# DRAM.py annotate -i  -o  --threads 20  --min_contig_size 2500
+
+DRAM.py annotate -i all_Raw_genes_uniq_conitgs_5k.fasta -o sulfur_genes_in_uniq_conitgs_5k --threads 16  --min_contig_size 4999
+
+
+##call sbatch test_slurm.sh
+
+ slurm-7252.out
 ```
