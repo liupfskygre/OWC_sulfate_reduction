@@ -1,10 +1,15 @@
 ##
 cd /home/ORG-Data-2/metaT2018JGI_reads
 
-cd /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mappping_geneDB
 
 #reference preparation
 ```
+cd /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mappping_geneDB
+cat ../fccB_mapping_metaT/PF09242.hmm.collection_id_Raw.fna ../hmmsearch_hits_assembly/all_sulfur_cycling_genes_Raw.fna >all_sulfur_cycling_genes_Raw.fna 
+
+#all_sulfur_cycling_genes_Raw.fna, 6903
+
+
 rsem-prepare-reference all_sulfur_cycling_genes_Raw.fna --bowtie2 all_sulfur_cycling_genes_Raw
 ```
 
@@ -15,9 +20,10 @@ do
 echo ${sample}
 rsem-calculate-expression --bowtie2 --no-qualities -p 12 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R1_trimmed.fa.gz /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R2_trimmed.fa.gz all_sulfur_cycling_genes_Raw ${sample}_Sulfur_RSEM
 done 
-sbatch metaT_mapping_partI.sh
-Submitted batch job 7225
 ```
+sbatch metaT_mapping_partI.sh
+Submitted batch job 7253
+
 #part I
 #slurm scripts backup
 ```
@@ -45,17 +51,14 @@ echo "${mrna_path}/${prefix}_R1_trimmed.fa.gz"
 echo "${mrna_path}/${prefix}_R2_trimmed.fa.gz"
 rsem-calculate-expression --bowtie2 -p 14 --num-threads 14 --paired-end "${mrna_path}"/${prefix}_R1_trimmed.fa.gz "${mrna_path}"/${prefix}_R2_trimmed.fa.gz --no-qualities ./all_sulfur_cycling_genes_Raw ${prefix}_sulfur_cycling_gene
 done
-
+```
 
 #
 ##call sbatch slurm.sh
 
-```
-
-
-
 part II
-
+sbatch metaT_mapping_partII.sh
+Submitted batch job 7255
 ```
 #!/bin/bash
 #SBATCH --nodes=1 #always =1 on zenith, usually will be =1 on summit
@@ -80,11 +83,13 @@ echo "${mrna_path}/${prefix}_R1_trimmed.fa"
 echo "${mrna_path}/${prefix}_R2_trimmed.fa"
 rsem-calculate-expression --bowtie2 -p 14 --num-threads 14 --paired-end  "${mrna_path}"/${prefix}_R1_trimmed.fa "${mrna_path}"/${prefix}_R2_trimmed.fa --no-qualities ./all_sulfur_cycling_genes_Raw ${prefix}_sulfur_cycling_gene
 done
+```
 
 
 #
 ##call sbatch slurm.sh
-Submitted batch job 7226
+sbatch metaT_mapping_partIII.sh
+Submitted batch job 7254
 
 ```
 
