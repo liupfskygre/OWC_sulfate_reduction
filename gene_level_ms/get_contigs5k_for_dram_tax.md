@@ -93,7 +93,7 @@ grep -c '>' all_Raw_genes_uniq_conitgs_5k.fasta
 source /opt/Miniconda2/miniconda2/bin/activate DRAM
 # DRAM.py annotate -i  -o  --threads 20  --min_contig_size 2500
 
-DRAM.py annotate -i all_Raw_genes_uniq_conitgs_5k.fasta -o sulfur_genes_in_uniq_conitgs_5k --threads 16  --min_contig_size 4999
+DRAM.py annotate -i all_Raw_genes_uniq_conitgs_5k.fasta -o sulfur_genes_in_uniq_conitgs_5k --threads 16  --use_uniref --min_contig_size 4999
 
 
 ##call sbatch test_slurm.sh
