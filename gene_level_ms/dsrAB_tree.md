@@ -38,7 +38,7 @@ trimal -keepheader -automated1 -in dsrA_gene_tree_alignment.faa -out dsrA_gene_t
 #Error: the symbol 'B' accesing the matrix is not defined in this object
 #
 
-iqtree -s dsrA_gene_tree_alignment_trimal.faa -nt AUTO -bb 1000 -pre dsrA_gene
+iqtree -s dsrA_gene_tree_alignment_trimal.faa -nt AUTO -bb 1000 -pre dsrA_gene #slurm-7351.out
 #
 
 
@@ -55,7 +55,7 @@ mafft --auto --add dsrB.hmm.collection.faa --thread 6 Full_length_seq_dsrAB_ref_
 trimal -keepheader -automated1 -in dsrB_gene_tree_alignment.faa -out dsrB_gene_tree_alignment_trimal.faa
 
 
-iqtree -s OWC_mcrA_all_987_alignment_global_re_by_muscle_trimal.faa -m LG+F+R6 -nt 12 -bb 1000 -pre OWC_mcrA_all_983_iqtree
+iqtree -s dsrB_gene_tree_alignment_trimal.faa -nt AUTO -bb 1000 -pre dsrB_gene #slurm-7352.out
 
 
 FastTree -gamma -lg -boot 1000 <dsrB_gene_tree_alignment_trimal.faa> dsrB_gene_tree_Fasttree.tree
