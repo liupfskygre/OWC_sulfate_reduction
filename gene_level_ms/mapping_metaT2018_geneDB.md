@@ -21,6 +21,7 @@ echo ${sample}
 rsem-calculate-expression --bowtie2 --no-qualities -p 12 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R1_trimmed.fa.gz /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R2_trimmed.fa.gz all_sulfur_cycling_genes_Raw ${sample}_Sulfur_RSEM
 done 
 ```
+
 sbatch metaT_mapping_partI.sh
 Submitted batch job 7253
 
@@ -140,3 +141,48 @@ done
 
 #sbatch metaT_mapping_partIII.sh
 #Submitted batch job 7227
+
+
+#part IV， two redo samples from CUD
+```
+Aug_M1_C2_D5
+Aug_OW2_C1_D5_A
+
+/home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT_2018_redos_16Mar2020
+
+#nano OWC_metaT_2018_redos2_mapping.sh
+
+#sbatch OWC_metaT_2018_redos2_mapping.sh
+#Submitted batch job 7349
+
+#slurm scripts
+
+#!/bin/bash
+#SBATCH --nodes=1 #always =1 on zenith, usually will be =1 on summit
+#SBATCH --ntasks=14 #number of cores you are requesting
+#SBATCH --time=14-00:00:00 #max 14 days, HH:MM:SS if you need to include days do D-HH:MM:SS i.e.requesting 7 days is done as 7-00:00:00
+#SBATCH --mem=128gb #How much memory you are requesting.  i.e. 500gb.  For 1Tb use 1024gb.  Notice this is lower case.
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --mail-user=liupf@colostate.edu
+#SBATCH --partition=wrighton-hi,wrighton-low #The options are: wrighton-hi,wrighton-low,wilkins-hi,wilkins-low,debug
+
+
+#put your code block here for running
+#prepare reference
+
+cd /home/projects/Wetlands/sulfur_cycling_analysis/metaT_mappping_geneDB
+
+mrna_path="/home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT_2018_redos_16Mar2020"
+
+for prefix in $(cat ./metaT2018CUD_reads_redos_list2.txt)
+do
+
+echo "${mrna_path}/${prefix}_trimmed_R1.fa.gz"
+echo "${mrna_path}/${prefix}_trimmed_R2.fa.gz"
+
+rsem-calculate-expression --bowtie2 -p 14 --num-threads 14 --paired-end  "${mrna_path}"/${prefix}_trimmed.R1.fa.gz "${mrna_path}"/${prefix}_trimmed.R2.fa.gz ./all_sulfur_cycling_genes_Raw ${prefix}_sulfur_cycling_gene
+
+done
+```
+
+
