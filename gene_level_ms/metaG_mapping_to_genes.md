@@ -58,7 +58,7 @@ rm temp_interleaved_trimmed.fq
 
 reformat.sh in=temp_interleaved_trimmed.fa out1=temp_interleaved_trimmed_R1.fa out2=temp_interleaved_trimmed_R2.fa
 
-rsem-calculate-expression --bowtie2 -p 14 --num-threads 14 --paired-end temp_interleaved_trimmed_R1.fa temp_interleaved_trimmed_R2.fa --no-qualities ./all_sulfur_cycling_genes_Raw ${prefix}_S_cycling_gene
+rsem-calculate-expression --bowtie2 -p 24 --num-threads 24 --paired-end temp_interleaved_trimmed_R1.fa temp_interleaved_trimmed_R2.fa --no-qualities ./all_sulfur_cycling_genes_Raw ${sample}_S_cycling_gene
 
 done
 rm temp_interleaved_trimmed.fa
@@ -66,4 +66,13 @@ rm temp_interleaved_trimmed_R1.fa
 rm temp_interleaved_trimmed_R2.fa 
 echo "finish all"
 unset IFS
+```
+
+#
+```
+May_M1_C1_D6
+mv _S_cycling_gene.genes.results May_M1_C1_D6_S_cycling_gene.genes.results
+mv _S_cycling_gene.isoforms.results May_M1_C1_D6_S_cycling_gene.isoforms.results
+mv _S_cycling_gene.transcript.bam May_M1_C1_D6_S_cycling_gene.transcript.bam
+mv _S_cycling_gene.stat May_M1_C1_D6_S_cycling_gene.stat
 ```
