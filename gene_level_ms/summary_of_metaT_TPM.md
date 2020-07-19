@@ -29,25 +29,23 @@ awk -F '\t' '{$2=""; sub(" ", " "); print}' host.txt > OWC_Sulfur_109.txt
 
 ```
 
-#reference scripts
+##keep TPM of only verified hits 
 ```
-#paste all/merge all _RSEM.genes.results files
+#after comparing GhostKAAS and Conserved domain search, we 4902 hits were kept for metaT
 
-Aug_N3_C1_D5_A_MG89_RSEM.genes.results 
+#on MAC
+cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/metaT-NMDS-MRPP
+nano sulful_marker_genes_4902list.txt
 
-for file in $(cat metaT2018JGI_reads_partI_II_list53.txt)
-do 
-#sed -i -e "s/TPM/TPM_$file/g" ${file}_MG89_RSEM.genes.results 
-echo "${file}"
-paste "${file}"_MG89_RSEM.genes.results tmp.txt>tmp.txt
-done
-paste *_MG89_RSEM.genes.results >tmp.txt
-
-paste PS42_S_cout.out PS43_S_cout.out PS44_S_cout.out PS46_S_cout.out phz2_S_cout.out phz3_S_cout.out phz4_S_cout.out phz5_S_cout.out | awk -F "\t" '{print $1"\t"$2"\t"$4"\t"$6"\t"$8"\t"$10"\t"$12"\t"$14"\t"$16}' > PSI_htseqcounts.txt
+grep -w -f sulful_marker_genes_4902list.txt OWC_metaT2018_Sulfur_109.txt >OWC_metaT2018_Sulfur_109_clean4902.txt
 ```
 
 
-##
+
+
+
+
+##reference 
 ```
 for prefix in $(cat ../OWC2014_trimmed_transcript_reads_prefix_uniq.txt)
 do
