@@ -100,3 +100,32 @@ DRAM.py annotate -i all_Raw_genes_uniq_conitgs_5k.fasta -o sulfur_genes_in_uniq_
 
  slurm-7252.out
 ```
+
+#taxonomic affiliation of each contigs curation
+```
+#keep only conitgs with positive key genes
+cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/5k_dram_tax_assignment
+
+#uniref annotation
+scaffold_votes_for_pl.txt
+
+#gene list
+sulful_marker_genes_4902list.txt
+
+sed -e 's/.*~~\(k121_.*\)_.*$/\1/g' sulful_marker_genes_4902list.txt > contigs_tmp.list
+
+cat contigs_tmp.list|sort|uniq > contigs_uniq.list
+#3928
+
+grep -w -f contigs_uniq.list scaffold_votes_for_pl.txt >scaffold_votes_for_pl_positive.txt
+#1338 contigs left
+
+
+#check dram annotation
+sed -i -e 's/all_Raw_genes_uniq_conitgs_5k_//g' annotations.tsv 
+
+grep -w -f sulful_marker_genes_4902list.txt annotations.tsv> sulful_marker_genes4902_5k_dram_annotations.tsv
+
+1825 sulful_marker_genes4902_5k_dram_annotations.tsv
+
+```
