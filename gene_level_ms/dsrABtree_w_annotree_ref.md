@@ -37,9 +37,9 @@ cat dsrB_ba_ar_anntree_hits.fasta dsrB.hmm.collection.faa >dsrB.hmm.collection_w
 /Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in dsrB_anno_tree_alignment.faa -out dsrB_anno_tree_alignment_trmal.fasta
 
 #remove dsrA part and remove columns w/ 5% gaps；
-#186 position
+#2625 sequences with 287 position
 
-FastTree -gamma -lg -boot 1000 <dsrB_anno_tree_alignment_trmal.fasta> dsrB_anno_tree_alignment_trmal.tree
+/Users/pengfeiliu/software/FastTree -gamma -lg -boot 1000 <dsrB_anno_tree_alignment_trmal.fasta> dsrB_anno_tree_alignment_trmal.tree
 
 ```
 
@@ -53,7 +53,7 @@ cat dsrA_ba_ar_anntree_hits.fasta dsrA.hmm.collection.faa >dsrA.hmm.collection_w
 /Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in dsrA_anno_tree_alignment.faa -out dsrA_anno_tree_alignment_trmal.fasta
 
 #remove dsrB part and remove columns w/ 5% gaps；
-#233 position
+#2715 sequences with 233 position
 FastTree -gamma -lg -boot 1000 <dsrA_anno_tree_alignment_trmal.fasta> dsrA_anno_tree_alignment_trmal.tree
 
 ```
