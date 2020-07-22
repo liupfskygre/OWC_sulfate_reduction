@@ -54,5 +54,6 @@ cat dsrA_ba_ar_anntree_hits.fasta dsrA.hmm.collection.faa >dsrA.hmm.collection_w
 
 #remove dsrB part and remove columns w/ 5% gaps；
 #233 position
+FastTree -gamma -lg -boot 1000 <dsrA_anno_tree_alignment_trmal.fasta> dsrA_anno_tree_alignment_trmal.tree
 
 ```
