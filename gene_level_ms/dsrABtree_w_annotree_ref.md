@@ -54,6 +54,15 @@ cat dsrA_ba_ar_anntree_hits.fasta dsrA.hmm.collection.faa >dsrA.hmm.collection_w
 #remove dsrB part and remove columns w/ 5% gaps；
 #2715 sequences with 233 position
 
+#
+```
+#
+```
+#change ; in the header to __
+dsrA_anno_tree_alignment_trmal.fasta
+
+dsrB_anno_tree_alignment_trmal.fasta
+
 ```
 
 #dsrAB tree
@@ -68,6 +77,10 @@ FastTree -gamma -lg -boot 1000 <dsrB_anno_tree_alignment_trmal.fasta> dsrB_anno_
 
 ```
 
+
+sbatch dsrA_iqtree.sh
+sbatch dsrB_iqtree.sh
+
 ```
 #!/bin/bash
 #SBATCH --nodes=1 #always =1 on zenith, usually will be =1 on summit
@@ -80,8 +93,8 @@ FastTree -gamma -lg -boot 1000 <dsrB_anno_tree_alignment_trmal.fasta> dsrB_anno_
 
 
 #put your code block here for running
-iqtree -s dsrA_anno_tree_alignment_trmal.fasta -nt AUTO -bb 1000 -pre dsrA_annoRef_ #slurm-7493.out
+iqtree -s dsrA_anno_tree_alignment_trmal.fasta -nt AUTO -bb 1000 -pre dsrA_annoRef_ #slurm-7494.out
 
-iqtree -s dsrB_anno_tree_alignment_trmal.fasta -nt AUTO -bb 1000 -pre dsrB_annoRef_ #Submitted batch job 7492
+iqtree -s dsrB_anno_tree_alignment_trmal.fasta -nt AUTO -bb 1000 -pre dsrB_annoRef_ #Submitted batch job 7495
 ```
 
