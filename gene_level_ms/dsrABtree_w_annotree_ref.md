@@ -36,6 +36,23 @@ cat dsrB_ba_ar_anntree_hits.fasta dsrB.hmm.collection.faa >dsrB.hmm.collection_w
 
 /Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in dsrB_anno_tree_alignment.faa -out dsrB_anno_tree_alignment_trmal.fasta
 
-#remove dsrA part and remove columns w/ 10% gaps
+#remove dsrA part and remove columns w/ 5% gaps；
+#186 position
+
+FastTree -gamma -lg -boot 1000 <dsrB_anno_tree_alignment_trmal.fasta> dsrB_anno_tree_alignment_trmal.tree
+
+```
+
+#dsrA
+```
+cat dsrA_ba_ar_anntree_hits.fasta dsrA.hmm.collection.faa >dsrA.hmm.collection_w_annotreeRef.faa
+
+#on mac
+/Users/pengfeiliu/software/mafft-mac/mafftdir/bin/mafft --auto --add dsrA.hmm.collection_w_annotreeRef.faa --thread 4 Full_length_seq_dsrAB_ref_fixH.faa >dsrA_anno_tree_alignment.faa
+
+/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in dsrA_anno_tree_alignment.faa -out dsrA_anno_tree_alignment_trmal.fasta
+
+#remove dsrB part and remove columns w/ 5% gaps；
+#233 position
 
 ```
