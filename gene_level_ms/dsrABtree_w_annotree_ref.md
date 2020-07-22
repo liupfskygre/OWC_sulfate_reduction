@@ -25,3 +25,17 @@ awk -F ',' '{print ">"$4";"$3"\n"$5}' dsrB_ba_ar_anntree_hits.csv > dsrB_ba_ar_a
 #cat annotree_hits_mcrA_PF02249_PF02745_raw.fasta| seqkit rmdup -s -o annotree_hits_mcrA_PF02249_PF02745_clean.fasta
 #awk -F ',' '{print ">"$1"_"$2"_"$3"_"$4"\n"$5}' tabseq.tsv > seqs.fa
 ```
+
+
+#dsrB
+```
+cat dsrB_ba_ar_anntree_hits.fasta dsrB.hmm.collection.faa >dsrB.hmm.collection_w_annotreeRef.faa
+
+#on mac
+/Users/pengfeiliu/software/mafft-mac/mafftdir/bin/mafft --auto --add dsrB.hmm.collection_w_annotreeRef.faa --thread 4 Full_length_seq_dsrAB_ref_fixH.faa >dsrB_anno_tree_alignment.faa
+
+/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in dsrB_anno_tree_alignment.faa -out dsrB_anno_tree_alignment_trmal.fasta
+
+#remove dsrA part and remove columns w/ 10% gaps
+
+```
