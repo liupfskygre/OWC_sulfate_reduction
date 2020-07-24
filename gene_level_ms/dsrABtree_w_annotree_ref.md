@@ -181,10 +181,26 @@ cat dsrA_arc_annotree_hits_MAG_tax.txt dsrA_bac_annotree_hits_MAG_tax.txt >dsrA_
 cat dsrB_arc_annotree_hits_MAG_tax.txt dsrB_bac_annotree_hits_MAG_tax.txt >dsrB_arc_bac_annotree_hits_MAG_tax.txt
 
 #get sequences ID of dsrA and dsrB
-grep  '>'  dsrA_ba_ar_anntree_hits.fasta >dsrA_ba_ar_anntree_hits_ID.txt 
-grep  '>'  dsrB_ba_ar_anntree_hits.fasta >dsrB_ba_ar_anntree_hits_ID.txt 
-#edit in excel to get tree id and MAGs id done
+grep  '>'  ../dsrA_ba_ar_anntree_hits.fasta >dsrA_ba_ar_anntree_hits_ID.txt 
+grep  '>'  ../dsrB_ba_ar_anntree_hits.fasta >dsrB_ba_ar_anntree_hits_ID.txt 
 
+
+sed -i -e 's/>//g' dsrA_ba_ar_anntree_hits_ID.txt 
+sed -i -e 's/>//g' dsrB_ba_ar_anntree_hits_ID.txt 
+
+#edit in excel to get tree id and MAGs id done
+#e.g.
+#Tree_ID	MAGs_ID	Seq_ID
+#GB_GCA_000007225.1___AE009441.1_1796	GB_GCA_000007225.1	AE009441.1_1796
+
+sed -i -e 's/;/___/g' dsrA_ba_ar_anntree_hits_ID.txt 
+sed -i -e 's/;/___/g' dsrB_ba_ar_anntree_hits_ID.txt 
+
+dsrB_ID_tax_annotree_R95.txt
+dsrA_ID_tax_annotree_R95.txt
+
+#compared R89 and R95, many are different, and some representative Genomes were missing in R95 release, 
+e.g.RS_GCF_000974685.1; 
 ```
 
 sbatch dsrA_iqtree.sh
