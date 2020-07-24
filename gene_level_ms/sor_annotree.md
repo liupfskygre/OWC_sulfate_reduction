@@ -17,4 +17,13 @@ sed -i -e '/sequence/d' sor_ba_ar_anntree_hits.fasta
 
 
 ```
+#2
+```
+grep -c '>' sor_ba_ar_anntree_hits.fasta
 
+grep 'K16952' sor_user.out.top.txt|cut -f1 -d$'\t' |cut -f2 -d':' > sor_user.out.top_positive_hits.txt
+pullseq -i sor_ba_ar_anntree_hits.fasta -n sor_user.out.top_positive_hits.txt > sor_ba_ar_anntree_pos_hits.fasta
+
+grep -c 'K16952' sor_user.out.top.txt
+grep -c '>' sor_ba_ar_anntree_pos_hits.fasta
+```
