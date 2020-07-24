@@ -16,3 +16,15 @@ sed -i -e '/sequence/d' sqr_ba_anntree_hits.fasta
 
 
 ```
+
+```
+grep -c '>' sqr_ba_anntree_hits.fasta
+
+grep 'K17218' sqr_user.out.top.txt|cut -f1 -d$'\t' |cut -f2 -d':' > sqr_user.out.top_positive_hits.txt
+pullseq -i sqr_ba_anntree_hits.fasta -n sqr_user.out.top_positive_hits.txt > sqr_ba_anntree_pos_hits.fasta
+
+grep -c 'K17218' sqr_user.out.top.txt
+grep -c '>' sqr_ba_anntree_pos_hits.fasta
+
+#6642
+```
