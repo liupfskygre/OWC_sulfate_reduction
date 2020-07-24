@@ -26,7 +26,13 @@ sed -i -e '/sequence/d' aprB_ba_ar_anntree_hits.fasta
 
 #submit to GhostKAAS
 ```
-https://www.kegg.jp/ghostkoala/
+#https://www.kegg.jp/ghostkoala/
+#one per time
+#download
+==> Annotation data: user_ko.txt
+==> Taxonomy data: user.out.top.txt ==>this one is the tax
 
-one per time
+
+https://www.ncbi.nlm.nih.gov/Structure/bwrpsb/bwrpsb.cgi
+
 ```
