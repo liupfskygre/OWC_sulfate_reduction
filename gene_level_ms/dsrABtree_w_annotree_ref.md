@@ -78,7 +78,7 @@ FastTree -gamma -lg -boot 1000 <dsrB_anno_tree_alignment_trmal.fasta> dsrB_anno_
 ```
 
 
-#prepare classification file for dsrA and dsrB
+#prepare classification file for dsrA and dsrB==>r89
 ```
 #on mac, annotree reference 
 cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/dsrAB_tree_with_Annotree_ref/tree_annotation
@@ -131,6 +131,61 @@ grep  '>'  dsrB_ba_ar_anntree_hits.fasta >dsrB_ba_ar_anntree_hits_ID.txt
 
 ```
 
+#prepare classification file for dsrA and dsrB==>r95
+```
+#on mac, annotree reference 
+cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/dsrAB_tree_with_Annotree_ref/dsrAB_gtdb_r95based_annotation
+
+#list of anntree MAGs id for dsrA and dsrB
+ar122_taxonomy_r95.tsv
+bac120_taxonomy_r95.tsv
+
+
+cut -f4 -d, dsrA_arc_annotree_hits.csv > dsrA_arc_annotree_hits_MAGid.txt
+cut -f4 -d, dsrB_arc_annotree_hits.csv > dsrB_arc_annotree_hits_MAGid.txt
+
+cut -f4 -d, dsrA_bac_annotree_hits.csv >dsrA_bac_annotree_hits_MAGid.txt
+cut -f4 -d, dsrB_bac_annotree_hits.csv >dsrB_bac_annotree_hits_MAGid.txt
+
+#archaea 
+grep -w -f dsrA_arc_annotree_hits_MAGid.txt ar122_taxonomy_r95.tsv >dsrA_arc_annotree_hits_MAG_tax.txt
+grep -w -f dsrB_arc_annotree_hits_MAGid.txt ar122_taxonomy_r95.tsv >dsrB_arc_annotree_hits_MAG_tax.txt
+
+#cat 
+
+#bacteria
+grep -w -f dsrA_bac_annotree_hits_MAGid.txt bac120_taxonomy_r95.tsv>dsrA_bac_annotree_hits_MAG_tax.txt
+grep -w -f dsrB_bac_annotree_hits_MAGid.txt bac120_taxonomy_r95.tsv>dsrB_bac_annotree_hits_MAG_tax.txt
+
+#check    wc -l *_hits_MAGid.txt
+$ wc -l *_hits_MAGid.txt
+      55 dsrA_arc_annotree_hits_MAGid.txt
+     836 dsrA_bac_annotree_hits_MAGid.txt
+      52 dsrB_arc_annotree_hits_MAGid.txt
+     808 dsrB_bac_annotree_hits_MAGid.txt
+    1751 total
+
+    
+ #some MAGs cotain more than 1 dsrA or dsrB
+     $ wc -l *_MAG_tax.txt
+      39 dsrA_arc_annotree_hits_MAG_tax.txt
+     756 dsrA_bac_annotree_hits_MAG_tax.txt
+      36 dsrB_arc_annotree_hits_MAG_tax.txt
+     751 dsrB_bac_annotree_hits_MAG_tax.txt
+    1582 total   
+    #
+
+#dsrA arc and bac
+
+cat dsrA_arc_annotree_hits_MAG_tax.txt dsrA_bac_annotree_hits_MAG_tax.txt >dsrA_arc_bac_annotree_hits_MAG_tax.txt
+cat dsrB_arc_annotree_hits_MAG_tax.txt dsrB_bac_annotree_hits_MAG_tax.txt >dsrB_arc_bac_annotree_hits_MAG_tax.txt
+
+#get sequences ID of dsrA and dsrB
+grep  '>'  dsrA_ba_ar_anntree_hits.fasta >dsrA_ba_ar_anntree_hits_ID.txt 
+grep  '>'  dsrB_ba_ar_anntree_hits.fasta >dsrB_ba_ar_anntree_hits_ID.txt 
+#edit in excel to get tree id and MAGs id done
+
+```
 
 sbatch dsrA_iqtree.sh
 sbatch dsrB_iqtree.sh
