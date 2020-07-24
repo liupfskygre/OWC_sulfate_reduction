@@ -34,6 +34,15 @@ awk -F ',' '{print ">"$4"___"$3"\n"$8}' sdo30_ba_ar_anntree_hits.csv > sdo30_ba_
 sed -i -e '/gtdbId___geneId/d' sdo30_ba_ar_anntree_hits.fasta
 sed -i -e '/sequence/d' sdo30_ba_ar_anntree_hits.fasta
 
+```
 
+```
+grep -c '>' sdo30_ba_ar_anntree_hits.fasta
 
+grep 'K17725' sdo30_user.out.top.txt|cut -f1 -d$'\t' |cut -f2 -d':' > sdo30_user.out.top_positive_hits.txt
+pullseq -i sdo30_ba_ar_anntree_hits.fasta -n sdo30_user.out.top_positive_hits.txt > sdo30_ba_ar_anntree_pos_hits.fasta
+
+grep -c 'K17725' sdo30_user.out.top.txt
+grep -c '>' sdo30_ba_ar_anntree_pos_hits.fasta
+#618
 ```
