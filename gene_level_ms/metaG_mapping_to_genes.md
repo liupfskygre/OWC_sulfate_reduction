@@ -44,13 +44,14 @@ mv *sorted.bam sorted_bam_backup/
 
 ```
 
-#Submitted batch job 7547
+#Submitted batch job Submitted batch job 7548
+
 
 #updated
 ```
 #!/bin/bash
 #SBATCH --nodes=1 #always =1 on zenith, usually will be =1 on summit
-#SBATCH --ntasks=14 #number of cores you are requesting
+#SBATCH --ntasks=24 #number of cores you are requesting
 #SBATCH --time=14-00:00:00 #max 14 days, HH:MM:SS if you need to include days do D-HH:MM:SS i.e.requesting 7 days is done as 7-00:00:00
 #SBATCH --mem=128gb #How much memory you are requesting.  i.e. 500gb.  For 1Tb use 1024gb.  Notice this is lower case.
 #SBATCH --mail-type=BEGIN,END,FAIL
@@ -83,7 +84,7 @@ rm temp_interleaved_trimmed.fq
 echo "${name}.fq removed"
 
 
-reformat.sh in=temp_interleaved_trimmed.fa out1=temp_interleaved_trimmed_R1.fa out2=temp_interleaved_trimmed_R2.fa ow=t -Xmx112g
+reformat.sh in=temp_interleaved_trimmed.fa out1=temp_interleaved_trimmed_R1.fa out2=temp_interleaved_trimmed_R2.fa ow=t  #-Xmx112g
 
 rsem-calculate-expression --bowtie2 -p 14 --num-threads 14 --paired-end temp_interleaved_trimmed_R1.fa temp_interleaved_trimmed_R2.fa --no-qualities ./all_sulfur_cycling_genes_Raw ${name}_S_cycling_gene &>${name}.log
 
