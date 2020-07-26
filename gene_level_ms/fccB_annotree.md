@@ -29,33 +29,33 @@ grep -c '>' fccB_ba_anntree_pos_hits.fasta
 
 #filtering owc reads based on ghostkola annotation； cat with reference sequence
 ```
-cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/aprAB_w_annotree_tree
+cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/fccB_annotree_gene_tree
 
-#aprA
-grep 'aprA' ../clean_sulfur_genenID_type.txt |cut -f1 -d$'\t' >aprA_clean_geneID.txt
-pullseq -i aprA.hmm.collection.faa -n aprA_clean_geneID.txt > aprA.hmm.collection_clean.fasta
+#fccB
+grep 'fccB' ../clean_sulfur_genenID_type.txt |cut -f1 -d$'\t' >fccB_clean_geneID.txt
+pullseq -i PF09242.hmm.collection_len.faa -n fccB_clean_geneID.txt > fccB.hmm.collection_clean.fasta
 
-grep -c '>' aprA.hmm.collection_clean.fasta
-wc -l aprA_clean_geneID.txt
-#233
+grep -c '>' fccB.hmm.collection_clean.fasta
+wc -l fccB_clean_geneID.txt
+#
 
-cat aprA_ba_ar_anntree_pos_hits.fasta aprA.hmm.collection_clean.fasta > aprA_owc_clean_wAnnRef.fasta
+cat fccB_ba_anntree_pos_hits.fasta fccB.hmm.collection_clean.fasta > fccB_owc_clean_wAnnRef.fasta
 
-/Users/pengfeiliu/software/mafft-mac/mafft.bat --auto aprA_owc_clean_wAnnRef.fasta > aprA_owc_clean_wAnnRef_align.fasta
-/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in aprA_owc_clean_wAnnRef_align.fasta -out aprA_owc_clean_wAnnRef_trimal.fasta
+/Users/pengfeiliu/software/mafft-mac/mafft.bat --auto fccB_owc_clean_wAnnRef.fasta > fccB_owc_clean_wAnnRef_align.fasta
+/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in fccB_owc_clean_wAnnRef_align.fasta -out fccB_owc_clean_wAnnRef_trimal.fasta
 
 #change ~~ to ___in the sequence header
-sed -i -e 's/~~/___/g'  aprA_owc_clean_wAnnRef_trimal.fasta 
+sed -i -e 's/~~/___/g'  fccB_owc_clean_wAnnRef_trimal.fasta 
 ```
 
 #upload alignment and do iqtree
 ```
 /home/projects/Wetlands/sulfur_cycling_analysis/annotree_ref_all_S_iqtree
 
-nano aprA_iqtree.sh
+nano fccB_iqtree.sh
 
-sbatch aprB_iqtree.sh
-#Submitted batch job 7550
+sbatch fccB_iqtree.sh
+#Submitted batch job 7551
 
 #slurm
 ```
@@ -72,6 +72,6 @@ sbatch dsrA_iqtree.sh sbatch dsrB_iqtree.sh
 
 
 #put your code block here for running
-iqtree -s aprA_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre aprA_annoRef_ 
+iqtree -s fccB_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre fccB_annoRef_ 
 
 ```
