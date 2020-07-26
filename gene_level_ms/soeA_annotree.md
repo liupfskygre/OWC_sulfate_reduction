@@ -58,7 +58,7 @@ sed -i -e 's/~~/___/g'  soeA_owc_clean_wAnnRef_trimal.fasta
 nano soeA_iqtree.sh
 
 sbatch soeA_iqtree.sh
-#Submitted batch job 7552
+#Submitted batch job 7553
 ```
 #slurm
 ```
