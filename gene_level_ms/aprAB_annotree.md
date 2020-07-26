@@ -93,18 +93,40 @@ sed -i -e 's/~~/___/g'  aprB_owc_clean_wAnnRef_trimal.fasta
 ```
 
 
-
-#combine annotree reference and owc_seqs for alignment and tree
+#upload alignment and do iqtree
 ```
-cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/aprAB_w_annotree_tree
+/home/projects/Wetlands/sulfur_cycling_analysis/annotree_ref_all_S_iqtree
+
+nano aprA_iqtree.sh
+
+nano aprB_iqtree.sh
+
+sbatch aprA_iqtree.sh 
+#Submitted batch job 7549
+
+sbatch aprB_iqtree.sh
+#Submitted batch job 7550
+
+```
+
+#slurm
+```
+sbatch dsrA_iqtree.sh sbatch dsrB_iqtree.sh
+
+#!/bin/bash
+#SBATCH --nodes=1 #always =1 on zenith, usually will be =1 on summit
+#SBATCH --ntasks=10 #number of cores you are requesting
+#SBATCH --time=14-00:00:00 #max 14 days, HH:MM:SS if you need to include days do D-HH:MM:SS i.e.requesting 7 days is done as 7-00:00:00
+#SBATCH --mem=50gb #How much memory you are requesting.  i.e. 500gb.  For 1Tb use 1024gb.  Notice this is lower case.
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --mail-user=liupf@colostate.edu
+#SBATCH --partition=wrighton-hi,wrighton-low #The options are: wrighton-hi,wrighton-low,wilkins-hi,wilkins-low,debug
 
 
-/Users/pengfeiliu/software/mafft-mac/mafft.bat --auto aprA_4_tree_w_ref.fasta > aprA_4_tree_w_ref_align.fasta
+#put your code block here for running
+iqtree -s aprA_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre aprA_annoRef_ 
 
-aprA_4_tree_w_ref_align_refine.fasta
-
-#trimAl v1.4.rev22 build[2015-05-21]
-/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in aprA_4_tree_w_ref_align_refine.fasta -out aprA_4_tree_w_ref_align_refine_trim.fasta
+iqtree -s aprB_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre aprB_annoRef_ 
 
 
 ```
