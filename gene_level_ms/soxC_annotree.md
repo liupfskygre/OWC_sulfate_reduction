@@ -46,6 +46,7 @@ cat soxC_ba_ar_anntree_pos_hits.fasta soxC.hmm.collection_clean.fasta > soxC_owc
 #change ~~ to ___in the sequence header
 sed -i -e 's/~~/___/g'  soxC_owc_clean_wAnnRef_trimal.fasta 
 ```
+
 #upload alignment and do iqtree
 ```
 /home/projects/Wetlands/sulfur_cycling_analysis/annotree_ref_all_S_iqtree
@@ -54,9 +55,11 @@ nano soxC_iqtree.sh
 
 sbatch soxC_iqtree.sh
 #Submitted batch job 7555
-#slurm
 ```
 
+#slurm
+
+```
 #!/bin/bash
 #SBATCH --nodes=1 #always =1 on zenith, usually will be =1 on summit
 #SBATCH --ntasks=10 #number of cores you are requesting
