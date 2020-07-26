@@ -54,7 +54,7 @@ sed -i -e 's/~~/___/g'  soxC_owc_clean_wAnnRef_trimal.fasta
 nano soxC_iqtree.sh
 
 sbatch soxC_iqtree.sh
-#Submitted batch job 7555
+#Submitted batch job 7556
 ```
 
 #slurm
