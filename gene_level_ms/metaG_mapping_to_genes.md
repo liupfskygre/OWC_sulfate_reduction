@@ -20,9 +20,33 @@ nano file_path_link.txt
 nano metaG_mapping_S_genes.sh
 
 sbatch metaG_mapping_S_genes.sh
-Submitted batch job 7258
 
 ```
+
+```
+cd /home/projects/Wetlands/sulfur_cycling_analysis/metaG16_mapping_to_all_genes
+
+
+for file in *.bam
+do
+samtools sort -@ 2 ${file} > "${file}".sorted
+done
+
+#
+jgi_summarize_bam_contig_depths --outputDepth metaT_mapping_MGdb89_depth.txt *.sorted.bam
+
+#use cut and R extract data we need
+
+rm *.sam
+
+mv *sorted.bam sorted_bam_backup/
+
+
+
+
+```
+
+#updated
 ```
 #!/bin/bash
 #SBATCH --nodes=1 #always =1 on zenith, usually will be =1 on summit
@@ -53,26 +77,26 @@ zcat ${path}/${file} > ./temp_interleaved.fq
 
 sickle pe -c temp_interleaved.fq -t sanger -M temp_interleaved_trimmed.fq
 fq2fa --paired --filter temp_interleaved_trimmed.fq temp_interleaved_trimmed.fa
+
 rm temp_interleaved.fq
 rm temp_interleaved_trimmed.fq
+echo "${name}.fq removed"
 
-reformat.sh in=temp_interleaved_trimmed.fa out1=temp_interleaved_trimmed_R1.fa out2=temp_interleaved_trimmed_R2.fa
 
-rsem-calculate-expression --bowtie2 -p 24 --num-threads 24 --paired-end temp_interleaved_trimmed_R1.fa temp_interleaved_trimmed_R2.fa --no-qualities ./all_sulfur_cycling_genes_Raw ${sample}_S_cycling_gene
+reformat.sh in=temp_interleaved_trimmed.fa out1=temp_interleaved_trimmed_R1.fa out2=temp_interleaved_trimmed_R2.fa ow=t -Xmx112g
 
-done
+rsem-calculate-expression --bowtie2 -p 14 --num-threads 14 --paired-end temp_interleaved_trimmed_R1.fa temp_interleaved_trimmed_R2.fa --no-qualities ./all_sulfur_cycling_genes_Raw ${name}_S_cycling_gene &>${name}.log
+
+ls -1 *.fa >>${name}.log
+
 rm temp_interleaved_trimmed.fa
 rm temp_interleaved_trimmed_R1.fa 
 rm temp_interleaved_trimmed_R2.fa 
+echo "${name} removed"
+
+done
+
 echo "finish all"
 unset IFS
 ```
 
-#
-```
-May_M1_C1_D6
-mv _S_cycling_gene.genes.results May_M1_C1_D6_S_cycling_gene.genes.results
-mv _S_cycling_gene.isoforms.results May_M1_C1_D6_S_cycling_gene.isoforms.results
-mv _S_cycling_gene.transcript.bam May_M1_C1_D6_S_cycling_gene.transcript.bam
-mv _S_cycling_gene.stat May_M1_C1_D6_S_cycling_gene.stat
-```
