@@ -128,5 +128,51 @@ iqtree -s aprA_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre aprA_annoR
 
 iqtree -s aprB_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre aprB_annoRef_ 
 
+```
 
+#prepare taxonomy file
+```
+#
+#prepare classification file for aprA and aprB==>r95
+
+#prepare classification file for aprA and aprB==>r95
+
+#on mac, annotree reference 
+cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/aprAB_tree_with_Annotree_ref/aprAB_gtdb_r95based_annotation
+
+#list of anntree MAGs id for aprA and aprB
+cat ../ar122_taxonomy_r95.tsv ../bac120_taxonomy_r95.tsv > ../ar_ba_taxonomy_r95.tsv
+
+
+
+sed -i -e 's/___/;/g' aprA_user.out.top_positive_hits.txt
+sed -i -e 's/___/;/g' aprB_user.out.top_positive_hits.txt
+
+cut -f1 -d$';' aprA_user.out.top_positive_hits.txt > aprA_ba_ar_annotree_hits_MAGid.txt
+cut -f1 -d$';' aprB_user.out.top_positive_hits.txt > aprB_ba_ar_annotree_hits_MAGid.txt
+
+#ba-ar 
+grep -w -f aprA_ba_ar_annotree_hits_MAGid.txt ../ar_ba_taxonomy_r95.tsv >aprA_ba_ar_annotree_hits_MAG_tax.txt
+grep -w -f aprB_ba_ar_annotree_hits_MAGid.txt ../ar_ba_taxonomy_r95.tsv >aprB_ba_ar_annotree_hits_MAG_tax.txt
+
+sed -i -e 's/;/___/g' aprA_user.out.top_positive_hits.txt
+sed -i -e 's/;/___/g' aprB_user.out.top_positive_hits.txt
+
+
+#edit in excel to get tree id and MAGs id done
+#e.g.
+#Tree_ID	MAGs_ID	Seq_ID
+#GB_GCA_000007225.1___AE009441.1_1796	GB_GCA_000007225.1	AE009441.1_1796
+
+
+#after merge from R
+sed -i -e 's/;/___/g' aprA_ba_ar_anntree_hits_ID.txt 
+sed -i -e 's/;/___/g' aprB_ba_ar_anntree_hits_ID.txt 
+
+#merge in R
+aprA_ID_tax_annotree_R95.txt
+aprB_ID_tax_annotree_R95.txt
+
+#compared R89 and R95, many are different, and some representative Genomes were missing in R95 release, 
+e.g.RS_GCF_000974685.1; 
 ```
