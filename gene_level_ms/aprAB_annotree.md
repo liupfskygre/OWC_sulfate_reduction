@@ -103,6 +103,11 @@ nano aprB_iqtree.sh
 
 sbatch aprA_iqtree.sh 
 #Submitted batch job 7549
+Submitted batch job 7567 
+
+#failed, tree to resume (by default) with the model
+#iqtree -s aprA_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre aprA_annoRef_ -m LG+R10  #stop manually
+
 
 sbatch aprB_iqtree.sh
 #Submitted batch job 7550
@@ -124,7 +129,7 @@ sbatch dsrA_iqtree.sh sbatch dsrB_iqtree.sh
 
 
 #put your code block here for running
-iqtree -s aprA_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre aprA_annoRef_ 
+iqtree -s aprA_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre aprA_annoRef_
 
 iqtree -s aprB_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre aprB_annoRef_ 
 
