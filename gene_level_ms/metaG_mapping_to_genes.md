@@ -24,6 +24,13 @@ sbatch metaG_mapping_S_genes.sh
 ```
 
 ```
+sbatch metaG16_4902_gene_partI.sh 
+Submitted batch job 7583
+
+```
+
+
+```
 cd /home/projects/Wetlands/sulfur_cycling_analysis/metaG16_mapping_to_all_genes
 
 
@@ -51,7 +58,7 @@ mv *sorted.bam sorted_bam_backup/
 ```
 #!/bin/bash
 #SBATCH --nodes=1 #always =1 on zenith, usually will be =1 on summit
-#SBATCH --ntasks=24 #number of cores you are requesting
+#SBATCH --ntasks=10 #number of cores you are requesting
 #SBATCH --time=14-00:00:00 #max 14 days, HH:MM:SS if you need to include days do D-HH:MM:SS i.e.requesting 7 days is done as 7-00:00:00
 #SBATCH --mem=128gb #How much memory you are requesting.  i.e. 500gb.  For 1Tb use 1024gb.  Notice this is lower case.
 #SBATCH --mail-type=BEGIN,END,FAIL
@@ -86,9 +93,24 @@ echo "${name}.fq removed"
 
 reformat.sh in=temp_interleaved_trimmed.fa out1=temp_interleaved_trimmed_R1.fa out2=temp_interleaved_trimmed_R2.fa ow=t  #-Xmx112g
 
-rsem-calculate-expression --bowtie2 -p 14 --num-threads 14 --paired-end temp_interleaved_trimmed_R1.fa temp_interleaved_trimmed_R2.fa --no-qualities ./all_sulfur_cycling_genes_Raw ${name}_S_cycling_gene &>${name}.log
+rsem-calculate-expression --bowtie2 -p 10 --num-threads 10 --paired-end temp_interleaved_trimmed_R1.fa temp_interleaved_trimmed_R2.fa --no-qualities ./all_sulfur_cycling_genes_Raw ${name}_S_cycling_gene &>${name}.log
 
 ls -1 *.fa >>${name}.log
+
+#filter and sorted
+samtools view -b -h -q 20 -F 4 -@ 8 "${name}"_S_cycling_gene.transcript.bam > "${name}"_S_cycling_gene.filter.bam
+samtools sort -@ 8 "${name}"_S_cycling_gene.filter.bam  -o "${name}"_S_cycling_gene.filter.sorted.bam
+
+rm "${name}"_S_cycling_gene.transcript.bam
+rm "${name}"_S_cycling_gene.filter.bam
+
+#samtools view -b -h -q 20 -F 4 -@ 8 Aug_M1_C1_D1_S_cycling_gene.transcript.bam > Aug_M1_C1_D1_S_cycling_gene.filter.bam
+#samtools sort -@ 8 Aug_M1_C1_D1_S_cycling_gene.filter.bam  -o Aug_M1_C1_D1_S_cycling_gene.filter_sorted.bam
+#jgi_summarize_bam_contig_depths --outputDepth Aug_M1_C1_D1_S_cycling_gene_depth.txt Aug_M1_C1_D1_S_cycling_gene.filter_sorted.bam
+
+#Aug_M1_C1_D1_S_cycling_gene.transcript.bam
+#"${name}"_S_cycling_gene.transcript.bam
+
 
 rm temp_interleaved_trimmed.fa
 rm temp_interleaved_trimmed_R1.fa 
