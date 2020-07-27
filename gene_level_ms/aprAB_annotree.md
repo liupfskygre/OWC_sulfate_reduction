@@ -169,11 +169,35 @@ sed -i -e 's/;/___/g' aprB_user.out.top_positive_hits.txt
 #Tree_ID	MAGs_ID	Seq_ID
 #GB_GCA_000007225.1___AE009441.1_1796	GB_GCA_000007225.1	AE009441.1_1796
 
+# MAGsID	Tax_full
+
+sed -i '1 i\MAGsID\tTax_full'  aprA_ba_ar_annotree_hits_MAG_tax.txt
+sed -i '1 i\MAGsID\tTax_full'  aprB_ba_ar_annotree_hits_MAG_tax.txt
+
+cat aprA_user.out.top_positive_hits.txt|awk -F '\t' '{print $0"\t"$1}'|sed -e 's/___/\t/2' - > aprA_geneID_MAGsID.txt  
+sed -i '1 i\Tree_ID\tMAGs_ID\tSeq_ID' aprA_geneID_MAGsID.txt
+
+
+cat aprB_user.out.top_positive_hits.txt|awk -F '\t' '{print $0"\t"$1}'|sed -e 's/___/\t/2' - > aprB_geneID_MAGsID.txt  
+sed -i '1 i\Tree_ID\tMAGs_ID\tSeq_ID' aprB_geneID_MAGsID.txt
+
+#
+R
+setwd("./")
+aprA_tax <- read.delim("aprA_ba_ar_annotree_hits_MAG_tax.txt",header=T, check.names = FALSE)
+aprB_tax <- read.delim("aprB_ba_ar_annotree_hits_MAG_tax.txt",header=T, check.names = FALSE) 
+
+aprA_ID <- read.delim("aprA_geneID_MAGsID.txt",header=T, check.names = FALSE)
+aprB_ID <- read.delim("aprB_geneID_MAGsID.txt",header=T, check.names = FALSE) 
+
+aprA_ID_tax<-merge(aprA_ID, aprA_tax, by.x="MAGs_ID", by.y="MAGsID", all=TRUE)
+aprB_ID_tax<-merge(aprB_ID, aprB_tax, by.x="MAGs_ID", by.y="MAGsID", all=TRUE)
+
+write.table(aprA_ID_tax, 'aprA_ID_tax_annotree.txt', sep = '\t', col.names = NA, quote = FALSE)
+write.table(aprB_ID_tax, 'aprB_ID_tax_annotree.txt', sep = '\t', col.names = NA, quote = FALSE)
+quit()
 
 #after merge from R
-sed -i -e 's/;/___/g' aprA_ba_ar_anntree_hits_ID.txt 
-sed -i -e 's/;/___/g' aprB_ba_ar_anntree_hits_ID.txt 
-
 #merge in R
 aprA_ID_tax_annotree_R95.txt
 aprB_ID_tax_annotree_R95.txt
