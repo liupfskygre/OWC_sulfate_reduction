@@ -76,3 +76,52 @@ sbatch soeA_iqtree.sh
 iqtree -s soeA_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre soeA_annoRef_ 
 
 ```
+
+#prepare classification file for aprA and soeA==>r95
+
+```
+#on mac, annotree reference 
+sed -i -e 's/___/;/g' soeA_user.out.top_positive_hits.txt
+
+cut -f1 -d$';' soeA_user.out.top_positive_hits.txt > soeA_ba_ar_annotree_hits_MAGid.txt
+
+#ba-ar 
+grep -w -f soeA_ba_ar_annotree_hits_MAGid.txt ../ar_ba_taxonomy_r95.tsv >soeA_ba_ar_annotree_hits_MAG_tax.txt
+
+sed -i -e 's/;/___/g' soeA_user.out.top_positive_hits.txt
+
+
+#edit in excel to get tree id and MAGs id done
+#e.g.
+#Tree_ID	MAGs_ID	Seq_ID
+#GB_GCA_000007225.1___AE009441.1_1796	GB_GCA_000007225.1	AE009441.1_1796
+
+# MAGsID	Tax_full
+
+sed -i '1 i\MAGsID\tTax_full'  soeA_ba_ar_annotree_hits_MAG_tax.txt
+
+cat soeA_user.out.top_positive_hits.txt|awk -F '\t' '{print $0"\t"$1}'|sed -e 's/___/\t/2' - > soeA_geneID_MAGsID.txt  
+sed -i '1 i\Tree_ID\tMAGs_ID\tSeq_ID' soeA_geneID_MAGsID.txt
+
+##merge in R
+
+R
+setwd("./")
+soeA_tax <- read.delim("soeA_ba_ar_annotree_hits_MAG_tax.txt",header=T, check.names = FALSE) 
+
+soeA_ID <- read.delim("soeA_geneID_MAGsID.txt",header=T, check.names = FALSE) 
+
+soeA_ID_tax<-merge(soeA_ID, soeA_tax, by.x="MAGs_ID", by.y="MAGsID", all=TRUE)
+
+write.table(soeA_ID_tax, 'soeA_ID_tax_annotree.txt', sep = '\t', col.names = NA, quote = FALSE)
+quit("no")
+
+#after merge from R
+#prepare nodes label
+#,-1,#000000,normal,1,0
+
+
+cat soeA_ID_tax_annotree.txt|cut -f3,5 -d$'\t'|sed -e 's/\t/,/g' - >soeA_ID_tax_annotree_R95.txt
+sed -i -e 's/$/,-1,#000000,normal,1,0/g' soeA_ID_tax_annotree_R95.txt
+
+```
