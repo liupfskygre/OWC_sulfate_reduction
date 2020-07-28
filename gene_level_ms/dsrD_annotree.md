@@ -113,4 +113,7 @@ sed -i -e 's/$/,-1,#000000,normal,1,0/g' dsrD_ID_tax_annotree_R95.txt
 
 ```
 
-
+#tree_label
+```
+cat ../itol_dataset_text_template_head.txt  dsrD_ID_tax_annotree_R95.txt >itol_dsrD_tax_annotree_R95_label.txt
+```
