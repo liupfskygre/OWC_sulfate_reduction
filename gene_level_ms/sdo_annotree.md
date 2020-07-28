@@ -92,4 +92,55 @@ sbatch sdo_iqtree.sh
 
 #put your code block here for running
 iqtree -s sdo_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre sdo_annoRef_ 
+```
 
+#
+```
+#prepare classification file for aprA and sdo==>r95
+
+#on mac, annotree reference 
+
+sed -i -e 's/___/;/g' sdo30_user.out.top_positive_hits.txt
+
+cut -f1 -d$';' sdo30_user.out.top_positive_hits.txt > sdo_ba_ar_annotree_hits_MAGid.txt
+
+#ba-ar 
+grep -w -f sdo_ba_ar_annotree_hits_MAGid.txt ../ar_ba_taxonomy_r95.tsv >sdo_ba_ar_annotree_hits_MAG_tax.txt
+
+sed -i -e 's/;/___/g' sdo_user.out.top_positive_hits.txt
+
+
+#edit in excel to get tree id and MAGs id done
+#e.g.
+#Tree_ID	MAGs_ID	Seq_ID
+#GB_GCA_000007225.1___AE009441.1_1796	GB_GCA_000007225.1	AE009441.1_1796
+
+# MAGsID	Tax_full
+
+sed -i '1 i\MAGsID\tTax_full'  sdo_ba_ar_annotree_hits_MAG_tax.txt
+
+cat sdo_user.out.top_positive_hits.txt|awk -F '\t' '{print $0"\t"$1}'|sed -e 's/___/\t/2' - > sdo_geneID_MAGsID.txt  
+sed -i '1 i\Tree_ID\tMAGs_ID\tSeq_ID' sdo_geneID_MAGsID.txt
+
+##merge in R
+
+R
+setwd("./")
+sdo_tax <- read.delim("sdo_ba_ar_annotree_hits_MAG_tax.txt",header=T, check.names = FALSE) 
+
+sdo_ID <- read.delim("sdo_geneID_MAGsID.txt",header=T, check.names = FALSE) 
+
+sdo_ID_tax<-merge(sdo_ID, sdo_tax, by.x="MAGs_ID", by.y="MAGsID", all=TRUE)
+
+write.table(sdo_ID_tax, 'sdo_ID_tax_annotree.txt', sep = '\t', col.names = NA, quote = FALSE)
+quit("no")
+
+#after merge from R
+#prepare nodes label
+#,-1,#000000,normal,1,0
+
+
+cat sdo_ID_tax_annotree.txt|cut -f3,5 -d$'\t'|sed -e 's/\t/,/g' - >sdo_ID_tax_annotree_R95.txt
+sed -i -e 's/$/,-1,#000000,normal,1,0/g' sdo_ID_tax_annotree_R95.txt
+
+```
