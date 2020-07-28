@@ -181,7 +181,8 @@ sed -i '1 i\Tree_ID\tMAGs_ID\tSeq_ID' aprA_geneID_MAGsID.txt
 cat aprB_user.out.top_positive_hits.txt|awk -F '\t' '{print $0"\t"$1}'|sed -e 's/___/\t/2' - > aprB_geneID_MAGsID.txt  
 sed -i '1 i\Tree_ID\tMAGs_ID\tSeq_ID' aprB_geneID_MAGsID.txt
 
-#
+##merge in R
+
 R
 setwd("./")
 aprA_tax <- read.delim("aprA_ba_ar_annotree_hits_MAG_tax.txt",header=T, check.names = FALSE)
@@ -192,15 +193,19 @@ aprB_ID <- read.delim("aprB_geneID_MAGsID.txt",header=T, check.names = FALSE)
 
 aprA_ID_tax<-merge(aprA_ID, aprA_tax, by.x="MAGs_ID", by.y="MAGsID", all=TRUE)
 aprB_ID_tax<-merge(aprB_ID, aprB_tax, by.x="MAGs_ID", by.y="MAGsID", all=TRUE)
-
 write.table(aprA_ID_tax, 'aprA_ID_tax_annotree.txt', sep = '\t', col.names = NA, quote = FALSE)
 write.table(aprB_ID_tax, 'aprB_ID_tax_annotree.txt', sep = '\t', col.names = NA, quote = FALSE)
 quit()
 
 #after merge from R
-#merge in R
-aprA_ID_tax_annotree_R95.txt
-aprB_ID_tax_annotree_R95.txt
+#prepare nodes label
+#,-1,#000000,normal,1,0
+
+cat aprA_ID_tax_annotree.txt|cut -f3,5 -d$'\t'|sed -e 's/\t/,/g' - >aprA_ID_tax_annotree_R95.txt
+sed -i -e 's/$/,-1,#000000,normal,1,0/g' aprA_ID_tax_annotree_R95.txt
+
+cat aprB_ID_tax_annotree.txt|cut -f3,5 -d$'\t'|sed -e 's/\t/,/g' - >aprB_ID_tax_annotree_R95.txt
+sed -i -e 's/$/,-1,#000000,normal,1,0/g' aprB_ID_tax_annotree_R95.txt
 
 #compared R89 and R95, many are different, and some representative Genomes were missing in R95 release, 
 e.g.RS_GCF_000974685.1; 
