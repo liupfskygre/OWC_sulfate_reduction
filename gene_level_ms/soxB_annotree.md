@@ -123,3 +123,10 @@ quit("no")
 cat soxB_ID_tax_annotree.txt|cut -f3,5 -d$'\t'|sed -e 's/\t/,/g' - >soxB_ID_tax_annotree_R95.txt
 sed -i -e 's/$/,-1,#000000,normal,1,0/g' soxB_ID_tax_annotree_R95.txt
 ```
+
+
+#tree_label
+```
+cat ../itol_dataset_text_template_head.txt  soxB_ID_tax_annotree_R95.txt >itol_soxB_tax_annotree_R95_label.txt
+```
+
