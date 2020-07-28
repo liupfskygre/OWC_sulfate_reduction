@@ -210,3 +210,10 @@ sed -i -e 's/$/,-1,#000000,normal,1,0/g' aprB_ID_tax_annotree_R95.txt
 #compared R89 and R95, many are different, and some representative Genomes were missing in R95 release, 
 e.g.RS_GCF_000974685.1; 
 ```
+
+#tree_label
+```
+cat ../itol_dataset_text_template_head.txt  aprB_ID_tax_annotree_R95.txt >itol_aprB_tax_annotree_R95_label.txt
+cat ../itol_dataset_text_template_head.txt  aprA_ID_tax_annotree_R95.txt >itol_aprA_tax_annotree_R95_label.txt
+
+```
