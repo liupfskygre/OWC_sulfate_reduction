@@ -131,5 +131,11 @@ quit("no")
 cat sqr_ID_tax_annotree.txt|cut -f3,5 -d$'\t'|sed -e 's/\t/,/g' - >sqr_ID_tax_annotree_R95.txt
 sed -i -e 's/$/,-1,#000000,normal,1,0/g' sqr_ID_tax_annotree_R95.txt
 
+```
+#
+```
+#sqr
+
+cat ../itol_dataset_text_template_head.txt  sqr_ID_tax_annotree_R95.txt >itol_sqr_tax_annotree_R95_label.txt
 
 ```
