@@ -128,3 +128,10 @@ cat phsA_ID_tax_annotree.txt|cut -f3,5 -d$'\t'|sed -e 's/\t/,/g' - >phsA_ID_tax_
 sed -i -e 's/$/,-1,#000000,normal,1,0/g' phsA_ID_tax_annotree_R95.txt
 
 ```
+
+#tree_label
+```
+cat ../itol_dataset_text_template_head.txt  phsA_ID_tax_annotree_R95.txt >itol_phsA_tax_annotree_R95_label.txt
+
+
+```
