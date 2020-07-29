@@ -203,6 +203,15 @@ dsrA_ID_tax_annotree_R95.txt
 e.g.RS_GCF_000974685.1; 
 ```
 
+#treelabel
+```
+#
+cat ../../itol_dataset_text_template_head.txt  dsrB_ID_tax_annotree_R95.txt >itol_dsrB_tax_annotree_R95_label.txt
+cat ../../itol_dataset_text_template_head.txt  dsrA_ID_tax_annotree_R95.txt >itol_dsrA_tax_annotree_R95_label.txt
+
+```
+
+
 sbatch dsrA_iqtree.sh
 sbatch dsrB_iqtree.sh
 
