@@ -206,8 +206,15 @@ e.g.RS_GCF_000974685.1;
 #treelabel
 ```
 #
-cat ../../itol_dataset_text_template_head.txt  dsrB_ID_tax_annotree_R95.txt >itol_dsrB_tax_annotree_R95_label.txt
-cat ../../itol_dataset_text_template_head.txt  dsrA_ID_tax_annotree_R95.txt >itol_dsrA_tax_annotree_R95_label.txt
+cat dsrA_ID_tax_annotree_R95.txt|cut -f3,5 -d$'\t'|sed -e 's/\t/,/g' - >dsrA_ID_tax_annotree_R95f.txt
+sed -i -e 's/$/,-1,#000000,normal,1,0/g' dsrA_ID_tax_annotree_R95f.txt
+
+cat dsrB_ID_tax_annotree_R95.txt|cut -f3,5 -d$'\t'|sed -e 's/\t/,/g' - >dsrB_ID_tax_annotree_R95f.txt
+sed -i -e 's/$/,-1,#000000,normal,1,0/g' dsrB_ID_tax_annotree_R95f.txt
+
+
+cat ../../itol_dataset_text_template_head.txt  dsrB_ID_tax_annotree_R95f.txt >itol_dsrB_tax_annotree_R95_label.txt
+cat ../../itol_dataset_text_template_head.txt  dsrA_ID_tax_annotree_R95f.txt >itol_dsrA_tax_annotree_R95_label.txt
 
 ```
 
