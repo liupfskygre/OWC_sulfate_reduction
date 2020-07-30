@@ -34,20 +34,7 @@ Submitted batch job 7583
 cd /home/projects/Wetlands/sulfur_cycling_analysis/metaG16_mapping_to_all_genes
 
 
-for file in *.bam
-do
-samtools sort -@ 2 ${file} > "${file}".sorted
-done
-
-#
-jgi_summarize_bam_contig_depths --outputDepth metaT_mapping_MGdb89_depth.txt *.sorted.bam
-
-#use cut and R extract data we need
-
-rm *.sam
-
-mv *sorted.bam sorted_bam_backup/
-
+jgi_summarize_bam_contig_depths --outputDepth metaG16_S_cycling_gene_depth.txt *sorted.bam
 
 ```
 
