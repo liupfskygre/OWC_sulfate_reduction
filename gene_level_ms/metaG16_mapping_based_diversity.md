@@ -4,7 +4,14 @@
 cd /home/projects/Wetlands/sulfur_cycling_analysis/metaG16_mapping_to_all_genes
 
 
+cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/metaG16_mapping_coverage
 
+metaG16_S_cycling_gene_depth.txt
+
+#keep positive sequence only
+metaG16_S_cycling_gene_depth4902_cut.txt
+
+#normalize the coverage by sequences depth
 
 ```
 
