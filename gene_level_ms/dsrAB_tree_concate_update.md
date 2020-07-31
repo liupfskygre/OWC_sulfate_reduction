@@ -90,7 +90,7 @@ quit("no")
 
 
 cat dsrAB_ID_tax_annotree.txt|cut -f2,3 -d$'\t'|sed -e 's/\t/,/g' - >dsrAB_ID_tax_annotree_R95.txt
-sed -i -e 's/$/,-1,#000000,normal,1,0/g' dsrAB_ID_tax_annotree_R95.txt
+sed -i -e 's/\n$/,-1,#000000,normal,1,0\n/g' dsrAB_ID_tax_annotree_R95.txt
 
 cat ../../itol_dataset_text_template_head.txt dsrAB_ID_tax_annotree_R95.txt >itol_dsrAB_tax_concate_annotree_R95_label.txt
 
@@ -119,14 +119,40 @@ cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/g
 
 /Users/pengfeiliu/software/mafft-mac/mafftdir/bin/mafft --auto --add dsrAB.concatenated.alignments.v9_header_sel.fasta --thread 4 dsrAB_anno_tree_alignment1.faa >dsrAB_anno_tree_alignment2.faa
 
-/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in dsrA_anno_tree_alignment.faa -out dsrA_anno_tree_alignment_trmal.fasta
+#manual check dsrAB_anno_tree_alignment2.faa
+
+/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in dsrAB_anno_tree_alignment2copy.faa -out dsrAB_anno_tree_alignment2_traml.faa
+
+```
+
+#tree, one phyml
+```
+http://atgc.lirmm.fr/phyml/
+
+```
+
+#fasttree, with referenc only
+```
+FastTree -gamma -lg -boot 1000 <dsrAB_anno_tree_alignment2_traml.faa> dsrAB_concate_trmal.tree
+
 
 ```
 
 
+#add dsrA sequence and do again, fasttree, with referenc only
+```
+/Users/pengfeiliu/software/mafft-mac/mafftdir/bin/mafft --auto --add ../dsrA.hmm.collection.faa --thread 4 dsrAB_anno_tree_alignment2copy.faa >dsrA_w_dsrAB_con_alignment.faa
+
+#manual check dsrAB_anno_tree_alignment2.faa
+
+/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in dsrA_w_dsrAB_con_alignment.faa -out dsrA_w_dsrAB_con_alignment_traml.faa
 
 
+FastTree -gamma -lg -boot 1000 <dsrA_w_dsrAB_con_alignment_traml.faa> dsrA_OWC_dsrAB_concate_trmal_fast.tree
 
+#timming tree for display
+
+```
 
 
 
