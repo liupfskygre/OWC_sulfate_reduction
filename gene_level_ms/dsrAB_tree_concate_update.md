@@ -154,6 +154,21 @@ FastTree -gamma -lg -boot 1000 <dsrA_w_dsrAB_con_alignment_traml.faa> dsrA_OWC_d
 
 ```
 
+#dsrB
+```
+#
+/Users/pengfeiliu/software/mafft-mac/mafftdir/bin/mafft --auto --add ../dsrB.hmm.collection.faa --thread 4 dsrAB_anno_tree_alignment2copy.faa >dsrB_w_dsrAB_con_alignment.faa
+
+#manual check dsrAB_anno_tree_alignment2.faa
+
+/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in dsrB_w_dsrAB_con_alignment.faa -out dsrB_w_dsrAB_con_alignment_traml.faa
+
+
+FastTree -gamma -lg -boot 1000 <dsrB_w_dsrAB_con_alignment_traml.faa> dsrB_OWC_dsrAB_concate_trmal_fast.tree
+
+```
+
+
 
 
 #first try log
