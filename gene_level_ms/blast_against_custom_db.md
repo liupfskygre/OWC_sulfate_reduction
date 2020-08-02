@@ -18,6 +18,10 @@ conda activate diamondv201
 
 diamond makedb --in db.fasta
 diamodn blastp -p 4 -d db -o out.file -f 6 -q query.fasta --max-target-seqs 1 --very-sensitive
+
+--ultra-sensitive
+
+diamond v2.0.1.139
 ```
 
 
