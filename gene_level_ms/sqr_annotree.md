@@ -83,6 +83,14 @@ iqtree -s sqr_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre sqr_annoRef
 
 ```
 
+#sqr fasta tree
+```
+iqtree -s sqr_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre sqr_annoRef_ 
+FastTree -gamma -lg -boot 1000 <sqr_owc_clean_wAnnRef_trimal.fasta> sqr_concate_trmal_fasttree.tree
+
+```
+
+
 ```
 #prepare classification file for aprA and sqr==>r95
 
