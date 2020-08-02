@@ -15,27 +15,23 @@ sed -i -e '/sequence/d' soxY_bac_ar_anntree_hits.fasta
 ```
 
 ```
-grep -c '>' soxB_ba_ar_anntree_hits.fasta
+grep -c '>' soxY_bac_ar_anntree_hits.fasta
+#1727
 
-grep 'K17224' soxB_user.out.top.txt|cut -f1 -d$'\t' |cut -f2 -d':' > soxB_user.out.top_positive_hits.txt
-pullseq -i soxB_ba_ar_anntree_hits.fasta -n soxB_user.out.top_positive_hits.txt > soxB_ba_ar_anntree_pos_hits.fasta
-
-grep -c 'K17224' soxB_user.out.top.txt
-grep -c '>' soxB_ba_ar_anntree_pos_hits.fasta
-
-
+grep 'K17226' soxY_user.out.top.txt|cut -f1 -d$'\t' |cut -f2 -d':' > soxY_user.out.top_positive_hits.txt
+pullseq -i soxY_bac_ar_anntree_hits.fasta -n soxY_user.out.top_positive_hits.txt > soxY_ba_ar_anntree_pos_hits.fasta
 
 ```
 
 
 ```
-grep 'soxB' ../clean_sulfur_genenID_type.txt |cut -f1 -d$'\t' >soxB_clean_geneID.txt
-pullseq -i soxB.hmm.collection.faa -n soxB_clean_geneID.txt > soxB.hmm.collection_clean.fasta
+grep 'soxY' ../clean_sulfur_genenID_type.txt |cut -f1 -d$'\t' >soxY_clean_geneID.txt
+pullseq -i soxY.hmm.collection.faa  -n soxY_clean_geneID.txt > soxY.hmm.collection_clean.fasta
 
-grep -c '>' soxB.hmm.collection_clean.fasta
-wc -l soxB_clean_geneID.txt
+grep -c '>' soxY.hmm.collection_clean.fasta
+wc -l soxY_clean_geneID.txt
 #
-
+```
 
 ```
 
