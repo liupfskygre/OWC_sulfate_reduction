@@ -19,7 +19,7 @@ sed -i -e '/sequence/d' soxA_ba_ar_anntree_hits.fasta
 
 grep -c '>' soxB_ba_ar_anntree_hits.fasta
 
-grep 'K17224' soxB_user.out.top.txt|cut -f1 -d$'\t' |cut -f2 -d':' > soxB_user.out.top_positive_hits.txt
+grep 'K17222' soxB_user.out.top.txt|cut -f1 -d$'\t' |cut -f2 -d':' > soxB_user.out.top_positive_hits.txt
 pullseq -i soxB_ba_ar_anntree_hits.fasta -n soxB_user.out.top_positive_hits.txt > soxB_ba_ar_anntree_pos_hits.fasta
 
 grep -c 'K17224' soxB_user.out.top.txt
