@@ -9,6 +9,17 @@ makeblastdb -in all_sequences.fasta -dbtype prot -out HCOx_classifier_allSeq -pa
 blastp -query query.fasta -db HCOx_classifier_allSeq -outfmt 6 -max_target_seqs 1 -num_threads 6 -out out6MTS3.txt
 ```
 
+
+
+#prepare blast DB
+```
+cat *pos* >sulfur_marker_gene_annotree_db.fas #22449
+cat *hmm* > sulfur_marker_gene_OWC.fas # 4902
+
+```
+
+#
+
 #use diamond instead of blast due to the "-max_target_seqs" issue 
 #--max-target-seqs
 ```
@@ -16,13 +27,20 @@ blastp -query query.fasta -db HCOx_classifier_allSeq -outfmt 6 -max_target_seqs 
 
 conda activate diamondv201
 
-diamond makedb --in db.fasta
-diamodn blastp -p 4 -d db -o out.file -f 6 -q query.fasta --max-target-seqs 1 --very-sensitive
+diamond makedb --in sulfur_marker_gene_annotree_db.fas  -d sulfur_marker_gene_annotree_db
+diamond blastp -p 4 -d sulfur_marker_gene_annotree_db -o sulfur_owc_diamond_out.txt -f 6 -q sulfur_marker_gene_OWC.fas --max-target-seqs 1 --ultra-sensitive
 
 --ultra-sensitive
 
 diamond v2.0.1.139
 ```
+
+#checking and get tax for each hits based no the annotree search
+```
+
+
+```
+
 
 
 ```
