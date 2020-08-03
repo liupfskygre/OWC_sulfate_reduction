@@ -29,7 +29,7 @@ grep -c '>' soxA_ba_ar_anntree_pos_hits.fasta
 #soxA
 
 grep 'soxA' ../clean_sulfur_genenID_type.txt |cut -f1 -d$'\t' >soxA_clean_geneID.txt
-pullseq -i soxA.hmm.collection.faa -n soxA_clean_geneID.txt > soxB.hmm.collection_clean.fasta
+pullseq -i soxA.hmm.collection.faa -n soxA_clean_geneID.txt > soxA.hmm.collection_clean.fasta
 
 grep -c '>' soxA.hmm.collection_clean.fasta
 wc -l soxA_clean_geneID.txt
