@@ -40,8 +40,34 @@ diamond v2.0.1.139
 #combine all info together
 
 sulfur_owc_diamond_out.txt
-TPM_Gene_W_5ktax.xlsx 
+TPM_Gene_W_5ktax.txt 
 ../ar_ba_taxonomy_r95.tsv
+
+#header: Gene_ID	Subject_ID	Percentage_of_identical_matches	Alignment_length	Number_of_mismatches	Number_of_gap_openings	Start_of_alignment_in_query	End_of_alignment_in_query	Start_of_alignment_in_subject	End_of_alignment_in_subject	Expected_value	Bit_score
+
+#
+grep -w -f Diamond_OWC_hits_annotree_MAGs_uniq.txt ../ar_ba_taxonomy_r95.tsv > Diamond_OWC_hits_annotree_MAGs_Taxonomy.txt
+
+sed -i '1 i\MAGsID\tTax_full'  Diamond_OWC_hits_annotree_MAGs_Taxonomy.txt
+
+R
+setwd("./")
+MAGs_tax <- read.delim("Diamond_OWC_hits_annotree_MAGs_Taxonomy.txt",header=T, check.names = FALSE) 
+
+blastP_out <- read.delim("sulfur_owc_diamond_out.txt",header=T, check.names = FALSE) 
+
+OWC_genes <-read.delim("TPM_Gene_W_5ktax.txt",header=T, check.names = FALSE) 
+
+#merge 1
+
+MAGs_tax_blastp <-merge(MAGs_tax, blastP_out, by.x="MAGsID", by.y="MAGs", all=TRUE)
+
+
+MAGs_tax_blastp_OWC <-merge(MAGs_tax_blastp, OWC_genes, by.x="Gene_ID", by.y="Gene_ID", all=TRUE)
+
+write.table(MAGs_tax_blastp_OWC, 'Sulfur_OWC_genes_w_anntree_MAGs_tax.txt', sep = '\t', col.names = NA, quote = FALSE)
+quit("no")
+
 
 ```
 
