@@ -37,7 +37,11 @@ diamond v2.0.1.139
 
 #checking and get tax for each hits based no the annotree search
 ```
+#combine all info together
 
+sulfur_owc_diamond_out.txt
+TPM_Gene_W_5ktax.xlsx 
+../ar_ba_taxonomy_r95.tsv
 
 ```
 
