@@ -143,5 +143,8 @@ UQO_contig00001.1_2 tab taxon-id
 …
 Then, specify both the .abin file (as accession mapping file) and your .map file containing such lines as a synonyms file and that should work.
 
+
+# /Applications/MEGAN/tools/
+
 ```
 
