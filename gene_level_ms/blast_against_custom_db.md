@@ -1,7 +1,15 @@
-#
+##using customed annotree db to  classify my sequence
 
-
+#1, top hits based way
 ##
+```
+cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/blast_custome_annotree_db
+
+
+
+
+```
+
 
 ```
 makeblastdb -in all_sequences.fasta -dbtype prot -out HCOx_classifier_allSeq -parse_seqids
@@ -113,3 +121,27 @@ Value 6 may be followed by a space-separated list of these keywords:
 	qstrand means Query strand
 
 ```
+
+
+#try using megan LCA alogrithm for the classification
+```
+#https://metagenomics-workshop.readthedocs.io/en/latest/annotation/taxonomic_annotation.html
+
+diamond blastp -p 6 -d sulfur_marker_gene_annotree_db --daa sulfur_owc_diamond.results -q sulfur_marker_gene_OWC.fas --ultra-sensitive
+
+diamond view -a sulfur_owc_diamond.results > sulfur_owc_diamond.search_result.tab
+ sed -e 's/___.*_[0-9]*\t/\t/1' sulfur_owc_diamond.search_result.tab >sulfur_owc_diamond.search_result_fix.tab
+
+http://megan.informatik.uni-tuebingen.de/t/build-custom-database-with-accession/563
+
+#
+accession2taxid abin file 
+
+o add to an incomplete mapping, in addition to the abin file, you can also specify an “synonyms” file, and the lines should be formatted like this:
+UQO_contig00001.1_1 tab taxon-id
+UQO_contig00001.1_2 tab taxon-id
+…
+Then, specify both the .abin file (as accession mapping file) and your .map file containing such lines as a synonyms file and that should work.
+
+```
+
