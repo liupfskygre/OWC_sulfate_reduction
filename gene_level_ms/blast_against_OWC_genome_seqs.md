@@ -23,19 +23,32 @@ pullseq -i sdo_4_tree.faa -n sdo_user.out.top_positive_hits.txt > sdo_owc_pos_hi
 
 
 ```
-#cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/Data_analysis_sulfur_cycling/Confirmed_marker_gene_hits
-
-#zenith
-cd /home/projects/Wetlands/sulfur_cycling_analysis
-all_bins_combined_annotations_3211db.tsv
-
-
+#
+cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/blastp_OWC_genome_db
+nano sulfur_cycing_gene_in_OWC_MAGs.txt
 
 #all_22_marker_gene_final_DRAM_annotation_w_genename.xlsx, cleaned
 #add sdo to the confirmed list14 ==>15 genes as using in the gene level analysis
 #make a list of genes
 
+cat /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/Data_analysis_sulfur_cycling/gene_tree/sdo_tree/sdo_user.out.top_positive_hits.txt >>sulfur_cycing_gene_in_OWC_MAGs.txt
+#4252 sequences
+
+
+#zenith
+cd /home/projects/Wetlands/sulfur_cycling_analysis/DRAM_OUT
+all_bins_combined_annotations_3211db.tsv
+
+grep -w -f sulfur_cycing_gene_in_OWC_MAGs.txt all_bins_combined_annotations_3211db.tsv > sulfur_cycing_gene_in_OWC_MAGs4253DRAM.tsv
 
 #get all sequence from all_bins_combined_annotations_3211db.tsv 
-pullseq -i all_3211_genes_DRAM_aa.faa -n sulfur_cycing_gene_in_OWC_MAGs.txt > sulfur_cycing_gene_in_OWC_MAGs.txt 
+pullseq -i ../all_3211_genes_DRAM_aa.faa -n sulfur_cycing_gene_in_OWC_MAGs.txt > sulfur_cycing_gene_in_OWC_MAGs.fasta 
+#4252 sequences
+```
+
+#diamond blastp
+```
+
+
+
 ```
