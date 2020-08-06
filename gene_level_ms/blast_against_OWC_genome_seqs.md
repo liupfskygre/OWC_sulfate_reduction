@@ -62,6 +62,14 @@ diamond view -a sulfur_owc_diamond.results > sulfur_owc_diamond.search_result.ta
  sed -e 's/___.*_[0-9]*\t/\t/1' sulfur_owc_diamond.search_result.tab >sulfur_owc_diamond.search_result_fix.tab
 
 ```
+
+#merge the blastp results with the taxonomic info
+```
+sulfur_owc_diamond_out_cus_master.txt #blastp out
+
+
+
+```
 #1, blast
 #diamond blastp
 ```
