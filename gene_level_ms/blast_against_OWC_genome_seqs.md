@@ -67,9 +67,39 @@ diamond view -a sulfur_owc_diamond.results > sulfur_owc_diamond.search_result.ta
 ```
 sulfur_owc_diamond_out_cus_master.txt #blastp out
 
+nano OWC_hits_seqs_ID.txt
+nano Annotree_hits_seqs_ID.txt
 
+grep -w -f Annotree_hits_seqs_ID.txt ../ar_ba_taxonomy_r95.tsv > Diamond_OWC_hits_annotree_MAGs_Taxonomy.txt
+
+grep -w -f OWC_hits_seqs_ID.txt sulfur_cycing_gene_in_OWC_MAGs4253DRAM.tsv >Diamond_OWC_hits_OWC_MAGs_Taxonomy.txt
 
 ```
+```
+
+R
+setwd("./")
+#annotree resultes
+MAGs_tax <- read.delim("Diamond_OWC_hits_annotree_MAGs_Taxonomy.txt",header=T, check.names = FALSE) 
+
+blastP_out <- read.delim("sulfur_owc_diamond_out_cus_master.txt",header=T, check.names = FALSE) 
+
+OWC_genes <-read.delim("../blast_custome_annotree_db/TPM_Gene_W_5ktax.txt",header=T, check.names = FALSE) 
+
+#merge 1
+
+MAGs_tax_blastp <-merge(MAGs_tax, blastP_out, by.x="MAGsID", by.y="MAGs_ID", all=TRUE)
+
+
+MAGs_tax_blastp_OWC <-merge(MAGs_tax_blastp, OWC_genes, by.x="Gene_ID", by.y="Gene_ID", all=TRUE)
+
+write.table(MAGs_tax_blastp_OWC, 'Sulfur_OWC_genes_w_all_MAGs_tax.txt', sep = '\t', col.names = NA, quote = FALSE)
+quit("no")
+
+```
+
+
+
 #1, blast
 #diamond blastp
 ```
