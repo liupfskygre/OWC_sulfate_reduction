@@ -46,6 +46,18 @@ pullseq -i ../all_3211_genes_DRAM_aa.faa -n sulfur_cycing_gene_in_OWC_MAGs.txt >
 #4252 sequences
 ```
 
+#adding all Muller2015, Annotree, OWC_MAGs db to creat a master db
+```
+cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/blastp_OWC_genome_db
+cat Full_length_seq_dsrAB_ref_fixH.faa sulfur_cycing_gene_in_OWC_MAGs.fasta sulfur_marker_gene_annotree_db.fas > sulfur_gene_master_cus_db1.fasta
+
+diamond makedb --in sulfur_gene_master_cus_db1.fasta  -d sulfur_gene_master_cus_db1
+
+diamond blastp -p 8 -d sulfur_gene_master_cus_db1 --daa sulfur_gene_master_cus_db1.out -q sulfur_marker_gene_OWC.fas --ultra-sensitive
+
+
+```
+#1, blast
 #diamond blastp
 ```
 
