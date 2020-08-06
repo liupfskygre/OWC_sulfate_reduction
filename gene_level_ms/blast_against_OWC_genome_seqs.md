@@ -55,6 +55,11 @@ diamond makedb --in sulfur_gene_master_cus_db1.fasta  -d sulfur_gene_master_cus_
 
 diamond blastp -p 8 -d sulfur_gene_master_cus_db1 --daa sulfur_gene_master_cus_db1.out -q sulfur_marker_gene_OWC.fas --ultra-sensitive
 
+diamond blastp -p 8 -d sulfur_gene_master_cus_db1 -o sulfur_owc_diamond_out_cus_master.txt -f 6 -q sulfur_marker_gene_OWC.fas --max-target-seqs 1 --ultra-sensitive
+
+
+diamond view -a sulfur_owc_diamond.results > sulfur_owc_diamond.search_result.tab
+ sed -e 's/___.*_[0-9]*\t/\t/1' sulfur_owc_diamond.search_result.tab >sulfur_owc_diamond.search_result_fix.tab
 
 ```
 #1, blast
