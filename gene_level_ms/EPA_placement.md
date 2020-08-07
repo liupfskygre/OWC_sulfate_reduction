@@ -5,8 +5,18 @@
 
 
 #2, genesis to extract placement of sequences
-
+#https://clang-omp.github.io/, #for genesis installation
 Taxon_1 <tab> clade_a
+
+
+
+```
+
+#pplacer
+```
+# pplacer, no for mac
+
+
 ```
 
 
