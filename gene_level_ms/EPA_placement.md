@@ -32,6 +32,7 @@ Taxon_1 <tab> clade_a
 
 #dsrD as a demo
 ```
+epa-ng --ref-msa dsrD_owc_clean_wAnnRef_trimal.fasta --tree dsrd_owc_clean_wannref_trimal_phy_phyml_tree.txt --query dsrD_owc_clean_wAnnRef_demoq.fasta --model LG
 
 
 ```
