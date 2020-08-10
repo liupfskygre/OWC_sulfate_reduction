@@ -7,7 +7,7 @@ cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/g
 cat soxB_arc_annotree_hits.csv soxB_bac_annotree_hits.csv > soxB_ba_ar_anntree_hits.csv
 
 
-#soxB, search by tigrfam, 
+#soxB, search by tigrfam,
 awk -F ',' '{print ">"$4"___"$3"\n"$5}' soxB_ba_ar_anntree_hits.csv > soxB_ba_ar_anntree_hits.fasta
 
 
@@ -47,7 +47,7 @@ cat soxB_ba_ar_anntree_pos_hits.fasta soxB.hmm.collection_clean.fasta > soxB_owc
 /Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in soxB_owc_clean_wAnnRef_align.fasta -out soxB_owc_clean_wAnnRef_trimal.fasta
 
 #change ~~ to ___in the sequence header
-sed -i -e 's/~~/___/g'  soxB_owc_clean_wAnnRef_trimal.fasta 
+sed -i -e 's/~~/___/g'  soxB_owc_clean_wAnnRef_trimal.fasta
 ```
 
 #upload alignment and do iqtree
@@ -73,18 +73,18 @@ sbatch soxB_iqtree.sh
 
 
 #put your code block here for running
-iqtree -s soxB_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre soxB_annoRef_ 
+iqtree -s soxB_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre soxB_annoRef_
 ```
 
 
 #prepare classification file for aprA and soxB==>r95
 ```
-#on mac, annotree reference 
+#on mac, annotree reference
 sed -i -e 's/___/;/g' soxB_user.out.top_positive_hits.txt
 
 cut -f1 -d$';' soxB_user.out.top_positive_hits.txt > soxB_ba_ar_annotree_hits_MAGid.txt
 
-#ba-ar 
+#ba-ar
 grep -w -f soxB_ba_ar_annotree_hits_MAGid.txt ../ar_ba_taxonomy_r95.tsv >soxB_ba_ar_annotree_hits_MAG_tax.txt
 
 sed -i -e 's/;/___/g' soxB_user.out.top_positive_hits.txt
@@ -99,16 +99,16 @@ sed -i -e 's/;/___/g' soxB_user.out.top_positive_hits.txt
 
 sed -i '1 i\MAGsID\tTax_full'  soxB_ba_ar_annotree_hits_MAG_tax.txt
 
-cat soxB_user.out.top_positive_hits.txt|awk -F '\t' '{print $0"\t"$1}'|sed -e 's/___/\t/2' - > soxB_geneID_MAGsID.txt  
+cat soxB_user.out.top_positive_hits.txt|awk -F '\t' '{print $0"\t"$1}'|sed -e 's/___/\t/2' - > soxB_geneID_MAGsID.txt
 sed -i '1 i\Tree_ID\tMAGs_ID\tSeq_ID' soxB_geneID_MAGsID.txt
 
 ##merge in R
 
 R
 setwd("./")
-soxB_tax <- read.delim("soxB_ba_ar_annotree_hits_MAG_tax.txt",header=T, check.names = FALSE) 
+soxB_tax <- read.delim("soxB_ba_ar_annotree_hits_MAG_tax.txt",header=T, check.names = FALSE)
 
-soxB_ID <- read.delim("soxB_geneID_MAGsID.txt",header=T, check.names = FALSE) 
+soxB_ID <- read.delim("soxB_geneID_MAGsID.txt",header=T, check.names = FALSE)
 
 soxB_ID_tax<-merge(soxB_ID, soxB_tax, by.x="MAGs_ID", by.y="MAGsID", all=TRUE)
 
@@ -130,3 +130,9 @@ sed -i -e 's/$/,-1,#000000,normal,1,0/g' soxB_ID_tax_annotree_R95.txt
 cat ../itol_dataset_text_template_head.txt  soxB_ID_tax_annotree_R95.txt >itol_soxB_tax_annotree_R95_label.txt
 ```
 
+```
+FastTree -gamma -lg -boot 1000 <soxB_owc_clean_wAnnRef_trimal.fasta> soxB_OWC_trmal_fasttree.tree
+
+FastTree -gamma -lg -boot 10000 <soxB_owc_clean_wAnnRef_trimal.fasta> soxB_OWC_trmal_fasttree_10k.tree
+
+```
