@@ -19,9 +19,9 @@ sed -e 's/\(.*\)_/\1\t/' dsrB_ba_ar_anntree_hits.txt >dsrB_ba_ar_anntree_hits_fi
 
 R
 setwd("./")
-dsrA <- read.delim("dsrA_ba_ar_anntree_hits_fix.txt",header=T, check.names = FALSE) 
+dsrA <- read.delim("dsrA_ba_ar_anntree_hits_fix.txt",header=T, check.names = FALSE)
 
-dsrB <- read.delim("dsrB_ba_ar_anntree_hits_fix.txt",header=T, check.names = FALSE) 
+dsrB <- read.delim("dsrB_ba_ar_anntree_hits_fix.txt",header=T, check.names = FALSE)
 
 dsrAB<-merge(dsrA, dsrB, by.x="MAGs_dsrA", by.y="MAGs_dsrB", all=TRUE)
 
@@ -32,7 +32,7 @@ quit("no")
 
 #give a consensus name to both dsrA and dsrB
 
-#check sequence annotated as dsrA&B 
+#check sequence annotated as dsrA&B
 
 #and also sequence with one dsrA but two dsrB in one line dsrB-A-B
 #checked with suspected backuped
@@ -75,9 +75,9 @@ grep -w -f dsrAB_concat_MAGsID.txt ../../ar_ba_taxonomy_r95.tsv >dsrAB_concat_MA
 
 R
 setwd("./")
-dsrAB_tax <- read.delim("dsrAB_concat_MAGsID_tax.txt",header=T, check.names = FALSE) 
+dsrAB_tax <- read.delim("dsrAB_concat_MAGsID_tax.txt",header=T, check.names = FALSE)
 
-dsrAB_ID <- read.delim("dsrAB_concat_geneID_MAGsID.txt",header=T, check.names = FALSE) 
+dsrAB_ID <- read.delim("dsrAB_concat_geneID_MAGsID.txt",header=T, check.names = FALSE)
 
 dsrAB_ID_tax<-merge(dsrAB_ID, dsrAB_tax, by.x="MAGs_ID", by.y="MAGsID", all=TRUE)
 
@@ -166,6 +166,10 @@ FastTree -gamma -lg -boot 1000 <dsrA_w_dsrAB_con_alignment_traml.faa> dsrA_OWC_d
 
 FastTree -gamma -lg -boot 1000 <dsrB_w_dsrAB_con_alignment_traml.faa> dsrB_OWC_dsrAB_concate_trmal_fast.tree
 
+FastTree -gamma -lg -boot 1000 <dsrB_w_dsrAB_con_alignment_traml.faa> dsrB_OWC_dsrAB_concate_trmal_fast_redo.tree
+
+FastTree -gamma -lg -boot 10000 <dsrB_w_dsrAB_con_alignment_traml.faa> dsrB_OWC_dsrAB_concate_trmal_fast_redo10k.tree
+
 ```
 
 
@@ -173,7 +177,7 @@ FastTree -gamma -lg -boot 1000 <dsrB_w_dsrAB_con_alignment_traml.faa> dsrB_OWC_d
 
 #first try log
 ```
-#fix name to have only MAGs_contigs, remove the last # of gene number for concatenate 
+#fix name to have only MAGs_contigs, remove the last # of gene number for concatenate
 
 #e.g., 1796 --> 179
 
@@ -197,7 +201,7 @@ sed -i -e 's/____/\./g' dsrAB_annotree_concatenation_partI.fas
 # above not working well, _19 and _20 will not get concated
 
 
-#recovered missing genes, partI 
+#recovered missing genes, partI
 
 dsrBwithout_A.txt
 
