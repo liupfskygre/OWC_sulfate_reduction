@@ -27,7 +27,7 @@ aprAB<-merge(aprA, aprB, by.x="MAGs_aprA", by.y="MAGs_aprB", all=TRUE)
 
 write.table(aprAB, 'aprAB_merge_gene_name.txt', sep = '\t', col.names = NA, quote = FALSE)
 quit("no")
-
+```
 #kept, with same MAGs+scaffold and geneID differece==abs(1)
 
 #give a consensus name to both aprA and aprB
@@ -56,14 +56,26 @@ sed -i -e 's/\./____/g' aprB_filtered_consensus.fas
 
 /Users/pengfeiliu/software/mafft-mac/mafft.bat --auto aprA_filtered_consensus.fas > aprAf_ba_ar_anntree_hits_align.fasta
 /Users/pengfeiliu/software/mafft-mac/mafft.bat --auto aprB_filtered_consensus.fas > aprBf_ba_ar_anntree_hits_align.fasta
-
+```
 
 #run add aprA, aprB, trimal and run fasttree
 ```
+/Users/pengfeiliu/software/mafft-mac/mafftdir/bin/mafft --auto --add ../aprA.hmm.collection_clean.fasta --thread 4 aprA_aprB_concatenation.fas >aprA_w_aprAB_con_ref.fasta
+
+/Users/pengfeiliu/software/mafft-mac/mafftdir/bin/mafft --auto --add ../aprB.hmm.collection_clean.fasta --thread 4 aprA_aprB_concatenation.fas >aprB_w_aprAB_con_ref.fasta
+
+#manual check dsrAB_anno_tree_alignment2.faa
+
+/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in aprA_w_aprAB_con_ref.fasta -out aprA_w_aprAB_con_ref_trimal.fasta
+/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in aprB_w_aprAB_con_ref.fasta -out aprB_w_aprAB_con_ref_trimal.fasta
 
 
+FastTree -gamma -lg -boot 1000 <aprA_w_aprAB_con_ref_trimal.fasta> aprA_OWC_trmal_fasttree.tree
+
+FastTree -gamma -lg -boot 1000 <aprB_w_aprAB_con_ref_trimal.fasta> aprB_OWC_trmal_fasttree.tree
+
 ```
-```
+
 
 #prepare sequence tax for concate sequence
 ```
