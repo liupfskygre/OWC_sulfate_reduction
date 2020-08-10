@@ -77,6 +77,12 @@ iqtree -s soeA_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre soeA_annoR
 
 ```
 
+```
+FastTree -gamma -lg -boot 1000 <soeA_owc_clean_wAnnRef_trimal.fasta> soeA_OWC_trmal_fasttree.tree
+
+
+```
+
 #prepare classification file for aprA and soeA==>r95
 
 ```
