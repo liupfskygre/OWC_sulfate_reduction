@@ -79,10 +79,17 @@ FastTree -gamma -lg -boot 1000 <aprB_w_aprAB_con_ref_trimal.fasta> aprB_OWC_trma
 
 #prepare sequence tax for concate sequence
 ```
-nano aprAB_concat_geneID_MAGsID.txt
-cat aprAB_concat_geneID_MAGsID.txt|cut -f1 -d$'\t'|sort|uniq  > aprAB_concat_MAGsID.txt
-grep -w -f aprAB_concat_MAGsID.txt ../../ar_ba_taxonomy_r95.tsv >aprAB_concat_MAGsID_tax.txt
+R
+setwd("./")
+aprA <- read.delim("aprAB_merge_gene_name-fix.txt",header=T, check.names = FALSE)
 
+aprB <- read.delim("aprAB_ID_tax_annotree-arb.txt",header=T, check.names = FALSE)
+
+aprAB<-merge(aprA, aprB, by.x="aprAID", by.y="Tree_ID", all.x=TRUE,all.y=FALSE)
+
+write.table(aprAB, 'aprAB_ID_tax_annotree-arb-label.txt', sep = '\t', col.names = NA, quote = FALSE)
+quit("no")
+```
 
 ##merge in R
 
