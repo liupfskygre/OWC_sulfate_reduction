@@ -74,6 +74,13 @@ sbatch soxC_iqtree.sh
 iqtree -s soxC_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre soxC_annoRef_ 
 ```
 
+#fasttree
+```
+#
+FastTree -gamma -lg -boot 1000 <soxC_owc_clean_wAnnRef_trimal.fasta> soxC_OWC_trmal_fasttree.tree
+
+```
+
 ```
 #prepare classification file for aprA and soxC==>r95
 
