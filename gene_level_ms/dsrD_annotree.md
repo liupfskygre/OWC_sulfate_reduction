@@ -32,7 +32,7 @@ cat annotree_hits_dsrD_sel.fasta dsrD.hmm.collection_clean.fasta > dsrD_owc_clea
 /Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in dsrD_owc_clean_wAnnRef_align.fasta -out dsrD_owc_clean_wAnnRef_trimal.fasta
 
 #change ~~ to ___in the sequence header
-sed -i -e 's/~~/___/g'  dsrD_owc_clean_wAnnRef_trimal.fasta 
+sed -i -e 's/~~/___/g'  dsrD_owc_clean_wAnnRef_trimal.fasta
 
 ```
 #upload alignment and do iqtree
@@ -56,7 +56,12 @@ sbatch dsrD_iqtree.sh
 
 
 #put your code block here for running
-iqtree -s dsrD_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre dsrD_annoRef_ 
+iqtree -s dsrD_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre dsrD_annoRef_
+
+FastTree -gamma -lg -boot 1000 <dsrD_owc_clean_wAnnRef_trimal.fasta> dsrD_OWC_trmal_fasttree.tree
+
+FastTree -gamma -lg -boot 10000 <dsrD_owc_clean_wAnnRef_trimal.fasta> dsrD_OWC_trmal_fasttree_10k.tree
+
 ```
 
 #prepare annotation file
@@ -65,13 +70,13 @@ cat annotree_hits_dsrD_sel.fasta|grep '>' |sed -e 's/>//g' - > dsrD_user.out.top
 
 #prepare classification file for aprA and dsrD==>r95
 
-#on mac, annotree reference 
+#on mac, annotree reference
 
 sed -i -e 's/___/;/g' dsrD_user.out.top_positive_hits.txt
 
 cut -f1 -d$';' dsrD_user.out.top_positive_hits.txt > dsrD_ba_ar_annotree_hits_MAGid.txt
 
-#ba-ar 
+#ba-ar
 grep -w -f dsrD_ba_ar_annotree_hits_MAGid.txt ../ar_ba_taxonomy_r95.tsv >dsrD_ba_ar_annotree_hits_MAG_tax.txt
 
 sed -i -e 's/;/___/g' dsrD_user.out.top_positive_hits.txt
@@ -86,16 +91,16 @@ sed -i -e 's/;/___/g' dsrD_user.out.top_positive_hits.txt
 
 sed -i '1 i\MAGsID\tTax_full'  dsrD_ba_ar_annotree_hits_MAG_tax.txt
 
-cat dsrD_user.out.top_positive_hits.txt|awk -F '\t' '{print $0"\t"$1}'|sed -e 's/___/\t/2' - > dsrD_geneID_MAGsID.txt  
+cat dsrD_user.out.top_positive_hits.txt|awk -F '\t' '{print $0"\t"$1}'|sed -e 's/___/\t/2' - > dsrD_geneID_MAGsID.txt
 sed -i '1 i\Tree_ID\tMAGs_ID\tSeq_ID' dsrD_geneID_MAGsID.txt
 
 ##merge in R
 
 R
 setwd("./")
-dsrD_tax <- read.delim("dsrD_ba_ar_annotree_hits_MAG_tax.txt",header=T, check.names = FALSE) 
+dsrD_tax <- read.delim("dsrD_ba_ar_annotree_hits_MAG_tax.txt",header=T, check.names = FALSE)
 
-dsrD_ID <- read.delim("dsrD_geneID_MAGsID.txt",header=T, check.names = FALSE) 
+dsrD_ID <- read.delim("dsrD_geneID_MAGsID.txt",header=T, check.names = FALSE)
 
 dsrD_ID_tax<-merge(dsrD_ID, dsrD_tax, by.x="MAGs_ID", by.y="MAGsID", all=TRUE)
 
