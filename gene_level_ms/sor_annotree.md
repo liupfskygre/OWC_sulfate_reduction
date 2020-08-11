@@ -71,6 +71,13 @@ sbatch sor_iqtree.sh
 iqtree -s sor_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre sor_annoRef_ 
 ```
 
+#
+```
+FastTree -gamma -lg -boot 1000 <sor_owc_clean_wAnnRef_trimal.fasta> SOR_OWC_trmal_fasttree.tree
+
+
+```
+
 
 ```
 #prepare classification file for aprA and SOR==>r95
