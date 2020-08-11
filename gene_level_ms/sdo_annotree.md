@@ -93,6 +93,12 @@ sbatch sdo_iqtree.sh
 #put your code block here for running
 iqtree -s sdo_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre sdo_annoRef_ 
 ```
+```
+FastTree -gamma -lg -boot 1000 <sdo_owc_clean_wAnnRef_trimal.fasta> sdo_OWC_trmal_fasttree.tree
+
+
+```
+
 
 #
 ```
