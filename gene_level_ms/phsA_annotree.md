@@ -77,6 +77,11 @@ sbatch phsA_iqtree.sh
 iqtree -s phsA_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre phsA_annoRef_ 
 
 ```
+#phsA fasttree
+```
+phsA_owc_clean_wAnnRef_trimal.fasta
+FastTree -gamma -lg -boot 1000 <phsA_owc_clean_wAnnRef_trimal.fasta> phsA_OWC_trmal_fasttree.tree
+```
 
 #
 ```
