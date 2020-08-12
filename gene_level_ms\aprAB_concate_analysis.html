@@ -44,35 +44,59 @@ aprB &lt;- read.delim(&quot;aprB_user.out.top_positive_hits_fix.txt&quot;,header
 aprAB&lt;-merge(aprA, aprB, by.x=&quot;MAGs_aprA&quot;, by.y=&quot;MAGs_aprB&quot;, all=TRUE)
 
 write.table(aprAB, &apos;aprAB_merge_gene_name.txt&apos;, sep = &apos;\t&apos;, col.names = NA, quote = FALSE)
-quit(&quot;no&quot;)
+quit(&quot;no&quot;)</code></pre><p>#kept, with same MAGs+scaffold and geneID differece==abs(1)</p>
+<p>#give a consensus name to both aprA and aprB</p>
+<p>#check sequence annotated as aprA&amp;B</p>
+<p>#and also sequence with one aprA but two aprB in one line aprB-A-B</p>
+<p>#checked with suspected backuped</p>
+<p>#pullseq with both aprA and aprB</p>
+<pre><code>aprA_ba_ar_anntree_pos_hits.fasta:1103
+aprB_ba_ar_anntree_pos_hits.fasta:1008
 
-#kept, with same MAGs+scaffold and geneID differece==abs(1)
+pullseq -n aprA_filtered_w_aprB -i aprA_ba_ar_anntree_pos_hits.fasta &gt; aprA_filtered_w_aprB.fas
 
-#give a consensus name to both aprA and aprB
+pullseq -n aprB_filtered_w_aprA -i aprB_ba_ar_anntree_pos_hits.fasta &gt; aprB_filtered_w_aprA.fas
 
-#check sequence annotated as aprA&amp;B
-
-#and also sequence with one aprA but two aprB in one line aprB-A-B
-#checked with suspected backuped
-
-#pullseq with both aprA and aprB</code></pre><p>aprA_ba_ar_anntree_pos_hits.fasta:1103
-aprB_ba_ar_anntree_pos_hits.fasta:1008</p>
-<p>pullseq -n aprA_filtered_w_aprB -i aprA_ba_ar_anntree_pos_hits.fasta &gt; aprA_filtered_w_aprB.fas</p>
-<p>pullseq -n aprB_filtered_w_aprA -i aprB_ba_ar_anntree_pos_hits.fasta &gt; aprB_filtered_w_aprA.fas</p>
-<p>#change to consencus name with seqkit
+#change to consencus name with seqkit
 seqkit replace -p &apos;(.+)$&apos; -r &apos;{kv}&apos; -k aprA_alias.txt aprA_filtered_w_aprB.fas &gt; aprA_filtered_consensus.fas
-seqkit replace -p &apos;(.+)$&apos; -r &apos;{kv}&apos; -k aprB_alias.txt aprB_filtered_w_aprA.fas &gt; aprB_filtered_consensus.fas</p>
-<p>sed -i -e &apos;s/./<strong><strong>/g&apos; aprA_filtered_consensus.fas
-sed -i -e &apos;s/./</strong></strong>/g&apos; aprB_filtered_consensus.fas</p>
-<p>/Users/pengfeiliu/software/mafft-mac/mafft.bat --auto aprA_filtered_consensus.fas &gt; aprAf_ba_ar_anntree_hits_align.fasta
-/Users/pengfeiliu/software/mafft-mac/mafft.bat --auto aprB_filtered_consensus.fas &gt; aprBf_ba_ar_anntree_hits_align.fasta</p>
-<p>#run add aprA, aprB, trimal and run fasttree</p>
-<pre><code>
-</code></pre><pre><code>
-#prepare sequence tax for concate sequence</code></pre><p>nano aprAB_concat_geneID_MAGsID.txt
-cat aprAB_concat_geneID_MAGsID.txt|cut -f1 -d$&apos;\t&apos;|sort|uniq  &gt; aprAB_concat_MAGsID.txt
-grep -w -f aprAB_concat_MAGsID.txt ../../ar_ba_taxonomy_r95.tsv &gt;aprAB_concat_MAGsID_tax.txt</p>
-<p>##merge in R</p>
+seqkit replace -p &apos;(.+)$&apos; -r &apos;{kv}&apos; -k aprB_alias.txt aprB_filtered_w_aprA.fas &gt; aprB_filtered_consensus.fas
+
+
+sed -i -e &apos;s/\./____/g&apos; aprA_filtered_consensus.fas
+sed -i -e &apos;s/\./____/g&apos; aprB_filtered_consensus.fas
+
+/Users/pengfeiliu/software/mafft-mac/mafft.bat --auto aprA_filtered_consensus.fas &gt; aprAf_ba_ar_anntree_hits_align.fasta
+/Users/pengfeiliu/software/mafft-mac/mafft.bat --auto aprB_filtered_consensus.fas &gt; aprBf_ba_ar_anntree_hits_align.fasta</code></pre><p>#run add aprA, aprB, trimal and run fasttree</p>
+<pre><code>/Users/pengfeiliu/software/mafft-mac/mafftdir/bin/mafft --auto --add ../aprA.hmm.collection_clean.fasta --thread 4 aprA_aprB_concatenation.fas &gt;aprA_w_aprAB_con_ref.fasta
+
+/Users/pengfeiliu/software/mafft-mac/mafftdir/bin/mafft --auto --add ../aprB.hmm.collection_clean.fasta --thread 4 aprA_aprB_concatenation.fas &gt;aprB_w_aprAB_con_ref.fasta
+
+#manual check dsrAB_anno_tree_alignment2.faa
+
+/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in aprA_w_aprAB_con_ref.fasta -out aprA_w_aprAB_con_ref_trimal.fasta
+/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in aprB_w_aprAB_con_ref.fasta -out aprB_w_aprAB_con_ref_trimal.fasta
+
+
+FastTree -gamma -lg -boot 1000 &lt;aprA_w_aprAB_con_ref_trimal.fasta&gt; aprA_OWC_trmal_fasttree.tree
+
+FastTree -gamma -lg -boot 1000 &lt;aprB_w_aprAB_con_ref_trimal.fasta&gt; aprB_OWC_trmal_fasttree.tree
+
+
+#reference only
+/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in aprA_aprB_concatenation.fas -out aprA_aprB_concatenation_trimal.fasta
+
+FastTree -gamma -lg -boot 1000 &lt;aprA_aprB_concatenation_trimal.fasta&gt; aprA_aprB_concatenation_trimal.tree
+</code></pre><p>#prepare sequence tax for concate sequence</p>
+<pre><code>R
+setwd(&quot;./&quot;)
+aprA &lt;- read.delim(&quot;aprAB_merge_gene_name-fix.txt&quot;,header=T, check.names = FALSE)
+
+aprB &lt;- read.delim(&quot;aprAB_ID_tax_annotree-arb.txt&quot;,header=T, check.names = FALSE)
+
+aprAB&lt;-merge(aprA, aprB, by.x=&quot;aprAID&quot;, by.y=&quot;Tree_ID&quot;, all.x=TRUE,all.y=FALSE)
+
+write.table(aprAB, &apos;aprAB_ID_tax_annotree-arb-label.txt&apos;, sep = &apos;\t&apos;, col.names = NA, quote = FALSE)
+quit(&quot;no&quot;)</code></pre><p>##merge in R</p>
 <p>R
 setwd(&quot;./&quot;)
 aprAB_tax &lt;- read.delim(&quot;aprAB_concat_MAGsID_tax.txt&quot;,header=T, check.names = FALSE)</p>
