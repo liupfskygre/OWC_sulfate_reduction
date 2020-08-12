@@ -37,12 +37,13 @@ grep 'soeA' ../clean_sulfur_genenID_type.txt |cut -f1 -d$'\t' >soeA_clean_geneID
 pullseq -i K21307.hmm.collection.faa -n soeA_clean_geneID.txt > soeA.hmm.collection_clean.fasta
 
 grep -c '>' soeA.hmm.collection_clean.fasta
-wc -l soeA_clean_geneID.txt
-#233
+
+#291
 
 cat soeA_ba_ar_anntree_pos_hits.fasta soeA.hmm.collection_clean.fasta > soeA_owc_clean_wAnnRef.fasta
 
 /Users/pengfeiliu/software/mafft-mac/mafft.bat --auto soeA_owc_clean_wAnnRef.fasta > soeA_owc_clean_wAnnRef_align.fasta
+
 /Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in soeA_owc_clean_wAnnRef_align.fasta -out soeA_owc_clean_wAnnRef_trimal.fasta
 
 #change ~~ to ___in the sequence header
@@ -77,8 +78,9 @@ iqtree -s soeA_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre soeA_annoR
 
 ```
 
+#fasttree
 ```
-FastTree -gamma -lg -boot 1000 <soeA_owc_clean_wAnnRef_trimal.fasta> soeA_OWC_trmal_fasttree.tree
+FastTree -gamma -lg -boot 1000 < soeA_owc_clean_wAnnRef_trimal.fasta > soeA_OWC_trmal_fasttree.tree
 
 
 ```
