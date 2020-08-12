@@ -74,6 +74,12 @@ FastTree -gamma -lg -boot 1000 <aprA_w_aprAB_con_ref_trimal.fasta> aprA_OWC_trma
 
 FastTree -gamma -lg -boot 1000 <aprB_w_aprAB_con_ref_trimal.fasta> aprB_OWC_trmal_fasttree.tree
 
+
+#reference only
+/Users/pengfeiliu/software/trimal-trimAl/source/trimal -keepheader -automated1 -in aprA_aprB_concatenation.fas -out aprA_aprB_concatenation_trimal.fasta
+
+FastTree -gamma -lg -boot 1000 <aprA_aprB_concatenation_trimal.fasta> aprA_aprB_concatenation_trimal.tree
+
 ```
 
 
