@@ -145,6 +145,8 @@ iqtree -s aprB_owc_clean_wAnnRef_trimal.fasta  -nt AUTO -bb 1000 -pre aprB_annoR
 #on mac, annotree reference 
 cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/aprAB_tree_with_Annotree_ref/aprAB_gtdb_r95based_annotation
 
+cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/Sulfur_Cycling_OWC_wetland/gene-level-analysis/aprAB_w_annotree_tree
+
 #list of anntree MAGs id for aprA and aprB
 cat ../ar122_taxonomy_r95.tsv ../bac120_taxonomy_r95.tsv > ../ar_ba_taxonomy_r95.tsv
 
