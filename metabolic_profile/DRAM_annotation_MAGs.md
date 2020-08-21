@@ -1,9 +1,27 @@
 ## Adrienne run dram on all dataset
 
-#location
+#update Aug20-2020
+
+#Adrienne rerun GTDBtk on r95, DRAM of 3217 MAGs (before 3211 MAGs)
+```
+# location of DRAM out 
+#newly DRMA without uniref annotation
+/home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/DRAM_directories
+all_bins_combined_3217db_annotations_gtdbtk_rel95.txt
+
+all_bins_combined_3217db_checkM_and_gtdbtk_rel95.txt
+
+#location of GTDBtk 
+/home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins/
+
+
+```
+
+#location, following dram out based on gtdbtk r89 were removed
 ```
 #DRAM.py
 /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins
+
 
 # the DRAM is run on each bins, not all
 # each bins get an annotation.tsv file
