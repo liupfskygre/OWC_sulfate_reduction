@@ -18,6 +18,12 @@ all_bins_combined_3217db_checkM_and_gtdbtk_rel95.txt
 ```
 
 #location, following dram out based on gtdbtk r89 were removed
+
+```
+#An old copy put here
+/home/projects/Wetlands/sulfur_cycling_analysis/DRAM_OUT
+
+```
 ```
 #DRAM.py
 /home/projects/Wetlands/All_genomes/OWC_MAGs_dRep_19Sept19/OWC_MAGs_19Sept19_dRep_/relabeled_dereplicated_genomes/relabeled_bins
