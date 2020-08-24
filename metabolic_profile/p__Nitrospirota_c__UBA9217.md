@@ -40,7 +40,31 @@ awk '{print $1"_"NR"\t"$2}' Nitrospirota_annotation_w_KO28_fix.tsv > Nitrospirot
 conda activate Decoder
 KEGG-decoder --input Nitrospirota_annotation_w_KO28_fix_wN.tsv --output Nitrospirota_FUNCTION_OUT.list --vizoption interactive
 
-#UBA9217, with new r95, 49 were assign as UBA9217
+
+
+#UBA9217, with new r95, xx were assign as UBA9217
+grep -e 'UBA9217' Nitrospirota_3217db_annotations_gtdbtk_rel95.txt >UBA9217_3217db_annotations_gtdbtk_rel95.txt 
+
+awk -F '\t' '$8!=""' UBA9217_3217db_annotations_gtdbtk_rel95.txt  >UBA9217_annotation_w_KO.tsv
+
+cat UBA9217_annotation_w_KO.tsv|cut -f2,8 -d$'\t' >UBA9217_annotation_w_KO28.tsv
+
+
+head Desulfobacterota_BSN033_annotation_w_KO28.tsv
+sed -i -e 's/\,/\t/g' UBA9217_annotation_w_KO28.tsv
+
+awk -F '\t' 'BEGIN{ORS=RS="\n"} {for(a=2; a<=NF;) print $1"\t"$(a++)}' UBA9217_annotation_w_KO28.tsv > UBA9217_annotation_w_KO28_fix.tsv
+
+#sed -i -e 1b -e '/fasta/d' UBA9217_annotation_w_KO28_fix.tsv
+sed -i -e '/fasta/d' UBA9217_annotation_w_KO28_fix.tsv
+
+sed -i -e 's/_/;/g' UBA9217_annotation_w_KO28_fix.tsv
+
+awk '{print $1"_"NR"\t"$2}' UBA9217_annotation_w_KO28_fix.tsv > UBA9217_annotation_w_KO28_fix_wN.tsv
+
+conda activate Decoder
+KEGG-decoder --input UBA9217_annotation_w_KO28_fix_wN.tsv --output UBA9217_FUNCTION_OUT.list --vizoption interactive
+
 
 KEGG-decoder --input UBA9217_annotation_w_KO28_fix_wN.tsv --output UBA9217_FUNCTION_OUT.list --vizoption interactive
 ```
