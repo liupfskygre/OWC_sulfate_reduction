@@ -34,4 +34,28 @@ cat Aug_N3_C1_D5_30Gb_idba_metabat.11_annotation.tsv|cut -f1,8 -d$'\t' > Aug_N3_
 grep -w 'Aug_M1_C1_D2_megahit_metabat.26' Desulfobacterota_BSN033_annotation.tsv > Aug_M1_C1_D2_megahit_metabat.26_annotation.tsv
 cat Aug_M1_C1_D2_megahit_metabat.26_annotation.tsv|cut -f1,8 -d$'\t' > Aug_M1_C1_D2_megahit_metabat.26_annotation_k28.tsv
 
+
+O3C3D4_DDIG_MN.279
+
+
+grep -w 'O3C3D4_DDIG_MN.279' Desulfobacterota_BSN033_annotation.tsv > O3C3D4_DDIG_MN.279_annotation.tsv
+cat O3C3D4_DDIG_MN.279_annotation.tsv|cut -f1,8 -d$'\t' > O3C3D4_DDIG_MN.279_annotation_k28.tsv
+
+
+grep -w 'O3C3D3_DDIG_MN.643' Desulfobacterota_BSN033_annotation.tsv > O3C3D3_DDIG_MN.643_annotation.tsv
+cat O3C3D3_DDIG_MN.643_annotation.tsv|cut -f1,8 -d$'\t' > O3C3D3_DDIG_MN.643_annotation_k28.tsv
+
+
+#O3C3D3_metabat_w_DDIG_2.5k.188
+grep -w 'O3C3D3_metabat_w_DDIG_2.5k.188' Desulfobacterota_BSN033_annotation.tsv > O3C3D3_metabat_w_DDIG_2.5k.188_annotation.tsv
+cat O3C3D3_metabat_w_DDIG_2.5k.188_annotation.tsv|cut -f1,8 -d$'\t' > O3C3D3_metabat_w_DDIG_2.5k.188_annotation_k28.tsv
+
+#OWC_subtractive_megahit_Surface_metabat.910
+grep -w 'OWC_subtractive_megahit_Surface_metabat.910' Desulfobacterota_BSN033_annotation.tsv > OWC_subtractive_megahit_Surface_metabat.910_annotation.tsv
+cat OWC_subtractive_megahit_Surface_metabat.910_annotation.tsv|cut -f1,8 -d$'\t' > OWC_subtractive_megahit_Surface_metabat.910_annotation_k28.tsv
+
+#Nov_Mud_rebin_metabat.4
+grep -w 'Nov_Mud_rebin_metabat.4' Desulfobacterota_BSN033_annotation.tsv > Nov_Mud_rebin_metabat.4_annotation.tsv
+cat Nov_Mud_rebin_metabat.4_annotation.tsv|cut -f1,8 -d$'\t' > Nov_Mud_rebin_metabat.4_annotation_k28.tsv
+
 ```
