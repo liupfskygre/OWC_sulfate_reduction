@@ -40,7 +40,7 @@ awk '{print $1"_"NR"\t"$2}' Nitrospirota_annotation_w_KO28_fix.tsv > Nitrospirot
 conda activate Decoder
 KEGG-decoder --input Nitrospirota_annotation_w_KO28_fix_wN.tsv --output Nitrospirota_FUNCTION_OUT.list --vizoption interactive
 
-#UBA9217
+#UBA9217, with new r95, 49 were assign as UBA9217
 
 KEGG-decoder --input UBA9217_annotation_w_KO28_fix_wN.tsv --output UBA9217_FUNCTION_OUT.list --vizoption interactive
 ```
